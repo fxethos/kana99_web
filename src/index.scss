@@ -1,0 +1,33 @@
+/* $red:yellow; */
+
+body {
+  margin: 0;
+  font-family: 'Sports World';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+  /* background-color: $red; */
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+$primary: #FE7A49;
+$primary-color:#FE7A49;
+
+
+/******* custom fonts *****/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+@font-face {
+  font-family: "Sports World";
+  src: local("Sports World"),
+   url("./fonts/SportsWorld-Regular.ttf") format("truetype");
+  font-weight: bold;
+  }
+
+h1 {
+    font-family: 'Sports World';
+}

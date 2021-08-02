@@ -1,0 +1,72 @@
+.logo-container {
+  padding: 0px;
+  /* position: absolute; */
+  /* position: absolute; */
+  bottom: 0px;
+  /* padding: 40px 0 0; */
+}
+
+.transbox {
+  /* background-color: #090019; */
+  opacity: 0.6;
+  padding: 10px;
+  background: rgba(9, 0, 25, 0.5);
+}
+
+.hero-banner {
+  max-height: 600px;
+  /* padding: 40px 0px !important; */
+}
+
+.react-multi-carousel-track {
+  margin: 0 auto !important;
+  align-items: center;
+}
+.logo-container .react-multi-carousel-item {
+  text-align: left;
+  padding: 0px 60px;
+}
+
+/* @media screen and (max-width: 1024px) {
+    .logo-container{
+        padding: 30px 0px 0;
+        position: absolute;
+        bottom: 55px;
+    }
+} */
+
+@media screen and (max-width: 1024px) {
+  .hero-banner {
+    max-height: 800px;
+    padding: 0px 0px !important;
+  }
+  .logo-container {
+    position: relative;
+    bottom: 0px;
+    padding: 0;
+  }
+  /* .react-multi-carousel-track {
+        margin:0 !important;
+    } */
+  /* .react-multi-carousel-item {
+        text-align: center !important;
+        width: 250px !important;
+
+    } */
+  .logo-container .react-multi-carousel-item {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 798px) {
+  .hero-banner {
+    max-height: 1000px;
+    padding: 0px 0px !important;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .logo-container .react-multi-carousel-item {
+    text-align: center;
+  }
+}
