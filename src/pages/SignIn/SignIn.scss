@@ -1,15 +1,11 @@
 $primary-color: #fe7a49;
 
-.full-screen-container {
-  /* background-image: url('/images/loginbanner.svg'); */
+.bg-img {
   background-image: url("../../images/login_banner.svg");
-  height: 85vh;
+  height: 90vh;
   width: 100vw;
   background-size: cover;
   background-position: left;
-  display: flex-end;
-  align-items: flex-end;
-  justify-content: flex-end;
 }
 
 .login-container {
@@ -20,7 +16,9 @@ $primary-color: #fe7a49;
   max-width: 600px;
   right: 0px;
   position: absolute;
-  height: 100vh;
+  height: 90vh;
+  display: block;
+  // display: flex;
 }
 
 .login-title {
@@ -129,9 +127,6 @@ h1 {
 }
 
 @media screen and (max-width: 1024px) {
-  .full-screen-container {
-    // height:150vh;
-  }
   .login-container {
     min-width: 100% !important;
     padding: 50px 30px;
