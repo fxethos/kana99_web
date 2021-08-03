@@ -4,7 +4,7 @@ import player1 from "../../images/player1.png";
 import { Link } from "react-router-dom";
 
 
-function PowerplayCards() {
+const PowerplayCards = () => {
     return (
 
          <div className="card_play radius shadowDepth1">

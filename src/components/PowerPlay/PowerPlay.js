@@ -28,7 +28,7 @@ const responsive = {
 };
 
 
-function PowerPlay() {
+const PowerPlay = () => {
   return (
     <React.Fragment>
       <div className="powerplay_block">

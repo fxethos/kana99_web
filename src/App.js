@@ -10,38 +10,21 @@ import { Navbar, Footer, FooterBottom } from "./components";
 import "./App.scss";
 
 
-function App() {
+const App = () => {
   return (
-
     <Router>
-    <GlobalStyle />
-    <ScrollToTop />
-    <Switch>
-      <Route path="/sign-in" component={SignIn} />
-      <Route path="/sign-up" component={SignUp} />
-      <Navbar>
-        <Route path="/" exact component={Home} />
-        <Footer />
-        <FooterBottom />
-      </Navbar>
-    </Switch>
-  </Router>
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
+      <GlobalStyle />
+      <ScrollToTop />
+      <Switch>
+        <Route path="/sign-in" component={SignIn} />
+        <Route path="/sign-up" component={SignUp} />
+        <Navbar>
+          <Route path="/" exact component={Home} />
+          <Footer />
+          <FooterBottom />
+        </Navbar>
+      </Switch>
+    </Router>
   );
 }
 

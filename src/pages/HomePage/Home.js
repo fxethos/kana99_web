@@ -3,7 +3,7 @@ import React from 'react'
 // import { homeObjOne } from './Data';
 import { InfoSection, JoinFantacy, PowerPlay, Members, FrequentQuestion} from '../../components';
 
-function Home() {
+const Home = () => {
 
   return (
     <React.Fragment>

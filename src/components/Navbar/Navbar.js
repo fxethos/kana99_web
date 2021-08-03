@@ -19,7 +19,7 @@ import {
 import logo from '../../images/logo.svg';
 
 
-function Navbar( { children } ) {
+const Navbar = ( { children } ) => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 

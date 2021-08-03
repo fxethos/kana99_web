@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Footer.scss";
 import logo from "../../images/logo.svg";
 
-function Footer() {
+const Footer = () => {
   return (
     <React.Fragment>
       <footer className="main-footer">

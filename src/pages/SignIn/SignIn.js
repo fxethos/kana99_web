@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Slide } from "react-awesome-reveal";
 import FooterBottom from "../../components/FooterBottom/FooterBottom";
 
-function SignIn() {
+const SignIn = () => {
   return (
     <React.Fragment>
       <Slide direction="right">

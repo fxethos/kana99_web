@@ -5,7 +5,7 @@ import { Button } from '../Button/Button';
 import { JackInTheBox, Roll, Zoom } from "react-awesome-reveal";
 
 
-function JoinFantacy() {
+const JoinFantacy = () => {
     return (
         <React.Fragment>
             <div className="joinfantacy_block">

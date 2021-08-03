@@ -7,7 +7,7 @@ import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 import FooterBottom from "../../components/FooterBottom/FooterBottom";
 
-function SignUp() {
+const SignUp = () => {
   return (
     <React.Fragment>
       <div className="full-screen-container">

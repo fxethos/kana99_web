@@ -26,7 +26,7 @@ const responsive = {
   },
 };
 
-function Members() {
+const Members = () => {
   return (
     <React.Fragment>
       <div className="container-fluid member_block">

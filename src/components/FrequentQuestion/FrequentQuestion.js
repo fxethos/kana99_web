@@ -3,7 +3,7 @@ import './FrequentQuestion.scss';
 import {  Slide, Zoom } from "react-awesome-reveal";
 
 
-function FrequentQuestion() {
+const FrequentQuestion = () => {
   return (
     <React.Fragment>
 

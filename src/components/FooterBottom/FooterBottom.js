@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import cards from "../../images/cards.svg";
 
-function FooterBottom() {
+const FooterBottom = () => {
   return (
     <div>
       <div

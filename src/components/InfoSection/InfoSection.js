@@ -52,7 +52,7 @@ const responsive = {
 
 
 
-function InfoSection({
+const InfoSection = ({
   // primary,
   lightBg,
   // topLine,
@@ -66,7 +66,7 @@ function InfoSection({
   alt,
   imgStart,
   start
-}) {
+}) => {
 
   return (
     <React.Fragment>
