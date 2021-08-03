@@ -3,12 +3,12 @@ import GlobalStyle from "./globalStyles";
 import Home from "./pages/HomePage/Home";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
+import MatchList from "./pages/MatchList/MatchList";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import { Navbar, Footer, FooterBottom } from "./components";
 import "./App.scss";
-
 
 const App = () => {
   return (
@@ -18,6 +18,7 @@ const App = () => {
       <Switch>
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-up" component={SignUp} />
+        <Route path="/match-list" component={MatchList} />
         <Navbar>
           <Route path="/" exact component={Home} />
           <Footer />
@@ -26,6 +27,6 @@ const App = () => {
       </Switch>
     </Router>
   );
-}
+};
 
 export default App;

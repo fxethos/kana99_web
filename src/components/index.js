@@ -7,3 +7,4 @@ export { default as Members } from "./Members/Members";
 export { default as FrequentQuestion } from "./FrequentQuestion/FrequentQuestion";
 export { default as Footer } from "./Footer/Footer";
 export { default as FooterBottom } from "./FooterBottom/FooterBottom";
+export { default as MatchListPage } from "./MatchListPage/MatchListPage";

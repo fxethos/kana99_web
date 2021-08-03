@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import cards from "../../images/cards.svg";
-import "./FooterBottom.scss";
-function FooterBottom() {
+
+function MatchListPage() {
   return (
     <React.Fragment>
+      hi i m here
       <div className="footer-bottom-new">
         <div className="container-footer">
           <div className="row clearfix align-items-center">
@@ -32,4 +33,4 @@ function FooterBottom() {
   );
 }
 
-export default FooterBottom;
+export default MatchListPage;
