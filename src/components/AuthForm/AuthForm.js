@@ -12,7 +12,6 @@ class AuthForm extends React.Component {
     onUsernameChange = (e) => {
         const username = e.target.value;
         this.setState(() => ({username}));
-        console.log(username);
     }
     onEmailChange = (e) => {
         const email = e.target.value;
@@ -21,11 +20,10 @@ class AuthForm extends React.Component {
     onPasswordChange = (e) => {
         const password = e.target.value;
         this.setState(() => ({password}));
-        console.log(password);
     }
     onSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        this.props.onSubmit(this.state);
     }
 
     render() {
@@ -63,7 +61,7 @@ class AuthForm extends React.Component {
                 <div className="row">
                   <div className="col-sm-12 col-lg-12 mt-5">
                     <div className="line">
-                      <h5>{!isSignup ? "ALREADY HAVE AN ACCOUNT?" : "NEW TO KANA99?"}</h5>
+                      <h5>{isSignup ? "ALREADY HAVE AN ACCOUNT?" : "NEW TO KANA99?"}</h5>
                     </div>
                     <Link to={!isSignup ? "/sign-up" : "/sign-in"}>
                       <Button fontBig buttonStyle="btn--outline">
