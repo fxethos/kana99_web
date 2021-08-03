@@ -1,15 +1,11 @@
-$primary-color:#FE7A49;
+$primary-color: #fe7a49;
 
-.full-screen-container {
-  /* background-image: url('/images/loginbanner.svg'); */
+.bg-img {
   background-image: url("../../images/login_banner.svg");
-  height: 85vh;
+  height: 90vh;
   width: 100vw;
   background-size: cover;
   background-position: left;
-  display: flex-end;
-  align-items: flex-end;
-  justify-content: flex-end;
 }
 
 .login-container {
@@ -20,7 +16,9 @@ $primary-color:#FE7A49;
   max-width: 600px;
   right: 0px;
   position: absolute;
-  height: 100vh;
+  height: 90vh;
+  display: block;
+  // display: flex;
 }
 
 .login-title {
@@ -41,6 +39,7 @@ h1 {
   color: $primary-color;
   text-align: center;
   text-transform: uppercase;
+  text-shadow: "2px -1px 2px white" !important;
 }
 .box {
   position: relative;
@@ -92,8 +91,8 @@ h1 {
   flex-direction: row;
   color: white;
   margin-bottom: 15px;
-  font-size:14px;
-  font-weight:400;
+  font-size: 14px;
+  font-weight: 400;
 }
 .line h5:before,
 .line h5:after {
@@ -101,7 +100,7 @@ h1 {
   flex: 1 1;
   border-bottom: 1px solid;
   margin: auto;
-  color: $primary;
+  color: $primary-color;
 }
 .line h5:before {
   margin-right: 10px;
@@ -120,6 +119,11 @@ h1 {
   padding: 10px 20px;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+.daily-title {
+  text-shadow: "2px -1px 2px white" !important;
+  font-size: "xx-large";
 }
 
 @media screen and (max-width: 1024px) {
@@ -141,6 +145,9 @@ h1 {
     -ms-flex-pack: center;
     justify-content: center;
   }
+  h1 {
+    font-size: "large" !important;
+  }
 }
 
 @media screen and (max-width: 450px) {
@@ -152,7 +159,7 @@ h1 {
     margin: 0px auto !important;
     padding: 50px 30px;
     top: 20%;
-    height: auto;
+    height: 160vh;
   }
   .daily_content {
     text-align: center;
@@ -165,5 +172,8 @@ h1 {
     padding: 10px 20px;
     -ms-flex-pack: center;
     justify-content: center;
+  }
+  h1 {
+    font-size: 20px !important;
   }
 }

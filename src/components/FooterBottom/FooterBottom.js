@@ -1,15 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import cards from "../../images/cards.svg";
-
+import "./FooterBottom.scss";
 function FooterBottom() {
   return (
-    <div>
-      <div
-        className="footer-bottom"
-        style={{ background: "black", padding: "20px 0" }}
-      >
-        <div className="container">
+    <React.Fragment>
+      <div className="footer-bottom1">
+        <div className="container-footer">
           <div className="row clearfix align-items-center">
             <div className="column col-lg-6 col-md-12 col-sm-12">
               <div className="card-logo">
@@ -31,7 +28,7 @@ function FooterBottom() {
           </div>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 
