@@ -3,7 +3,8 @@ import "./Members.scss";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Slide } from "react-awesome-reveal";
-import  MembersCards from '../MembersCards/MembersCards'
+import  MembersCards from '../MembersCards/MembersCards';
+import Testimonials from "../../content/Testimonials";
 
 
 const responsive = {
@@ -42,10 +43,11 @@ const Members = () => {
           </Slide>
           <Slide direction="right" delay={100} triggerOnce="true">
             <Carousel responsive={responsive}>
-<MembersCards/>
-<MembersCards/>
-<MembersCards/>
-<MembersCards/>
+              {Testimonials.map(testimonial => {
+                return (
+                  <MembersCards {...testimonial} key={testimonial.username} />
+                )
+              })}
             </Carousel>
           </Slide>
         </div>

@@ -2,7 +2,7 @@ export { default as Navbar } from "./Navbar/Navbar";
 export { default as InfoSection } from "./InfoSection/InfoSection";
 export { default as JoinFantacy } from "./JoinFantacy/JoinFantacy";
 export { default as PowerPlay } from "./PowerPlay/PowerPlay";
-export { default as PowerplayCards } from "./PowerplayCards/PowerplayCards";
+export { default as PowerplayCard } from "./PowerplayCard/PowerplayCard";
 export { default as Members } from "./Members/Members";
 export { default as FrequentQuestion } from "./FrequentQuestion/FrequentQuestion";
 export { default as Footer } from "./Footer/Footer";

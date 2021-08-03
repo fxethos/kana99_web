@@ -1,10 +1,10 @@
 import React from 'react'
-import "./PowerplayCards.scss";
+import "./PowerplayCard.scss";
 import player1 from "../../images/player1.png";
 import { Link } from "react-router-dom";
 
 
-const PowerplayCards = () => {
+const PowerplayCard = (props) => {
     return (
 
          <div className="card_play radius shadowDepth1">
@@ -17,14 +17,14 @@ const PowerplayCards = () => {
                   <img src={player1} alt="player-img" />
                   <article className="card__article_play">
                     <h5>
-                      <b>LeBron James</b>
+                      <b>{props.playerName}</b>
                     </h5>
-                    <h5 style={{ color: "#838383" }}>SF - LAL</h5>
-                    <p>Wed, Dec 30 8.30 PM VS SAS</p>
+                    <h5 style={{ color: "#838383" }}>{props.h3}</h5>
+                    <p>{props.when}</p>
                   </article>
                   <div className="points">
                     <p>
-                      <span className="points_value">25.5</span> points{" "}
+                      <span className="points_value">{props.points}</span> points{" "}
                     </p>
                   </div>
                 </div>
@@ -33,4 +33,4 @@ const PowerplayCards = () => {
     )
 }
 
-export default PowerplayCards;
+export default PowerplayCard;

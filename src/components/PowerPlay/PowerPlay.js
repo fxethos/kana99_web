@@ -3,9 +3,9 @@ import "./PowerPlay.scss";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 // import { Button } from '../Button/Button';
-import  PowerplayCards from '../PowerplayCards/PowerplayCards'
+import  PowerplayCard from '../PowerplayCard/PowerplayCard';
 import { Bounce, JackInTheBox } from "react-awesome-reveal";
-
+import PowerPlayCards from "../../content/PowerPlayCards";
 
 const responsive = {
   superLargeDesktop: {
@@ -53,11 +53,9 @@ const PowerPlay = () => {
             </div>
           </JackInTheBox>
           <Carousel responsive={responsive}>
-          <PowerplayCards/>
-          <PowerplayCards/>
-          <PowerplayCards/>
-          <PowerplayCards/>
-          <PowerplayCards/>
+            {PowerPlayCards.map(card => {
+              return (<PowerplayCard {...card} key={card.playerName} />)
+            })}
           </Carousel>
 
           <Bounce triggerOnce="false">
