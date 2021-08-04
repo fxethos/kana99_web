@@ -11,12 +11,13 @@ a:focus,
 a:active {
   text-decoration: none;
   outline: none;
+  color: white;
 }
 
 a,
 a:active,
 a:focus {
-  color: #333;
+  color: white;
   text-decoration: none;
   transition-timing-function: ease-in-out;
   -ms-transition-timing-function: ease-in-out;

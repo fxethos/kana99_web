@@ -1,0 +1,15 @@
+$primary-color: #fe7a49;
+
+.matchlist-block {
+  background-image: url("../../images/cricket-bg.svg");
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-position: left;
+}
+
+@media screen and (min-device-width: 300px) and (max-device-width: 600px) {
+  .container {
+    max-width: 100rem;
+  }
+}
