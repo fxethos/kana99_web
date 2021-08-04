@@ -1,14 +1,18 @@
-$bg-primary:#FE7A49;
+$bg-primary: #fe7a49;
 
-
-.panel-title{
-  border-bottom:1px solid #C4C4C4;
-  margin:0px;
+.panel-title {
+  border-bottom: 1px solid #c4c4c4;
+  margin: 0px;
   font-size: 14px;
-  font-weight:800px;
+  font-weight: 800px;
+  a,
+  a:active,
+  a:focus {
+    color: black !important;
+  }
 }
 
-.panel-default>.panel-heading {
+.panel-default > .panel-heading {
   color: #333;
   background-color: #fff;
   border-color: #e4e5e7;
@@ -19,48 +23,48 @@ $bg-primary:#FE7A49;
   padding: 0px;
 }
 
-.panel-default>.panel-heading a {
+.panel-default > .panel-heading a {
   display: block;
   padding: 10px 5px;
 }
 
-.panel-default>.panel-heading a:after {
+.panel-default > .panel-heading a:after {
   content: "";
   position: relative;
   top: 1px;
   display: inline-block;
-  font-family: 'FontAwesome';
+  font-family: "FontAwesome";
   font-style: normal;
   font-weight: 400;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: transform .25s linear;
-  -webkit-transition: -webkit-transform .25s linear;
+  transition: transform 0.25s linear;
+  -webkit-transition: -webkit-transform 0.25s linear;
 }
 
 /* .panel-default>.panel-heading a[aria-expanded="true"] {
   background-color: #eee;
 } */
 
-.panel-default>.panel-heading a[aria-expanded="true"]:after {
+.panel-default > .panel-heading a[aria-expanded="true"]:after {
   content: "\f054";
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
   float: right;
 }
 
-.panel-default>.panel-heading a[aria-expanded="false"]:after {
+.panel-default > .panel-heading a[aria-expanded="false"]:after {
   content: "\f054";
   -webkit-transform: rotate(0deg);
   transform: rotate(0deg);
   float: right;
 }
-a:hover{
-  color:black;
+a:hover {
+  color: black;
 }
 
-.question{
+.question {
   background: $bg-primary;
   padding: 1px 6px;
   border-radius: 50%;
@@ -75,26 +79,25 @@ a:hover{
   margin-right: 10px;
 }
 
-
-.panel-body{
-  background-color:white;
-  padding:10px;
-  font-size:14px;
+.panel-body {
+  background-color: white;
+  padding: 10px;
+  font-size: 14px;
 }
 
-.FAQ_block{
+.FAQ_block {
   padding: 50px 0;
   display: flex-start;
   // flex-direction: column;
   // justify-content: center;
-  background:white;
+  background: white;
 }
 
 @media screen and (max-width: 768px) {
-  .panel-default>.panel-heading a{
+  .panel-default > .panel-heading a {
     font-size: 14px;
   }
-  .panel-body p{
+  .panel-body p {
     font-size: 14px;
   }
 }
