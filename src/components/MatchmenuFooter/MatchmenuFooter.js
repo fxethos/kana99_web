@@ -21,7 +21,7 @@ function MatchmenuFooter() {
   return (
     <div>
       <header className="header">
-        <div className="container">
+        <div className="tab-container">
           <nav className="bottom-nav">
             <div className="bottom-nav-item active">
               <div className="bottom-nav-link">
