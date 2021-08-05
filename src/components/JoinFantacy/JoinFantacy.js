@@ -3,9 +3,31 @@ import { Link } from 'react-router-dom';
 import './JoinFantacy.scss';
 import { Button } from '../Button/Button';
 import { JackInTheBox, Roll, Zoom } from "react-awesome-reveal";
-
+import { Transaction, SystemProgram, clusterApiUrl, Connection } from '@solana/web3.js';
 
 const JoinFantacy = () => {
+    const NETWORK = clusterApiUrl('devnet');
+    const connection = new Connection(NETWORK);
+    const onSend = async () => {
+        const isPhantomConnected = window.solana && window.solana.isConnected;
+        if (!isPhantomConnected) {
+            alert('Phantom wallet not connected!');
+            return;
+        }
+        const transaction = new Transaction().add(
+            SystemProgram.transfer({
+            fromPubkey: window.solana.publicKey,
+            toPubkey: window.solana.publicKey,
+            lamports: 100
+            })
+        );
+        transaction.feePayer = window.solana.publicKey;
+        transaction.recentBlockhash = (await connection.getRecentBlockhash()).blockhash;
+        const signedTransaction = await window.solana.signTransaction(transaction);
+        const signature = await connection.sendRawTransaction(signedTransaction.serialize());
+        console.log(signature);
+        alert('Transaction successful. See console for details.');
+    }
     return (
         <React.Fragment>
             <div className="joinfantacy_block">
@@ -75,7 +97,7 @@ const JoinFantacy = () => {
 
 
                     <div className="col-sm-4 offset-sm-4  header-content">
-                        <Button big fontBig primary>
+                        <Button big fontBig primary onClick={onSend}>
                             JOIN FANTASY
                         </Button>
                     </div>

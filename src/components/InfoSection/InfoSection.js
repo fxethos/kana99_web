@@ -67,7 +67,18 @@ const InfoSection = ({
   imgStart,
   start
 }) => {
-
+  const onConnectWallet = () => {
+    const isPhantomInstalled = window.solana && window.solana.isPhantom;
+    if (!isPhantomInstalled) {
+      alert("Please install Phantom to continue! \n https://phantom.app");
+    } else {
+      window.solana.on('connect', () => {
+        alert(`Connected. Your wallet address: ${window.solana.publicKey.toString()}`);
+      });
+      window.solana.connect();
+    }
+  }
+  
   return (
     <React.Fragment>
       <InfoSec lightBg={lightBg} className="hero-banner">
@@ -93,7 +104,7 @@ const InfoSection = ({
                 <div className="row justify-content-center"> 
                 <div className="col-sm-5 ">
                 {/* <Link to='/sign-up'> */}
-                  <Button big fontBig primary >
+                  <Button big fontBig primary onClick={onConnectWallet} >
                    SIGNUP AND PLAY NOW!
                   </Button>
                 {/* </Link> */}
