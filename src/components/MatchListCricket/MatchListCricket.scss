@@ -1,0 +1,129 @@
+$primary-color: #fe7a49;
+@media screen and (min-device-width: 320px) and (max-device-width: 768px) {
+  .table-card {
+    border-left: 1px solid #ddd !important;
+  }
+}
+
+@media screen and (min-device-width: 769px) and (max-device-width: 1440px) {
+  .table-card {
+    border-left: 12px solid $primary-color !important;
+  }
+}
+
+.match-list {
+  .card-body {
+    padding: 0rem;
+  }
+  .card {
+    width: auto;
+    margin-bottom: 0;
+    border-radius: 0px !important;
+    background: transparent !important;
+  }
+  .card-header {
+    background: $primary-color;
+    border-radius: 0px !important;
+  }
+}
+
+.content-details {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.match-logo {
+  border-radius: 50px;
+  width: 25px;
+}
+.match-logo-bg {
+  background-color: rebeccapurple;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0px 10px;
+}
+
+input {
+  border: 1px solid $primary-color;
+  border-radiuus: 10px;
+  border-radius: 3px;
+  height: 30px;
+  text-align: center;
+  font-weight: 600;
+  color: black;
+}
+
+input::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: black;
+}
+
+input::-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: black;
+  opacity: 1;
+}
+
+input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: black;
+  opacity: 1;
+}
+
+input::-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: black;
+}
+
+// card design start
+
+.table-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  grid-template-rows: auto;
+
+  @media screen and (min-width: 10em) {
+    grid-template-columns: 1fr;
+    grid-row-gap: 0px;
+    input {
+      width: 100px;
+    }
+  }
+}
+.table-card {
+  display: flex;
+  flex-direction: column;
+  grid-column-start: auto;
+  grid-column-end: span 1;
+  //   min-height: 200px;
+  margin: 10px 0px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: white;
+
+  div {
+    padding: 5px 0px;
+    flex: 1 2;
+  }
+  border: 1px solid #ddd;
+  text-align: center;
+  @media screen and (min-width: 50em) {
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    min-height: 0;
+    align-items: center;
+  }
+  .content {
+    // background-color: #eee;
+    flex: 2 2 0;
+    border-left: 0.5px solid rgba(97, 95, 95, 0.4);
+    border-right: 0.5px solid rgba(97, 95, 95, 0.4);
+  }
+}

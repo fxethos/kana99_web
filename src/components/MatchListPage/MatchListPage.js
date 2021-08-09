@@ -2,7 +2,7 @@ import React from "react";
 import "./MatchListPage.scss";
 import cricket from "../../images/tab-icons/cricket.svg";
 // import { CricketmatchList } from "../CricketmatchList/CricketmatchList";
-import CricketmatchList from "../CricketmatchList/CricketmatchList";
+import MatchListCricket from "../MatchListCricket/MatchListCricket";
 
 function MatchListPage() {
   return (
@@ -93,10 +93,10 @@ function MatchListPage() {
               aria-labelledby="heading-A"
             >
               <div className="card-body">
-                <CricketmatchList />
-                <CricketmatchList />
-                <CricketmatchList />
-                <CricketmatchList />
+                <MatchListCricket />
+                <MatchListCricket />
+                <MatchListCricket />
+                <MatchListCricket />
               </div>
             </div>
           </div>
