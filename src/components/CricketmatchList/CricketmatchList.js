@@ -2,15 +2,15 @@ import React from "react";
 import "./CricketmatchList.scss";
 import m1 from "../../images/matchlist-icons/m1.png";
 
-function CricketmatchList() {
+const CricketmatchList = (props) => {
   return (
     <div>
       <div className="table-cards left">
         <div className="table-card">
-          <div>Jharjhand T20</div>
+          <div>{props.matchTitle}</div>
           <div className="content">
             <div className="content-details">
-              <span>RAN</span>
+              <span>{props.team1}</span>
               <span className="match-logo-bg">
                 <img src={m1} className="match-logo" alt="match-logo" />
               </span>
@@ -20,10 +20,10 @@ function CricketmatchList() {
               <span className="match-logo-bg">
                 <img src={m1} className="match-logo" alt="match-logo" />
               </span>
-              <span>DHA</span>
+              <span>{props.team2}</span>
             </div>
           </div>
-          <div>170 Players</div>
+          <div>{props.playersJoined} Players</div>
         </div>
       </div>
     </div>

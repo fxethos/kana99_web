@@ -1,67 +1,14 @@
 import React from "react";
-import "./MatchListPage.scss";
 import cricket from "../../images/tab-icons/cricket.svg";
-// import { CricketmatchList } from "../CricketmatchList/CricketmatchList";
-import MatchListCricket from "../MatchListCricket/MatchListCricket";
+import MatchListNav from "../MatchListNav/MatchListNav";
+import MatchList from "../MatchList/MatchList";
+import "./MatchListPage.scss";
 
 function MatchListPage() {
   return (
     <React.Fragment>
       <div className="match-list pt-3">
-        <ul id="tabs" className="nav nav-tabs" role="tablist">
-          <li className="nav-item">
-            <a
-              id="tab-A"
-              href="#pane-A"
-              className="nav-link active"
-              data-toggle="tab"
-              role="tab"
-            >
-              <img src={cricket} className="" alt="cricket-icon" />
-              <br></br>
-              <span>Cricket</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              id="tab-B"
-              href="#pane-B"
-              className="nav-link"
-              data-toggle="tab"
-              role="tab"
-            >
-              <img src={cricket} className="" alt="football-icon" />
-              <br></br>
-              <span>Football</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              id="tab-C"
-              href="#pane-C"
-              className="nav-link"
-              data-toggle="tab"
-              role="tab"
-            >
-              <img src={cricket} className="" alt="basketball-icon" />
-              <br></br>
-              <span>Basketball</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              id="tab-D"
-              href="#pane-D"
-              className="nav-link"
-              data-toggle="tab"
-              role="tab"
-            >
-              <img src={cricket} className="" alt="baseball-icon" />
-              <br></br>
-              <span>Baseball</span>
-            </a>
-          </li>
-        </ul>
+        <MatchListNav />
 
         <div id="content" className="tab-content" role="tablist">
           <div
@@ -84,21 +31,7 @@ function MatchListPage() {
                 </a>
               </h5>
             </div>
-
-            <div
-              id="collapse-A"
-              className="collapse show"
-              data-parent="#content"
-              role="tabpanel"
-              aria-labelledby="heading-A"
-            >
-              <div className="card-body">
-                <MatchListCricket />
-                <MatchListCricket />
-                <MatchListCricket />
-                <MatchListCricket />
-              </div>
-            </div>
+            <MatchList />
           </div>
 
           <div
