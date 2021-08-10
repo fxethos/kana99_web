@@ -1,7 +1,7 @@
 import React from "react";
 import "./ContestListPage.scss";
 import ContestListNav from "../ContestListNav/ContestListNav";
-import ContestCard from "../ContestCard/ContestCard";
+import ContestListAll from "../ContestListAll/ContestListAll";
 function ContestListPage() {
   return (
     <React.Fragment>
@@ -35,7 +35,7 @@ function ContestListPage() {
               aria-labelledby="heading-all"
             >
               <div className="card-body">
-                <ContestCard />
+                <ContestListAll />
               </div>
             </div>
           </div>
@@ -55,7 +55,7 @@ function ContestListPage() {
                   aria-expanded="false"
                   aria-controls="collapse-mega"
                 >
-                  Collapsible Group Item B
+                  MegaContest
                 </a>
               </h5>
             </div>
@@ -85,7 +85,7 @@ function ContestListPage() {
                   aria-expanded="false"
                   aria-controls="collapse-h2h"
                 >
-                  Collapsible Group Item h2h
+                  Head-2-Head
                 </a>
               </h5>
             </div>
@@ -115,7 +115,7 @@ function ContestListPage() {
                   aria-expanded="false"
                   aria-controls="collapse-don"
                 >
-                  Collapsible Group Item don
+                  DoubleOrNothing
                 </a>
               </h5>
             </div>

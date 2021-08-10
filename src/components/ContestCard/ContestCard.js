@@ -24,22 +24,22 @@ function ContestCard() {
             <span className="ml-auto">40%</span>
           </div>
           <div className="row align-items-center p-1">
-            <div className="col-md-10 col-xs-10">
+            <div className="col-lg-10 col-sm-10 col-md-10 col-8">
               <div className="progress">
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  aria-valuenow="60"
+                  aria-valuenow="0"
                   aria-valuemin="0"
                   aria-valuemax="100"
-                  style={{ maxWidth: "60%" }}
+                  style={{ maxWidth: "0%" }}
                 >
                   <span className="title">60%</span>
                 </div>
               </div>
               <div className="joined">0 ∞ Joined</div>
             </div>
-            <div className="col-md-2 col-xs-2">
+            <div className="col-lg-2 col-sm-2 col-md-2 col-4">
               <div className="ml-auto">
                 <Button buttonStyle="btn--primary">₹300</Button>
               </div>
@@ -86,35 +86,7 @@ function ContestCard() {
               </div>
             </div>
           </div>
-          {/* <div className="btn-group">
-            <button
-              type="button"
-              className="btn btn-secondary dropdown-toggle"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Right-aligned menu
-            </button>
-            <div className="dropdown-menu dropdown-menu-right">
-              <button className="dropdown-item" type="button">
-                Action
-              </button>
-              <button className="dropdown-item" type="button">
-                Another action
-              </button>
-              <button className="dropdown-item" type="button">
-                Something else here
-              </button>
-            </div>
-          </div> */}
         </div>
-        {/* <div className="status">
-          <div className="enrollment">
-            <i className="far fa-dot-circle"></i>
-            <span>Enrolled</span>
-          </div>
-        </div> */}
       </div>
     </div>
   );

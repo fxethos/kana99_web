@@ -27,8 +27,8 @@ $yelloworange-tint1: blue;
 }
 
 .wrapper {
-  width: 100vw;
-  height: 100vh;
+  // width: 100vw;
+  // height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -226,7 +226,7 @@ $yelloworange-tint1: blue;
     display: block;
     flex-direction: column;
     align-items: flex-start;
-    padding: 1rem;
+    padding: 0.4rem 1rem;
     .title {
       h1 {
         @extend .card-title;
