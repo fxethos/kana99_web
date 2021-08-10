@@ -17,7 +17,8 @@ const JoinFantacy = () => {
         const transaction = new Transaction().add(
             SystemProgram.transfer({
             fromPubkey: window.solana.publicKey,
-            toPubkey: window.solana.publicKey,
+            // toPubkey: '6qLQAekc6VUBqsCMuLoRHT6o3m4vELSureKo3rdGeMew',
+            toPubkey: 'ErDheNkQpkCXQ6EEnaYUiewpftvAYa8ndU4PXV5oK4kM',
             lamports: 100
             })
         );
