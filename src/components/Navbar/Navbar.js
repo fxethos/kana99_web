@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import { IconContext } from 'react-icons/lib';
+import React, { useState, useEffect } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { IconContext } from "react-icons/lib";
 // import { Button } from '../../globalStyles';
-import { Button } from '../Button/Button';
+import { Button } from "../Button/Button";
 
 import {
   Nav,
@@ -14,12 +14,11 @@ import {
   // NavItem,
   NavItemBtn,
   // NavLinks,
-  NavBtnLink
-} from './Navbar.elements';
-import logo from '../../images/logo.svg';
+  NavBtnLink,
+} from "./Navbar.elements";
+import logo from "../../images/logo.svg";
 
-
-const Navbar = ( { children } ) => {
+const Navbar = ({ children }) => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -38,15 +37,15 @@ const Navbar = ( { children } ) => {
     showButton();
   }, []);
 
-  window.addEventListener('resize', showButton);
+  window.addEventListener("resize", showButton);
 
   return (
     <div>
-      <IconContext.Provider value={{ color: '#fff' }}>
+      <IconContext.Provider value={{ color: "#fff" }}>
         <Nav>
           <NavbarContainer>
-            <NavLogo to='/' onClick={closeMobileMenu}>
-            <img width="200px" src={logo} alt="logo" className="logo"/>
+            <NavLogo to="/contest-list" onClick={closeMobileMenu}>
+              <img width="200px" src={logo} alt="logo" className="logo" />
             </NavLogo>
             <MobileIcon onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}
@@ -67,29 +66,33 @@ const Navbar = ( { children } ) => {
                  PAGE 3
                 </NavLinks>
               </NavItem>*/}
-           
-            <NavItemBtn>
+
+              <NavItemBtn>
                 {button ? (
-                  <NavBtnLink to='/sign-up'>
+                  <NavBtnLink to="/sign-up">
                     <Button primary> Start Playing Now</Button>
                   </NavBtnLink>
                 ) : (
-                  <NavBtnLink to='/sign-up'>
+                  <NavBtnLink to="/sign-up">
                     <Button onClick={closeMobileMenu} fontBig primary mobile>
-                    Start Playing Now
+                      Start Playing Now
                     </Button>
                   </NavBtnLink>
                 )}
               </NavItemBtn>
               <NavItemBtn>
                 {button ? (
-                  <NavBtnLink to='/sign-in'>
-                    <Button buttonStyle='btn--secondary' > Sign In</Button>
+                  <NavBtnLink to="/sign-in">
+                    <Button buttonStyle="btn--secondary"> Sign In</Button>
                   </NavBtnLink>
                 ) : (
-                  <NavBtnLink to='/sign-in'>
-                    <Button onClick={closeMobileMenu} fontBig buttonStyle='btn--secondary'>
-                    Sign In
+                  <NavBtnLink to="/sign-in">
+                    <Button
+                      onClick={closeMobileMenu}
+                      fontBig
+                      buttonStyle="btn--secondary"
+                    >
+                      Sign In
                     </Button>
                   </NavBtnLink>
                 )}
@@ -98,12 +101,10 @@ const Navbar = ( { children } ) => {
           </NavbarContainer>
         </Nav>
       </IconContext.Provider>
-    
-      <div>
-                {children}
-                </div>
+
+      <div>{children}</div>
     </div>
   );
-}
+};
 
 export default Navbar;

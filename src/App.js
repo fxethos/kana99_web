@@ -18,8 +18,8 @@ const App = () => {
       <Switch>
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-up" component={SignUp} />
-        <Route exact path="/match-list" component={MatchList} />
         <Route exact path="/contest-list" component={ContestList} />
+        <Route exact path="/match-list" component={MatchList} />
 
         <Navbar>
           <Route path="/" exact component={Home} />

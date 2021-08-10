@@ -1,7 +1,7 @@
 import React from "react";
-import cricket from "../../images/tab-icons/cricket.svg";
+// import cricket from "../../images/tab-icons/cricket.svg";
+// import MatchList from "../MatchList/MatchList";
 import MatchListNav from "../MatchListNav/MatchListNav";
-import MatchList from "../MatchList/MatchList";
 import "./MatchListPage.scss";
 
 function MatchListPage() {
@@ -10,7 +10,7 @@ function MatchListPage() {
       <div className="match-list pt-3">
         <MatchListNav />
 
-        <div id="content" className="tab-content" role="tablist">
+        {/* <div id="content" className="tab-content" role="tablist">
           <div
             id="pane-A"
             className="card tab-pane fade show active"
@@ -124,6 +124,7 @@ function MatchListPage() {
             </div>
           </div>
         </div>
+      </div> */}
       </div>
     </React.Fragment>
   );

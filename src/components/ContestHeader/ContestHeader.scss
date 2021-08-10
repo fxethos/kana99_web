@@ -1,0 +1,101 @@
+$primary-color: #fe7a49;
+
+.header {
+  position: sticky;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #09001a;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+.content-details {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.match-logo {
+  border-radius: 50px;
+  width: 25px;
+}
+.match-logo-bg {
+  background-color: rebeccapurple;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0px 10px;
+}
+
+input {
+  border: 1px solid $primary-color;
+  border-radiuus: 10px;
+  border-radius: 3px;
+  height: 30px;
+  text-align: center;
+  font-weight: 600;
+  color: black;
+  width: 60%;
+}
+
+input::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: black;
+}
+
+input::-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: black;
+  opacity: 1;
+}
+
+input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: black;
+  opacity: 1;
+}
+
+input::-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: black;
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  //   .match-logo-bg {
+  //     width: 50px;
+  //   }
+  input {
+    width: 100%;
+  }
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+/* @media (min-width: 481px) and (max-width: 767px) {
+  
+} */
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 420px) {
+  .match-logo-bg {
+    width: 60px;
+  }
+  input {
+    width: 100%;
+  }
+}

@@ -1,6 +1,7 @@
 :root {
-  --primary: #FE7A49;
-  --secondary: #64B2FE;
+  --primary: #fe7a49;
+  --secondary: #64b2fe;
+  --grey: #c4c4c4;
 }
 
 .btn {
@@ -10,7 +11,7 @@
   border: none;
   cursor: pointer;
   white-space: nowrap;
-  font-weight:500;
+  font-weight: 500;
 }
 
 .btn--primary {
@@ -30,6 +31,11 @@
   padding: 5px 20px;
   border: 1px solid var(--primary);
   transition: all 0.3s ease-out;
+}
+.btn--grey {
+  background-color: var(--grey);
+  color: black;
+  border: 1px solid var(--grey);
 }
 
 .btn--medium {
@@ -120,6 +126,16 @@
   border: none;
 }
 
+.grey {
+  background-color: grey;
+  color: black;
+  border: none;
+}
+.grey:hover {
+  background-color: grey;
+  color: white;
+  border: none;
+}
 
 .green {
   background: #25ce4a;
@@ -131,14 +147,12 @@
   background-color: #242424;
 }
 
-
 @media screen {
-  
 }
 
 @media only screen and (max-width: 768px) {
   /* .example {background: red;} */
   .btn {
-    width:100%;
+    width: 100%;
   }
 }

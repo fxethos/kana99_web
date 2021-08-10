@@ -28,6 +28,6 @@ const CricketmatchList = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default CricketmatchList;

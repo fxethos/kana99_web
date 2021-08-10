@@ -8,13 +8,9 @@ const ContestList = () => {
   return (
     <React.Fragment>
       <ContestHeader />
-      <div className="matchlist-block">
-        <div className="container-fluid">
-          <div className="match-background">
-            <div className="container">
-              <ContestListPage />
-            </div>
-          </div>
+      <div className="contest-block">
+        <div className="container-fluid pl-0 pr-0">
+          <ContestListPage />
         </div>
       </div>
       <ContestFooter />
