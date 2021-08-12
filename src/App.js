@@ -1,33 +1,21 @@
 import React from "react";
 import GlobalStyle from "./globalStyles";
-import Home from "./pages/HomePage/Home";
-import SignUp from "./pages/SignUp/SignUp";
-import SignIn from "./pages/SignIn/SignIn";
-import MatchList from "./pages/MatchList/MatchList";
-import ContestList from "./pages/ContestList/ContestList";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import { Navbar, Footer, FooterBottom } from "./components";
+import AppRouter from "./Routers/AppRouter";
 import "./App.scss";
 
 const App = () => {
   return (
-    <Router>
+    <div>
       <GlobalStyle />
-      <ScrollToTop />
-      <Switch>
-        <Route path="/sign-in" component={SignIn} />
-        <Route path="/sign-up" component={SignUp} />
-        <Route exact path="/contest-list" component={ContestList} />
-        <Route exact path="/match-list" component={MatchList} />
-
-        <Navbar>
-          <Route path="/" exact component={Home} />
-          <Footer />
-          <FooterBottom />
-        </Navbar>
-      </Switch>
-    </Router>
+      {/*<ScrollToTop />*/  }
+      <AppRouter />
+      {/*<Navbar>
+        <Footer />
+        <FooterBottom />
+      </Navbar>*/}
+    </div>
   );
 };
 
