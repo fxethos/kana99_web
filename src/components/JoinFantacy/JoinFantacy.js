@@ -3,9 +3,27 @@ import { Link } from 'react-router-dom';
 import './JoinFantacy.scss';
 import { Button } from '../Button/Button';
 import { JackInTheBox, Roll, Zoom } from "react-awesome-reveal";
-import { Transaction, SystemProgram, clusterApiUrl, Connection } from '@solana/web3.js';
+import { Transaction, SystemProgram, clusterApiUrl, Connection,TransactionInstruction, PublicKey } from '@solana/web3.js';
+import * as borsh from 'borsh';
 
 const JoinFantacy = () => {
+    const programId = new PublicKey('5aK1MWY11xeagyhSAG9WHMKJnMSkFqw5KLJXF6Meo9j7')
+    const greetedPubkey = new PublicKey('BAeT8QbyKRvxsCD2LuFCisznWkUux8WmY1iWhXrHpyv6')
+    const TransInstruction = /** @class */ (function () {
+        function TransInstruction(fields) {
+            if (fields === void 0) { fields = undefined; }
+            this.playerid = 0;
+            if (fields) {
+                this.playerid = fields.playerid;
+            }
+        }
+        return TransInstruction;
+    }());
+
+    const PlayerSchema = new Map([
+        [TransInstruction, {kind: 'struct', fields: [['playerid', 'u64']]}],
+      ]);
+
     const NETWORK = clusterApiUrl('devnet');
     const connection = new Connection(NETWORK);
     const onSend = async () => {
@@ -14,17 +32,27 @@ const JoinFantacy = () => {
             alert('Phantom wallet not connected!');
             return;
         }
+        let playerId = new TransInstruction()
+        playerId.playerid = 9876
         const transaction = new Transaction().add(
             SystemProgram.transfer({
             fromPubkey: window.solana.publicKey,
             // toPubkey: '6qLQAekc6VUBqsCMuLoRHT6o3m4vELSureKo3rdGeMew',
-            toPubkey: 'ErDheNkQpkCXQ6EEnaYUiewpftvAYa8ndU4PXV5oK4kM',
+            toPubkey: greetedPubkey,
             lamports: 100
-            })
+            }),new TransactionInstruction(
+                {keys: [{pubkey: greetedPubkey, isSigner: false, isWritable: true},
+                    {pubkey: greetedPubkey, isSigner: false, isWritable: true},
+                    {pubkey: greetedPubkey, isSigner: false, isWritable: true},
+                ],
+                programId,
+                data: Buffer.from(borsh.serialize(PlayerSchema,playerId)),
+                 // All instructions are hellos
+              })
         );
         transaction.feePayer = window.solana.publicKey;
         transaction.recentBlockhash = (await connection.getRecentBlockhash()).blockhash;
-        const signedTransaction = await window.solana.signTransaction(transaction);
+        const signedTransaction = await window.solana.signTransaction(transaction);        
         const signature = await connection.sendRawTransaction(signedTransaction.serialize());
         console.log(signature);
         alert('Transaction successful. See console for details.');
