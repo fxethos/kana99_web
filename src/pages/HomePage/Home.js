@@ -1,24 +1,34 @@
-import React from 'react'
+import React from "react";
 // import { homeObjOne, homeObjTwo, homeObjThree, homeObjFour } from './Data';
 // import { homeObjOne } from './Data';
-import { InfoSection, JoinFantacy, PowerPlay, Members, FrequentQuestion} from '../../components';
+import {
+  InfoSection,
+  JoinFantacy,
+  PowerPlay,
+  Members,
+  FrequentQuestion,
+  Navbar,
+  Footer,
+  FooterBottom,
+} from "../../components";
 
 const Home = () => {
-
   return (
     <React.Fragment>
-      <InfoSection/>
-      <JoinFantacy/>
-       <PowerPlay/>
-       <Members/>
-       <FrequentQuestion/>
-        {/* <Pricing /> */}
-        {/* <InfoSection {...homeObjThree} />
+      <Navbar />
+      <InfoSection />
+      <JoinFantacy />
+      <PowerPlay />
+      <Members />
+      <FrequentQuestion />
+      <Footer />
+      <FooterBottom />
+      {/* <Pricing /> */}
+      {/* <InfoSection {...homeObjThree} />
          <InfoSection {...homeObjTwo} /> */}
-        {/* <InfoSection {...homeObjFour} /> */}
-  </React.Fragment>
+      {/* <InfoSection {...homeObjFour} /> */}
+    </React.Fragment>
   );
-
-}
+};
 
 export default Home;
