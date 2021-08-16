@@ -30,11 +30,11 @@ const MatchList = () => {
   ];
   return (
     <div
-      id="collapse-A"
+      id="collapse-cricket"
       className="collapse show"
       data-parent="#content"
       role="tabpanel"
-      aria-labelledby="heading-A"
+      aria-labelledby="heading-cricket"
     >
       <div className="card-body">
         {matches.map((match, index) => {

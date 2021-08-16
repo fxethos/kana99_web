@@ -20,7 +20,7 @@ navItems.forEach(function (e, i) {
 function MatchmenuFooter() {
   return (
     <div>
-      <header className="header">
+      <div className="menu-header">
         <div className="tab-container">
           <nav className="bottom-nav">
             <div className="bottom-nav-item active">
@@ -63,7 +63,7 @@ function MatchmenuFooter() {
             </div>
           </nav>
         </div>
-      </header>
+      </div>
     </div>
   );
 }

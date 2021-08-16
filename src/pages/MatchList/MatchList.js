@@ -9,13 +9,15 @@ const MatchList = () => {
     <React.Fragment>
       <Navbar />
       <div className="matchlist-block">
-        <div className="container-fluid">
-          <div className="match-background">
-            <div className="container">
-              <MatchListPage />
-            </div>
+        {/* <div className="container-fluid"> */}
+
+        <div className="match-background">
+          <div className="container">
+            <MatchListPage />
           </div>
         </div>
+
+        {/* </div> */}
       </div>
       <MatchmenuFooter />
     </React.Fragment>

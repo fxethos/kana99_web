@@ -5,8 +5,8 @@ const MatchListNav = () => (
   <ul id="tabs" className="nav nav-tabs" role="tablist">
     <li className="nav-item">
       <a
-        id="tab-A"
-        href="#pane-A"
+        id="tab-cricket"
+        href="#pane-cricket"
         className="nav-link active"
         data-toggle="tab"
         role="tab"
@@ -16,6 +16,7 @@ const MatchListNav = () => (
         <span>Cricket</span>
       </a>
     </li>
+
     <li className="nav-item">
       <a
         id="tab-B"

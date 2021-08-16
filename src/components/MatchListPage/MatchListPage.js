@@ -1,29 +1,29 @@
 import React from "react";
-// import cricket from "../../images/tab-icons/cricket.svg";
-// import MatchList from "../MatchList/MatchList";
+import cricket from "../../images/tab-icons/cricket.svg";
+import MatchList from "../MatchList/MatchList";
 import MatchListNav from "../MatchListNav/MatchListNav";
 import "./MatchListPage.scss";
 
 function MatchListPage() {
   return (
     <React.Fragment>
-      <div className="match-list pt-3">
+      <div className="match-list pt-3 pb-5">
         <MatchListNav />
 
-        {/* <div id="content" className="tab-content" role="tablist">
+        <div id="content" className="tab-content" role="tablist">
           <div
-            id="pane-A"
+            id="pane-cricket"
             className="card tab-pane fade show active"
             role="tabpanel"
-            aria-labelledby="tab-A"
+            aria-labelledby="tab-cricket"
           >
-            <div className="card-header" role="tab" id="heading-A">
+            <div className="card-header" role="tab" id="heading-cricket">
               <h5 className="mb-0">
                 <a
                   data-toggle="collapse"
-                  href="#collapse-A"
+                  href="#collapse-cricket"
                   aria-expanded="true"
-                  aria-controls="collapse-A"
+                  aria-controls="collapse-cricket"
                 >
                   <img src={cricket} className="" alt="cricket-icon" />
                   <br></br>
@@ -124,7 +124,6 @@ function MatchListPage() {
             </div>
           </div>
         </div>
-      </div> */}
       </div>
     </React.Fragment>
   );

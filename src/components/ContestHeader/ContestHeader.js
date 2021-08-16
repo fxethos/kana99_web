@@ -14,13 +14,13 @@ function ContestHeader() {
                 <span>
                   <b>RAN</b>
                 </span>
-                <span className="match-logo-bg">
+                <span className="match-logo-bg-header">
                   <img src={m1} className="match-logo" alt="match-logo" />
                 </span>
                 <span>
                   <input type="text" placeholder="22h: 30m" />
                 </span>
-                <span className="match-logo-bg">
+                <span className="match-logo-bg-header">
                   <img src={m1} className="match-logo" alt="match-logo" />
                 </span>
                 <span>
