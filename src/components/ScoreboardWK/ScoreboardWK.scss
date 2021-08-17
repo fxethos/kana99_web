@@ -1,0 +1,242 @@
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  margin: 0px 15px;
+  img {
+    border-radius: 50%;
+  }
+}
+.custom_red_btn {
+  color: white;
+  background-color: #eb5757;
+  padding: 10px;
+  margin: 0px auto;
+}
+
+// .table {
+//   margin-top: 20px;
+//   color: white;
+// }
+
+thead {
+  background: rgba(7, 7, 7, 0.74);
+  color: #eb5757;
+  text-transform: uppercase;
+}
+.fas {
+  color: #9a9a9a;
+  font-size: 12px;
+}
+// .table thead th {
+//   border: none;
+// }
+
+// .table tr th,
+// .table tr td:nth-child(odd) {
+//   text-align: center;
+// }
+// .table td,
+// .table th {
+//   text-align: center;
+//   vertical-align: unset;
+//   padding: 0.5rem;
+// }
+// .table td {
+//   background: rgba(235, 87, 87, 0.5);
+//   border-top: 1px solid #eb5757;
+// }
+
+table td:first-child {
+  width: 65%;
+}
+
+.info {
+  display: flex;
+}
+.sp {
+  font-size: 0.8em;
+}
+.star_bg {
+  background-color: white;
+  border-radius: 20px;
+  color: black;
+  padding: 3px 5px;
+  width: 50px;
+  margin: 0 auto;
+}
+.star_value {
+  font-weight: 900;
+  color: black;
+  font-size: 16px;
+  padding: 0px 5px;
+  line-height: 10px;
+}
+.fa-star {
+  color: orange;
+}
+.details {
+  text-align: start;
+}
+
+// @import "compass/css3";
+
+// More practical CSS...
+// using mobile first method (IE8,7 requires respond.js polyfill https://github.com/scottjehl/Respond)
+
+$breakpoint-alpha: 480px; // adjust to your needs
+
+.rwd-table {
+  margin-bottom: 1em;
+  //   min-width: 460px; // adjust to your needs
+
+  tr {
+    // border-top: 1px solid #ddd;
+    border-bottom: 1px solid #eb5757;
+  }
+
+  th {
+    background: rgba(7, 7, 7, 0.74);
+    color: #eb5757;
+    text-transform: uppercase;
+    display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!
+  }
+
+  td {
+    background: rgba(235, 87, 87, 0.5);
+    display: block;
+
+    &:first-child {
+      padding-top: 0.5em;
+      width: 50%;
+    }
+    &:last-child {
+      padding-bottom: 0.5em;
+    }
+
+    &:before {
+      content: attr(data-th) ": "; // who knew you could do this? The internet, that's who.
+      font-weight: bold;
+
+      // optional stuff to make it look nicer
+      width: 6.5em; // magic number :( adjust according to your own content
+      display: inline-block;
+      // end options
+
+      @media (min-width: $breakpoint-alpha) {
+        display: none;
+      }
+    }
+  }
+
+  th,
+  td {
+    text-align: left;
+
+    @media (min-width: $breakpoint-alpha) {
+      display: table-cell;
+      padding: 0.25em 0.5em;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+// presentational styling
+
+.rwd-table {
+  color: #fff;
+  border-radius: none;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  tr {
+    border-bottom: 1px solid #eb5757;
+  }
+  th,
+  td {
+    margin: 0.5em 1em;
+    text-align: center;
+    @media (min-width: $breakpoint-alpha) {
+      padding: 0.5em !important;
+    }
+  }
+  th,
+  td:before {
+    color: #eb5757;
+  }
+}
+
+@media screen and (min-device-width: 320px) and (max-device-width: 600px) {
+  .rwd-table td:last-child {
+    padding-bottom: 0.5em;
+  }
+  .rwd-table td:first-child {
+    padding-top: 0.5em;
+    width: 100%;
+  }
+
+  .rwd-table th,
+  .rwd-table td {
+    margin: none;
+    text-align: none;
+  }
+  .rwd-table th,
+  .rwd-table td {
+    text-align: none;
+  }
+  .rwd-table td {
+    display: flex;
+    background: none;
+  }
+}
+
+@media screen and (min-device-width: 600px) and (max-device-width: 768px) {
+  .rwd-table {
+    min-width: 300px;
+    margin: 10px auto;
+  }
+  .scoreboard_block .nav-tabs .nav-item {
+    width: 50px;
+  }
+  .scoreboard-block {
+    height: 120vh !important;
+    padding-bottom: 200px;
+  }
+  .board_bg {
+    height: 120vh !important;
+  }
+}
+
+@media screen and (min-device-width: 1024px) and (max-device-width: 1100px) {
+  .rwd-table {
+    min-width: 360px;
+    margin: 10px auto;
+  }
+  .scoreboard_block .nav-tabs .nav-item {
+    width: 50px;
+  }
+  .scoreboard-block {
+    height: 120vh !important;
+    padding-bottom: 200px;
+  }
+  .board_bg {
+    height: 120vh !important;
+  }
+}
+@media screen and (min-device-width: 1200px) and (max-device-width: 1440px) {
+  .rwd-table {
+    min-width: 480px;
+    margin: 10px auto;
+  }
+  .scoreboard-block {
+    height: 150vh;
+  }
+}
