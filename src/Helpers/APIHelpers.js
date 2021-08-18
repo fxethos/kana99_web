@@ -1,4 +1,4 @@
-const path = require('path');
+// const path = require('path');
 const axios = require('axios');
 
 // class APIHelper {
@@ -27,6 +27,7 @@ var tournaments;
 // }
 
 async function authenticationToken() {
+
     const body = {
         "api_key": "RS5:7ca04571e349f24371cc6692c80c64ac"
     }

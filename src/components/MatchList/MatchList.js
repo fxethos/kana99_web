@@ -9,35 +9,35 @@ const MatchList = () => {
 
   useEffect(() => {
     responsee = JSON.parse(localStorage.getItem('schedule'));
-    setState(responsee)
+    setState(responsee);
   }, [])
-
-  const matches = [
-    {
-      matchTitle: "Jharjhand T20",
-      team1: "RAN",
-      team2: "DHA",
-      playersJoined: 170,
-    },
-    {
-      matchTitle: "Chennai T20",
-      team1: "CSK",
-      team2: "RCB",
-      playersJoined: 240,
-    },
-    {
-      matchTitle: "Mumbai T20",
-      team1: "MI",
-      team2: "KKR",
-      playersJoined: 113,
-    },
-    {
-      matchTitle: "Hyderabad T20",
-      team1: "SRH",
-      team2: "RR",
-      playersJoined: 95,
-    },
-  ];
+  console.log("Response", response)
+  // const matches = [
+  //   {
+  //     matchTitle: "Jharjhand T20",
+  //     team1: "RAN",
+  //     team2: "DHA",
+  //     playersJoined: 170,
+  //   },
+  //   {
+  //     matchTitle: "Chennai T20",
+  //     team1: "CSK",
+  //     team2: "RCB",
+  //     playersJoined: 240,
+  //   },
+  //   {
+  //     matchTitle: "Mumbai T20",
+  //     team1: "MI",
+  //     team2: "KKR",
+  //     playersJoined: 113,
+  //   },
+  //   {
+  //     matchTitle: "Hyderabad T20",
+  //     team1: "SRH",
+  //     team2: "RR",
+  //     playersJoined: 95,
+  //   },
+  // ];
   return (
     <div
       id="collapse-cricket"
