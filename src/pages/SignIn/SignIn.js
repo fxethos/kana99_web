@@ -1,10 +1,13 @@
 import React from "react";
+import { AuthenticationDetails, CognitoUser } from "amazon-cognito-identity-js";
+
 import "./SignIn.scss";
 import AuthFragment from "../../components/AuthFragment/AuthFragment";
 import UserPool from '../../UserPool';
-import { AuthenticationDetails, CognitoUser } from "amazon-cognito-identity-js";
 
-const SignIn = () => {
+
+const SignIn = (props) => {
+  console.log(props);
   const onSignIn = (creds) => {
     console.log("signin:", creds);
     
@@ -21,6 +24,7 @@ const SignIn = () => {
     user.authenticateUser(authDetails, {
       onSuccess: (data) => {
         console.log("onSuccess:", data);
+        props.history.push('/match-list');
       },
       onFailure: (err) => {
         console.log("onFailure:", err);
