@@ -1,0 +1,183 @@
+$primary-color: #fe7a49;
+
+.scoreboard-block {
+  background-image: url("../../images/score_bg.svg");
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-position: left;
+}
+.board_bg {
+  background-color: #270b2cba;
+  height: 100vh;
+  //   opacity: 0.7;
+}
+.text_back {
+  display: flex;
+  color: white;
+  align-items: center;
+  font-weight: 600;
+  padding-left: 30px;
+}
+.comp_time {
+  p {
+    margin-bottom: 0px;
+    font-size: 12px;
+  }
+}
+.kana_logo_align {
+  max-width: 480px;
+  text-align: center;
+  margin: auto;
+}
+
+.rectangle {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  width: 210px;
+  background: #eb5757;
+  border-radius: 10px;
+  position: relative;
+  z-index: 3;
+  margin: 20px auto;
+  box-shadow: 0px 3px 3px 0px #6c757d;
+}
+
+.circle {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  border-radius: 50px;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  left: 50%;
+  margin-left: -25px;
+  top: -10px;
+  background: #eb5757;
+  line-height: 60px;
+  text-align: center;
+  z-index: 3;
+}
+
+.score_box_one {
+  font-size: 12px;
+  font-weight: 600;
+}
+.score_box_two {
+  position: absolute;
+  right: 0px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.number_box {
+  width: 20px;
+  height: 20px;
+  background: black;
+  color: white;
+  padding: 2px 6px;
+  margin: 5px;
+  border-radius: 5px;
+  z-index: 2;
+}
+.player_logo {
+  line-height: 70px;
+  margin: 0px auto;
+  background-image: url("../../images/scoreboard_icons/sheild.png");
+  background-size: cover;
+  width: 80px;
+  height: 85px;
+}
+.logo_circle {
+  width: 60px;
+  height: 60px;
+  background-color: yellow;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 50px;
+  margin: 5px auto;
+}
+.credit_score {
+  background: white;
+  width: 160px;
+  margin: 0px auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  border-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 30px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.select_player {
+  background: rgba(235, 87, 87, 0.2);
+  height: 11em;
+  color: white;
+  text-align: center;
+}
+.select_box {
+  width: 30px;
+  height: 20x;
+  max-height: 30px;
+  border: 1px solid #eb5757;
+  text-align: center;
+  font-weight: 600;
+  background-color: black;
+  margin: 0px 3px;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 15px;
+  padding: 5px;
+}
+.select_red_box {
+  border: 1px solid #eb5757;
+  text-align: center;
+  font-weight: 600;
+  background-color: #eb5757;
+  margin: 0px 3px;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 25px;
+  color: white;
+  padding: 0px 3px;
+  margin: 0px 15px;
+}
+
+@media screen and (min-device-width: 300px) and (max-device-width: 600px) {
+  .container {
+    max-width: 100rem;
+  }
+  .scoreboard-block {
+    height: 120vh !important;
+    padding-bottom: 200px;
+  }
+  .player_logo {
+    height: 52px;
+    width: 50px;
+    margin: 3px auto;
+  }
+  .logo_circle {
+    line-height: 40px;
+    max-height: 40px;
+    max-width: 40px;
+    img {
+      max-width: 25px;
+    }
+  }
+  .select_box {
+    font-size: 9px;
+    line-height: 10px;
+    padding: 4px;
+    height: 20px;
+    min-width: 20px;
+    margin: 0px 2px;
+  }
+  .select_red_box {
+    margin: 0px;
+  }
+  .board_bg {
+    background-color: #270b2cba;
+    height: 120vh;
+  }
+}

@@ -9,3 +9,4 @@ export { default as Footer } from "./Footer/Footer";
 export { default as FooterBottom } from "./FooterBottom/FooterBottom";
 export { default as MatchListPage } from "./MatchListPage/MatchListPage";
 export { default as ContestListPage } from "./ContestListPage/ContestListPage";
+export { default as ScoreboardTabs } from "./ScoreboardTabs/ScoreboardTabs";
