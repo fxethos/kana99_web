@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MatchListCricket from "../MatchListCricket/MatchListCricket";
 
+var responsee
 const MatchList = () => {
+
+
+  const [response, setState] = React.useState({});
+
+  useEffect(() => {
+    responsee = JSON.parse(localStorage.getItem('schedule'));
+    setState(responsee)
+  }, [])
+
   const matches = [
     {
       matchTitle: "Jharjhand T20",
@@ -37,8 +47,9 @@ const MatchList = () => {
       aria-labelledby="heading-cricket"
     >
       <div className="card-body">
-        {matches.map((match, index) => {
-          return <MatchListCricket {...match} />;
+        {responsee?.map((match, index) => {
+          if (match.status === "not_started")
+            return <MatchListCricket {...match} />;
         })}
       </div>
     </div>
