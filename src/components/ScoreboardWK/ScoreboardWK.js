@@ -5,122 +5,126 @@ function ScoreboardWK() {
   return (
     <div>
       <table class="rwd-table">
-        <tr>
-          <th>
-            Players
-            <span className="p-1">
-              <i className="fas fa-chevron-down"></i>
-            </span>
-          </th>
-          <th>
-            Points
-            <span className="p-1">
-              <i className="fas fa-chevron-down"></i>
-            </span>
-          </th>
-          <th>
-            Credits
-            <span className="p-1">
-              <i className="fas fa-chevron-down"></i>
-            </span>
-          </th>
-        </tr>
-        <tr>
-          <td data-th="Players">
-            <div class="info">
-              <div class="avatar">
-                <img src="//via.placeholder.com/200" alt="doc name" />
-              </div>
-              <div class="details">
-                <div class="name">MS Wade</div>
-                <div class="meta-info">
-                  <span class="sp">AUS</span>
+        <thead>
+          <tr>
+            <th>
+              Players
+              <span className="p-1">
+                <i className="fas fa-chevron-down"></i>
+              </span>
+            </th>
+            <th>
+              Points
+              <span className="p-1">
+                <i className="fas fa-chevron-down"></i>
+              </span>
+            </th>
+            <th>
+              Credits
+              <span className="p-1">
+                <i className="fas fa-chevron-down"></i>
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-th="Players">
+              <div class="info">
+                <div class="avatar">
+                  <img src="//via.placeholder.com/200" alt="doc name" />
+                </div>
+                <div class="details">
+                  <div class="name">MS Wade</div>
+                  <div class="meta-info">
+                    <span class="sp">AUS</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </td>
-          <td data-th="Points">
-            <div class="star_bg">
-              <span>
-                <i className="fas fa-star"></i>
-                <span className="star_value"> 0</span>
-              </span>
-            </div>
-          </td>
-          <td data-th="Credits">1</td>
-        </tr>
-        <tr>
-          <td data-th="Players">
-            <div class="info">
-              <div class="avatar">
-                <img src="//via.placeholder.com/200" alt="doc name" />
+            </td>
+            <td data-th="Points">
+              <div class="star_bg">
+                <span>
+                  <i className="fas fa-star"></i>
+                  <span className="star_value"> 0</span>
+                </span>
               </div>
-              <div class="details">
-                <div class="name">MS Wade</div>
-                <div class="meta-info">
-                  <span class="sp">AUS</span>
+            </td>
+            <td data-th="Credits">1</td>
+          </tr>
+          <tr>
+            <td data-th="Players">
+              <div class="info">
+                <div class="avatar">
+                  <img src="//via.placeholder.com/200" alt="doc name" />
+                </div>
+                <div class="details">
+                  <div class="name">MS Wade</div>
+                  <div class="meta-info">
+                    <span class="sp">AUS</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </td>
-          <td data-th="Points">
-            <div class="star_bg">
-              <span>
-                <i className="fas fa-star"></i>
-                <span className="star_value"> 0</span>
-              </span>
-            </div>
-          </td>
-          <td data-th="Credits">1</td>
-        </tr>
-        <tr>
-          <td data-th="Players">
-            <div class="info">
-              <div class="avatar">
-                <img src="//via.placeholder.com/200" alt="doc name" />
+            </td>
+            <td data-th="Points">
+              <div class="star_bg">
+                <span>
+                  <i className="fas fa-star"></i>
+                  <span className="star_value"> 0</span>
+                </span>
               </div>
-              <div class="details">
-                <div class="name">MS Wade</div>
-                <div class="meta-info">
-                  <span class="sp">AUS</span>
+            </td>
+            <td data-th="Credits">1</td>
+          </tr>
+          <tr>
+            <td data-th="Players">
+              <div class="info">
+                <div class="avatar">
+                  <img src="//via.placeholder.com/200" alt="doc name" />
+                </div>
+                <div class="details">
+                  <div class="name">MS Wade</div>
+                  <div class="meta-info">
+                    <span class="sp">AUS</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </td>
-          <td data-th="Points">
-            <div class="star_bg">
-              <span>
-                <i className="fas fa-star"></i>
-                <span className="star_value"> 0</span>
-              </span>
-            </div>
-          </td>
-          <td data-th="Credits">1</td>
-        </tr>
-        <tr>
-          <td data-th="Players">
-            <div class="info">
-              <div class="avatar">
-                <img src="//via.placeholder.com/200" alt="doc name" />
+            </td>
+            <td data-th="Points">
+              <div class="star_bg">
+                <span>
+                  <i className="fas fa-star"></i>
+                  <span className="star_value"> 0</span>
+                </span>
               </div>
-              <div class="details">
-                <div class="name">MS Wade</div>
-                <div class="meta-info">
-                  <span class="sp">AUS</span>
+            </td>
+            <td data-th="Credits">1</td>
+          </tr>
+          <tr>
+            <td data-th="Players">
+              <div class="info">
+                <div class="avatar">
+                  <img src="//via.placeholder.com/200" alt="doc name" />
+                </div>
+                <div class="details">
+                  <div class="name">MS Wade</div>
+                  <div class="meta-info">
+                    <span class="sp">AUS</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </td>
-          <td data-th="Points">
-            <div class="star_bg">
-              <span>
-                <i className="fas fa-star"></i>
-                <span className="star_value"> 0</span>
-              </span>
-            </div>
-          </td>
-          <td data-th="Credits">1</td>
-        </tr>
+            </td>
+            <td data-th="Points">
+              <div class="star_bg">
+                <span>
+                  <i className="fas fa-star"></i>
+                  <span className="star_value"> 0</span>
+                </span>
+              </div>
+            </td>
+            <td data-th="Credits">1</td>
+          </tr>
+        </tbody>
       </table>
 
       <div classs="row justify-content-center align-items-center">

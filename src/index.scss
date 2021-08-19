@@ -31,3 +31,26 @@ $primary-color: #fe7a49;
 h1 {
   font-family: "Sports World";
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #eb5757;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #eb5757;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Button } from "../Button/Button";
 import "./ContestHeader.scss";
 import m1 from "../../images/matchlist-icons/m1.png";
@@ -32,12 +33,16 @@ function ContestHeader() {
           <div className="col-lg-4 col-sm-4 col-xs-12">
             <div className="row align-items-center">
               <div className="offset-xs-2 col-4 p-1 m-1">
-                <Button buttonStyle="btn--primary">
-                  <i className="fas fa-chevron-left"></i> Back
-                </Button>
+                <Link to="/">
+                  <Button buttonStyle="btn--primary">
+                    <i className="fas fa-chevron-left"></i> Back
+                  </Button>
+                </Link>
               </div>
               <div className="col-4 p-1 m-1">
-                <Button buttonStyle="btn--secondary"> Sign in</Button>
+                <Link to="/sign-in">
+                  <Button buttonStyle="btn--secondary"> Sign in</Button>
+                </Link>
               </div>
             </div>
           </div>

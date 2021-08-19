@@ -4,7 +4,7 @@ import ScoreboardWK from "../ScoreboardWK/ScoreboardWK";
 
 function ScoreboardTabs() {
   return (
-    <div class="scoreboard_block">
+    <div class="scoreboard_tabs_block">
       <div class="container">
         <ul id="tabs" class="nav nav-tabs" role="tablist">
           <li class="nav-item">

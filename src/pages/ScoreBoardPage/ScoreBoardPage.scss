@@ -168,16 +168,25 @@ $primary-color: #fe7a49;
   .select_box {
     font-size: 9px;
     line-height: 10px;
-    padding: 4px;
-    height: 20px;
-    min-width: 20px;
-    margin: 0px 2px;
+    width: auto;
   }
   .select_red_box {
     margin: 0px;
   }
   .board_bg {
     background-color: #270b2cba;
-    height: 120vh;
+    height: 145vh;
+    padding-bottom: 100px;
+  }
+  .card {
+    width: 100%;
+    background: transparent;
+    margin: 0.5rem 0rem;
+  }
+  .card-body {
+    padding: 0.25rem !important;
+  }
+  .kana_logo_align {
+    display: none;
   }
 }

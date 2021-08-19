@@ -4,12 +4,12 @@ import React from "react";
 import {
   InfoSection,
   JoinFantacy,
-  PowerPlay,
-  Members,
-  FrequentQuestion,
+  // PowerPlay,
+  // Members,
+  // FrequentQuestion,
   Navbar,
   Footer,
-  FooterBottom,
+  // FooterBottom,
 } from "../../components";
 
 const Home = () => {
@@ -18,11 +18,11 @@ const Home = () => {
       <Navbar />
       <InfoSection />
       <JoinFantacy />
-      <PowerPlay />
-      <Members />
-      <FrequentQuestion />
+      {/* <PowerPlay /> */}
+      {/* <Members /> */}
+      {/* <FrequentQuestion /> */}
       <Footer />
-      <FooterBottom />
+      {/* <FooterBottom /> */}
       {/* <Pricing /> */}
       {/* <InfoSection {...homeObjThree} />
          <InfoSection {...homeObjTwo} /> */}

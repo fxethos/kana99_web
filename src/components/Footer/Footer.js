@@ -54,17 +54,23 @@ const Footer = () => {
                     <div className="footer-social-icon">
                       <span>Follow us</span>
                       <Link to="">
-                        <i className="fa fa-facebook-f facebook-bg"></i>
-                      </Link>
-                      <Link to="">
                         <i className="fa fa-twitter twitter-bg"></i>
-                      </Link>
-                      <Link to="">
-                        <i className="fa fa-youtube-play youtube-bg"></i>
                       </Link>
                       <Link to="">
                         <i className="fa fa-instagram instagram-bg"></i>
                       </Link>
+                      <Link to="">
+                        <i className="fa fa-telegram facebook-bg"></i>
+                      </Link>
+                      <Link to="">
+                        <i className="fab fa-discord youtube-bg"></i>
+                      </Link>
+                      {/* <Link to="">
+                        <i className="fa fa-facebook-f facebook-bg"></i>
+                      </Link>
+                      <Link to="">
+                        <i className="fa fa-youtube-play youtube-bg"></i>
+                      </Link> */}
                     </div>
                   </div>
                 </div>
@@ -75,6 +81,6 @@ const Footer = () => {
       </footer>
     </React.Fragment>
   );
-}
+};
 
 export default Footer;
