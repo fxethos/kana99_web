@@ -3,7 +3,7 @@ import "./SignUp.scss";
 import AuthFragment from "../../components/AuthFragment/AuthFragment";
 import UserPool from '../../UserPool';
 
-const SignUp = () => {
+const SignUp = (props) => {
   const onSignUp = (creds) => {
     console.log("signup:", creds);
     UserPool.signUp(
@@ -16,6 +16,7 @@ const SignUp = () => {
           console.log(err);
         } else {
           console.log(res);
+          props.history.push('/sign-in');
         }
       });
   }
