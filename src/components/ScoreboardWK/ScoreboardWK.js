@@ -43,12 +43,119 @@ function ScoreboardWK() {
               </div>
             </td>
             <td data-th="Points">
-              <div class="star_bg">
+              <span class="star_bg">
                 <span>
                   <i className="fas fa-star"></i>
                   <span className="star_value"> 0</span>
                 </span>
+              </span>
+            </td>
+            <td data-th="Credits">
+              <div className="credit_value"> 1</div>
+            </td>
+          </tr>
+          <tr>
+            <td data-th="Players">
+              <div class="info">
+                <div class="avatar">
+                  <img src="//via.placeholder.com/200" alt="doc name" />
+                </div>
+                <div class="details">
+                  <div class="name">MS Wade</div>
+                  <div class="meta-info">
+                    <span class="sp">AUS</span>
+                  </div>
+                </div>
               </div>
+            </td>
+            <td data-th="Points">
+              <span class="star_bg">
+                <span>
+                  <i className="fas fa-star"></i>
+                  <span className="star_value"> 0</span>
+                </span>
+              </span>
+            </td>
+            <td data-th="Credits">
+              <div className="credit_value"> 1</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td data-th="Players">
+              <div class="info">
+                <div class="avatar">
+                  <img src="//via.placeholder.com/200" alt="doc name" />
+                </div>
+                <div class="details">
+                  <div class="name">MS Wade</div>
+                  <div class="meta-info">
+                    <span class="sp">AUS</span>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td data-th="Points">
+              <span class="star_bg">
+                <span>
+                  <i className="fas fa-star"></i>
+                  <span className="star_value"> 0</span>
+                </span>
+              </span>
+            </td>
+            <td data-th="Credits">
+              <div className="credit_value"> 1</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td data-th="Players">
+              <div class="info">
+                <div class="avatar">
+                  <img src="//via.placeholder.com/200" alt="doc name" />
+                </div>
+                <div class="details">
+                  <div class="name">MS Wade</div>
+                  <div class="meta-info">
+                    <span class="sp">AUS</span>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td data-th="Points">
+              <span class="star_bg">
+                <span>
+                  <i className="fas fa-star"></i>
+                  <span className="star_value"> 0</span>
+                </span>
+              </span>
+            </td>
+            <td data-th="Credits">
+              <div className="credit_value"> 1</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td data-th="Players">
+              <div class="info">
+                <div class="avatar">
+                  <img src="//via.placeholder.com/200" alt="doc name" />
+                </div>
+                <div class="details">
+                  <div class="name">MS Wade</div>
+                  <div class="meta-info">
+                    <span class="sp">AUS</span>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td data-th="Points">
+              <span class="star_bg">
+                <span>
+                  <i className="fas fa-star"></i>
+                  <span className="star_value"> 0</span>
+                </span>
+              </span>
             </td>
             <td data-th="Credits">1</td>
           </tr>
@@ -67,12 +174,12 @@ function ScoreboardWK() {
               </div>
             </td>
             <td data-th="Points">
-              <div class="star_bg">
+              <span class="star_bg">
                 <span>
                   <i className="fas fa-star"></i>
                   <span className="star_value"> 0</span>
                 </span>
-              </div>
+              </span>
             </td>
             <td data-th="Credits">1</td>
           </tr>
@@ -91,36 +198,12 @@ function ScoreboardWK() {
               </div>
             </td>
             <td data-th="Points">
-              <div class="star_bg">
+              <span class="star_bg">
                 <span>
                   <i className="fas fa-star"></i>
                   <span className="star_value"> 0</span>
                 </span>
-              </div>
-            </td>
-            <td data-th="Credits">1</td>
-          </tr>
-          <tr>
-            <td data-th="Players">
-              <div class="info">
-                <div class="avatar">
-                  <img src="//via.placeholder.com/200" alt="doc name" />
-                </div>
-                <div class="details">
-                  <div class="name">MS Wade</div>
-                  <div class="meta-info">
-                    <span class="sp">AUS</span>
-                  </div>
-                </div>
-              </div>
-            </td>
-            <td data-th="Points">
-              <div class="star_bg">
-                <span>
-                  <i className="fas fa-star"></i>
-                  <span className="star_value"> 0</span>
-                </span>
-              </div>
+              </span>
             </td>
             <td data-th="Credits">1</td>
           </tr>

@@ -1,5 +1,8 @@
 import React from "react";
-import cricket from "../../images/tab-icons/cricket.svg";
+import cricket from "../../images/tab-icons/cricket1.png";
+import basketball from "../../images/tab-icons/basketball.png";
+import baseball from "../../images/tab-icons/baseball.png";
+import football from "../../images/tab-icons/football.png";
 
 const MatchListNav = () => (
   <ul id="tabs" className="nav nav-tabs" role="tablist">
@@ -25,7 +28,7 @@ const MatchListNav = () => (
         data-toggle="tab"
         role="tab"
       >
-        <img src={cricket} className="" alt="football-icon" />
+        <img src={football} className="" alt="football-icon" />
         <br></br>
         <span>Football</span>
       </a>
@@ -38,7 +41,7 @@ const MatchListNav = () => (
         data-toggle="tab"
         role="tab"
       >
-        <img src={cricket} className="" alt="basketball-icon" />
+        <img src={basketball} className="" alt="basketball-icon" />
         <br></br>
         <span>Basketball</span>
       </a>
@@ -51,7 +54,7 @@ const MatchListNav = () => (
         data-toggle="tab"
         role="tab"
       >
-        <img src={cricket} className="" alt="baseball-icon" />
+        <img src={baseball} className="" alt="baseball-icon" />
         <br></br>
         <span>Baseball</span>
       </a>

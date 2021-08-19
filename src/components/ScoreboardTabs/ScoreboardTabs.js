@@ -68,7 +68,7 @@ function ScoreboardTabs() {
                   aria-expanded="true"
                   aria-controls="collapse-A"
                 >
-                  Collapsible Group Item A
+                  WK(0)
                 </a>
               </h5>
             </div>
@@ -114,7 +114,7 @@ function ScoreboardTabs() {
                   aria-expanded="false"
                   aria-controls="collapse-B"
                 >
-                  Collapsible Group Item B
+                  BAT(0)
                 </a>
               </h5>
             </div>
@@ -144,7 +144,7 @@ function ScoreboardTabs() {
                   aria-expanded="false"
                   aria-controls="collapse-C"
                 >
-                  Collapsible Group Item C
+                  AR(0)
                 </a>
               </h5>
             </div>
@@ -174,7 +174,7 @@ function ScoreboardTabs() {
                   aria-expanded="false"
                   aria-controls="collapse-D"
                 >
-                  Collapsible Group Item D
+                  BOW(0)
                 </a>
               </h5>
             </div>
