@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const host = 'https://35.154.51.112:3000'
+const host = new URL('https://35.154.51.112:3000');
 const endpoints = {
     auth: '/api/auth',
     associationList: '/api/association/list',
@@ -17,13 +17,13 @@ var association;
 var tournaments;
 
 async function authenticationToken() {
-
+    host.pathname = endpoints.auth;
     const body = {
         "api_key": "RS5:7ca04571e349f24371cc6692c80c64ac"
     }
     try {
 
-        const response = await axios.post(host + endpoints.auth, body);
+        const response = await axios.post(host.href, body);
         localStorage.setItem('authCricket', response.data.data.token);
         associationList();
     } catch (err) {
@@ -33,12 +33,13 @@ async function authenticationToken() {
 }
 
 async function associationList() {
+    host.pathname = endpoints.associationList;
     const authToken = localStorage.getItem('authCricket');
     const body = {
         "rs_token": authToken
     }
     try {
-        const response = await axios.post(host + endpoints.associationList, body);
+        const response = await axios.post(host.href, body);
         association = response.data.data.associations[3].key;
         tournamentList();
     } catch (err) {
@@ -47,13 +48,14 @@ async function associationList() {
 }
 
 async function tournamentList() {
+    host.pathname = endpoints.cBoard;
     const authToken = localStorage.getItem('authCricket');
     const body = {
         "rs_token": authToken,
         "page_key": association
     }
     try {
-        const response = await axios.post(host + endpoints.cBoard, body);
+        const response = await axios.post(host.href, body);
         tournaments = response.data.data.tournaments[3].key;
         schedule();
     } catch (err) {
@@ -62,13 +64,14 @@ async function tournamentList() {
 }
 
 async function schedule() {
+    host.pathname = endpoints.fixtures;
     const authToken = localStorage.getItem('authCricket');
     const body = {
         "rs_token": authToken,
         "page_key": tournaments
     }
     try {
-        const response = await axios.post(host + endpoints.fixtures, body);
+        const response = await axios.post(host.href, body);
         localStorage.setItem('schedule', JSON.stringify(response.data.data.matches));
 
     } catch (err) {
@@ -76,14 +79,14 @@ async function schedule() {
     }
 }
 
-// saveSignupInfo = async (userInfo) => {
-//     const endpoint = path.join(this.host, this.endpoints.signup);
-//     try {
-//         const response = await axios.post('http://35.154.51.112:3000/api/user/signup', userInfo);
-//         return response;
-//     } catch (err) {
-//         console.log(err.response.data);
-//     }
-// }
+export const saveSignupInfo = async (userInfo) => {
+    host.pathname = endpoints.signup
+    try {
+        const response = await axios.post(host.href, userInfo);
+        return response;
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 export default authenticationToken;
