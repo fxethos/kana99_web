@@ -80,11 +80,21 @@ async function schedule() {
 }
 
 export const saveSignupInfo = async (userInfo) => {
-    host.pathname = endpoints.signup
+    host.pathname = endpoints.signup;
     try {
         const response = await axios.post(host.href, userInfo);
         return response;
     } catch (err) {
+        console.log(err);
+    }
+}
+
+export const getContests = async (match_id) => {
+    host.pathname = endpoints.getContests;
+    try {
+        const response = await axios.get(host.href, {match_id});
+        console.log(response);
+    } catch(err) {
         console.log(err);
     }
 }
