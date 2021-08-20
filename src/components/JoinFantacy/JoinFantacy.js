@@ -1,27 +1,31 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Link } from 'react-router-dom';
 import './JoinFantacy.scss';
 import { Button } from '../Button/Button';
 import { JackInTheBox, Roll, Zoom } from "react-awesome-reveal";
-import { Transaction, SystemProgram, clusterApiUrl, Connection,TransactionInstruction, PublicKey } from '@solana/web3.js';
+import { Transaction,ConfirmedTransaction, SystemProgram, clusterApiUrl, Connection,TransactionInstruction,AccountChangeCallback, PublicKey } from '@solana/web3.js';
 import * as borsh from 'borsh';
-
 const JoinFantacy = () => {
-    const programId = new PublicKey('5aK1MWY11xeagyhSAG9WHMKJnMSkFqw5KLJXF6Meo9j7')
-    const greetedPubkey = new PublicKey('BAeT8QbyKRvxsCD2LuFCisznWkUux8WmY1iWhXrHpyv6')
-    const TransInstruction = /** @class */ (function () {
-        function TransInstruction(fields) {
+    
+    
+    const destinationPubkey = new PublicKey('DeH2ULUKz8Hw33fmXU9a5ATf9cabk6cKUf7U9EJjuW5v')
+    const programId = new PublicKey("EDkESd3fsX3crYKjmALuu7296rxRq4m6uvjuBP4bKuX4")
+    const ContestInstruction =  (function () {
+        function ContestInstruction(fields) {
             if (fields === void 0) { fields = undefined; }
-            this.playerid = 0;
+            this.contestids = 0;
+            this.datatype = 0
             if (fields) {
-                this.playerid = fields.playerid;
+                this.contestids = fields.contestids;
+                this.datatype = fields.datatype;
+
             }
         }
-        return TransInstruction;
+        return ContestInstruction;
     }());
 
-    const PlayerSchema = new Map([
-        [TransInstruction, {kind: 'struct', fields: [['playerid', 'u64']]}],
+    const ContestSchema = new Map([
+        [ContestInstruction, {kind: 'struct', fields: [['contestids', 'u64'],['datatype', 'u64']]}],
       ]);
 
     const NETWORK = clusterApiUrl('devnet');
@@ -32,30 +36,40 @@ const JoinFantacy = () => {
             alert('Phantom wallet not connected!');
             return;
         }
-        let playerId = new TransInstruction()
-        playerId.playerid = 9876
+        let ContestID = new ContestInstruction()
+        ContestID.contestids = 7857564
+        ContestID.datatype = 2
         const transaction = new Transaction().add(
             SystemProgram.transfer({
             fromPubkey: window.solana.publicKey,
             // toPubkey: '6qLQAekc6VUBqsCMuLoRHT6o3m4vELSureKo3rdGeMew',
-            toPubkey: greetedPubkey,
+            toPubkey: destinationPubkey,
             lamports: 100
-            }),new TransactionInstruction(
-                {keys: [{pubkey: greetedPubkey, isSigner: false, isWritable: true},
-                    {pubkey: greetedPubkey, isSigner: false, isWritable: true},
-                    {pubkey: greetedPubkey, isSigner: false, isWritable: true},
+            }),new TransactionInstruction({
+                keys: [{pubkey : destinationPubkey, isSigner : false,  isWritable: true},  
                 ],
                 programId,
-                data: Buffer.from(borsh.serialize(PlayerSchema,playerId)),
-                 // All instructions are hellos
-              })
+                data: Buffer.from(borsh.serialize(ContestSchema,ContestID)),
+            })
+           
+              
         );
         transaction.feePayer = window.solana.publicKey;
         transaction.recentBlockhash = (await connection.getRecentBlockhash()).blockhash;
         const signedTransaction = await window.solana.signTransaction(transaction);        
         const signature = await connection.sendRawTransaction(signedTransaction.serialize());
         console.log(signature);
+         
         alert('Transaction successful. See console for details.');
+        // const transsign2 = await connection.getConfirmedTransaction(signature);
+        // console.log(transsign2)
+       
+
+        
+      
+
+      
+      
     }
     return (
         <React.Fragment>
