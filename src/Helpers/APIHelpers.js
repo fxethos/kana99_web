@@ -1,30 +1,20 @@
-// const path = require('path');
 const axios = require('axios');
 
-// class APIHelper {
-
-const host = 'http://35.154.51.112:3000'
+const host = 'https://35.154.51.112:3000'
 const endpoints = {
     auth: '/api/auth',
     associationList: '/api/association/list',
     cBoard: '/api/association/c_board',
     fixtures: '/api/tournament/fixtures',
     fantasyCredits: '/api/fantasy_match_credits',
-    signup: '/user/signup'
+    signup: 'api/user/signup', // POST - uuid, username, email, wallet_address (optional)
+    getUser: 'api/user/info', // POST - uuid
+    getContests: '/api/getcontest', // GET - match_id
+    postContests: '/api/postcontest' // POST - contest_id, match_id, contest_name, contest_value, max_contest_size, entry_fee
 }
 
 var association;
 var tournaments;
-
-// saveSignupInfo = async (userInfo) => {
-//     const endpoint = path.join(this.host, this.endpoints.signup);
-//     try {
-//         const response = await axios.post('http://35.154.51.112:3000/api/user/signup', userInfo);
-//         return response;
-//     } catch (err) {
-//         console.log(err.response.data);
-//     }
-// }
 
 async function authenticationToken() {
 
@@ -86,18 +76,14 @@ async function schedule() {
     }
 }
 
-
-//}
-
-// const helper = new APIHelper();
-
-// helper.saveSignupInfo({ uuid: 'abc123' });
-
-
-// export {
-//     authenticationToken
+// saveSignupInfo = async (userInfo) => {
+//     const endpoint = path.join(this.host, this.endpoints.signup);
+//     try {
+//         const response = await axios.post('http://35.154.51.112:3000/api/user/signup', userInfo);
+//         return response;
+//     } catch (err) {
+//         console.log(err.response.data);
+//     }
 // }
 
 export default authenticationToken;
-
-// export default new APIHelper();
