@@ -8,12 +8,12 @@ import * as borsh from 'borsh';
 const JoinFantacy = () => {
     
     
-    const destinationPubkey = new PublicKey('DeH2ULUKz8Hw33fmXU9a5ATf9cabk6cKUf7U9EJjuW5v')
-    const programId = new PublicKey("EDkESd3fsX3crYKjmALuu7296rxRq4m6uvjuBP4bKuX4")
+    const destinationPubkey = new PublicKey('CHdhuY41nUDaiTAiRRwm1qkEbdXMtSJD2XcuxNQdQf21')
+    const programId = new PublicKey("3LkPWoPQJYXdjD62hcY8DwK6baMCKLRKVBH4MWmxDBEC")
     const ContestInstruction =  (function () {
         function ContestInstruction(fields) {
             if (fields === void 0) { fields = undefined; }
-            this.contestids = 0;
+            this.contestids = "";
             this.datatype = 0
             if (fields) {
                 this.contestids = fields.contestids;
@@ -25,7 +25,7 @@ const JoinFantacy = () => {
     }());
 
     const ContestSchema = new Map([
-        [ContestInstruction, {kind: 'struct', fields: [['contestids', 'u64'],['datatype', 'u64']]}],
+        [ContestInstruction, {kind: 'struct', fields: [['contestids', 'String'],['datatype', 'u64']]}],
       ]);
 
     const NETWORK = clusterApiUrl('devnet');
@@ -37,7 +37,7 @@ const JoinFantacy = () => {
             return;
         }
         let ContestID = new ContestInstruction()
-        ContestID.contestids = 7857564
+        ContestID.contestids = "tradla12"
         ContestID.datatype = 2
         const transaction = new Transaction().add(
             SystemProgram.transfer({
@@ -64,7 +64,27 @@ const JoinFantacy = () => {
         // const transsign2 = await connection.getConfirmedTransaction(signature);
         // console.log(transsign2)
        
+        async function parseTransaction(logs,context){
+            const requiredAccounts = [''];
+            //console.log('working')
+            let signature = await logs.signature
+            console.log(signature)
+            let payer_pubkey =  await connection.getParsedConfirmedTransaction(signature);
+            console.log(payer_pubkey)
+            let account = await payer_pubkey.transaction.message.instructions
+            let accounts = await account[0].parsed
+            //console.log(accounts.info.source)
+            requiredAccounts.push(accounts.info.source)
+            console.log(requiredAccounts)
+           
+        }
+      
 
+        let AccChange = await connection.onLogs(
+            destinationPubkey,
+            parseTransaction,
+        )
+        console.log(AccChange)
         
       
 
