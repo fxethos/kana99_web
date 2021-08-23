@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from "../../components/Button/Button";
 import { Link } from "react-router-dom";
-import { saveSignupInfo } from '../../Helpers/APIHelpers';
 
 class AuthForm extends React.Component {
     state = {
@@ -24,8 +23,7 @@ class AuthForm extends React.Component {
     }
     onSubmit = (e) => {
         e.preventDefault();
-        // this.props.onSubmit(this.state);
-        saveSignupInfo(this.state);
+        this.props.onSubmit(this.state);
     }
 
     render() {
