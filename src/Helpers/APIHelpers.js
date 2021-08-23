@@ -1,7 +1,13 @@
+import moment from 'moment';
+// const path = require('path');
 const axios = require('axios');
 
-const host = new URL('https://35.154.51.112:3000');
+
+// class APIHelper {
+
+const host = 'http://35.154.51.112:3000/api'
 const endpoints = {
+    staticData:'/getstaticdata',
     auth: '/api/auth',
     associationList: '/api/association/list',
     cBoard: '/api/association/c_board',
@@ -12,9 +18,37 @@ const endpoints = {
     getContests: '/api/getcontest', // GET - match_id
     postContests: '/api/postcontest' // POST - contest_id, match_id, contest_name, contest_value, max_contest_size, entry_fee
 }
-
+const date = moment().add(15, 'days').calendar();
+console.log("Date",date);
 var association;
 var tournaments;
+const matches = [] ;
+
+// saveSignupInfo = async (userInfo) => {
+//     const endpoint = path.join(this.host, this.endpoints.signup);
+//     try {
+//         const response = await axios.post('http://35.154.51.112:3000/api/user/signup', userInfo);
+//         return response;
+//     } catch (err) {
+//         console.log(err.response.data);
+//     }
+// }
+
+
+async function upcomingMatches(){
+    try{
+        const response = await axios.get(host+endpoints.staticData);
+        const upcomingList = response.data.data.matcheslist;
+       
+        upcomingList.forEach(element => {
+            var startDate = moment.unix(element.start_at).format("MM/DD/YYYY");
+            (element.status !== 'completed' && startDate <= date ) && matches.push(element);
+        });
+        localStorage.setItem('upcomingMatches', JSON.stringify(matches));
+    }catch(err){
+        console.log("Err",err)
+    }
+}
 
 async function authenticationToken() {
     host.pathname = endpoints.auth;
@@ -89,14 +123,17 @@ export const saveSignupInfo = async (userInfo) => {
     }
 }
 
-export const getContests = async (match_id) => {
-    host.pathname = endpoints.getContests;
-    try {
-        const response = await axios.get(host.href, {match_id});
-        console.log(response);
-    } catch(err) {
-        console.log(err);
-    }
-}
+//}
+
+// const helper = new APIHelper();
+
+// helper.saveSignupInfo({ uuid: 'abc123' });
+
+
+// export {
+//     authenticationToken
+// }
+
+export default upcomingMatches;
 
 export default authenticationToken;
