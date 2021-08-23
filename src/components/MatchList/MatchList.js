@@ -1,17 +1,29 @@
 import React, { useEffect } from "react";
 import MatchListCricket from "../MatchListCricket/MatchListCricket";
 
-var responsee
+import moment from "moment";
+
+var response;
 const MatchList = () => {
 
-
-  const [response, setState] = React.useState({});
+  const [state, setState] = React.useState({});
 
   useEffect(() => {
-    responsee = JSON.parse(localStorage.getItem('schedule'));
-    setState(responsee);
+    response = JSON.parse(localStorage.getItem('upcomingMatches'));
+    response.forEach(element => {
+      var matches = moment.unix(element.start_at).format("MM/DD/YYYY");
+      element.start_at = matches;    
+    });
+  setState(response);
   }, [])
-  console.log("Response", response)
+
+
+
+  // useEffect(() => {
+  //   response = JSON.parse(localStorage.getItem('schedule'));
+  //   setState(response);
+  // }, [])
+  // console.log("Response", response)
   // const matches = [
   //   {
   //     matchTitle: "Jharjhand T20",
@@ -47,8 +59,8 @@ const MatchList = () => {
       aria-labelledby="heading-cricket"
     >
       <div className="card-body">
-        {responsee?.map((match, index) => {
-          if (match.status === "not_started")
+        {response?.map((match, index) => {
+         
             return <MatchListCricket {...match} />;
         })}
       </div>

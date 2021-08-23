@@ -1,10 +1,13 @@
+import moment from 'moment';
 // const path = require('path');
 const axios = require('axios');
 
+
 // class APIHelper {
 
-const host = 'http://35.154.51.112:3000'
+const host = 'http://35.154.51.112:3000/api'
 const endpoints = {
+    staticData:'/getstaticdata',
     auth: '/api/auth',
     associationList: '/api/association/list',
     cBoard: '/api/association/c_board',
@@ -12,9 +15,11 @@ const endpoints = {
     fantasyCredits: '/api/fantasy_match_credits',
     signup: '/user/signup'
 }
-
+const date = moment().add(15, 'days').calendar();
+console.log("Date",date);
 var association;
 var tournaments;
+const matches = [] ;
 
 // saveSignupInfo = async (userInfo) => {
 //     const endpoint = path.join(this.host, this.endpoints.signup);
@@ -25,6 +30,22 @@ var tournaments;
 //         console.log(err.response.data);
 //     }
 // }
+
+
+async function upcomingMatches(){
+    try{
+        const response = await axios.get(host+endpoints.staticData);
+        const upcomingList = response.data.data.matcheslist;
+       
+        upcomingList.forEach(element => {
+            var startDate = moment.unix(element.start_at).format("MM/DD/YYYY");
+            (element.status !== 'completed' && startDate <= date ) && matches.push(element);
+        });
+        localStorage.setItem('upcomingMatches', JSON.stringify(matches));
+    }catch(err){
+        console.log("Err",err)
+    }
+}
 
 async function authenticationToken() {
 
@@ -98,6 +119,6 @@ async function schedule() {
 //     authenticationToken
 // }
 
-export default authenticationToken;
+export default upcomingMatches;
 
 // export default new APIHelper();
