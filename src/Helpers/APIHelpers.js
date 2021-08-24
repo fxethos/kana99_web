@@ -1,4 +1,5 @@
 import moment from 'moment';
+import MatchList from '../components/MatchList/MatchList';
 // const path = require('path');
 const axios = require('axios');
 
@@ -13,11 +14,8 @@ const endpoints = {
     getContests: '/api/getcontest', // GET - match_id
     postContests: '/api/postcontest' // POST - contest_id, match_id, contest_name, contest_value, max_contest_size, entry_fee
 }
-const date = moment().add(15, 'days').calendar();
-console.log("Date",date);
-var association;
-var tournaments;
-const matches = [] ;
+
+
 
 // saveSignupInfo = async (userInfo) => {
 //     const endpoint = path.join(this.host, this.endpoints.signup);
@@ -30,21 +28,34 @@ const matches = [] ;
 // }
 
 
-async function upcomingMatches(){
-    host.pathname = endpoints.staticData;
-    try{
-        const response = await axios.get(host.href);
-        const upcomingList = response.data.data.matcheslist;
-       
-        upcomingList.forEach(element => {
-            var startDate = moment.unix(element.start_at).format("MM/DD/YYYY");
-            (element.status !== 'completed' && startDate <= date ) && matches.push(element);
-        });
-        localStorage.setItem('upcomingMatches', JSON.stringify(matches));
-    }catch(err){
+
+
+    const lastDate = moment().add(20, 'days').calendar();
+    var endDate = moment(lastDate).format('DD/MM/YYYY');
+    var todayDate = moment().format('l'); 
+    const matches = [] ;
+    const matchList = [];
+
+    async function upcomingMatches(){
+        host.pathname = endpoints.staticData;
+        try{
+            const response = await axios.get(host.href);
+            const upcomingList = response.data.data.matcheslist;
+            upcomingList.forEach(element => {
+                const date = moment().add(15, 'days').calendar();
+                var startDate = moment.unix(element.start_at).format("DD/MM/YYYY");
+                let newStartDate = moment(startDate,'DD/MM/YYYY');
+                let newEndDate = moment(endDate,'DD/MM/YYYY');
+                element.start_at = startDate;
+                if((element.status === 'not_started' && newStartDate.isBefore(newEndDate) ) && newStartDate.isAfter(todayDate)){
+                    matches.push(element)
+                }
+            });
+            localStorage.setItem('upcomingMatches', JSON.stringify(matches));
+        }catch(err){
         console.log("Err",err)
+        }
     }
-}
 
 // async function authenticationToken() {
 //     host.pathname = endpoints.auth;
