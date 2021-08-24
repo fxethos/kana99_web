@@ -10,6 +10,7 @@ const JoinFantacy = () => {
     
     const destinationPubkey = new PublicKey('CHdhuY41nUDaiTAiRRwm1qkEbdXMtSJD2XcuxNQdQf21')
     const programId = new PublicKey("3LkPWoPQJYXdjD62hcY8DwK6baMCKLRKVBH4MWmxDBEC")
+    
     const ContestInstruction =  (function () {
         function ContestInstruction(fields) {
             if (fields === void 0) { fields = undefined; }
@@ -29,6 +30,7 @@ const JoinFantacy = () => {
       ]);
 
     const NETWORK = clusterApiUrl('devnet');
+
     const connection = new Connection(NETWORK);
     const onSend = async () => {
         const isPhantomConnected = window.solana && window.solana.isConnected;
@@ -37,7 +39,7 @@ const JoinFantacy = () => {
             return;
         }
         let ContestID = new ContestInstruction()
-        ContestID.contestids = "tradla12"
+        ContestID.contestids = "tradla13"
         ContestID.datatype = 2
         const transaction = new Transaction().add(
             SystemProgram.transfer({
@@ -64,27 +66,27 @@ const JoinFantacy = () => {
         // const transsign2 = await connection.getConfirmedTransaction(signature);
         // console.log(transsign2)
        
-        async function parseTransaction(logs,context){
-            const requiredAccounts = [''];
-            //console.log('working')
-            let signature = await logs.signature
-            console.log(signature)
-            let payer_pubkey =  await connection.getParsedConfirmedTransaction(signature);
-            console.log(payer_pubkey)
-            let account = await payer_pubkey.transaction.message.instructions
-            let accounts = await account[0].parsed
-            //console.log(accounts.info.source)
-            requiredAccounts.push(accounts.info.source)
-            console.log(requiredAccounts)
+        // async function parseTransaction(logs,context){
+        //     const requiredAccounts = [''];
+        //     //console.log('working')
+        //     let signature = await logs.signature
+        //     console.log(signature)
+        //     let payer_pubkey =  await connection.getParsedConfirmedTransaction(signature);
+        //     console.log(payer_pubkey)
+        //     let account = await payer_pubkey.transaction.message.instructions
+        //     let accounts = await account[0].parsed
+        //     //console.log(accounts.info.source)
+        //     requiredAccounts.push(accounts.info.source)
+        //     console.log(requiredAccounts)
            
-        }
+        // }
       
 
-        let AccChange = await connection.onLogs(
-            destinationPubkey,
-            parseTransaction,
-        )
-        console.log(AccChange)
+        // let AccChange = await connection.onLogs(
+        //     destinationPubkey,
+        //     parseTransaction,
+        // )
+        // console.log(AccChange)
         
       
 
