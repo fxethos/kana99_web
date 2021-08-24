@@ -9,6 +9,7 @@ const axios = require('axios');
 const host = new URL('http://35.154.51.112:3000');
 const endpoints = {
     staticData:'/api/getstaticdata',
+    fantacyMatchCredits:'/api/fantasy_match_credits/db',
     signup: '/api/user/signup', // POST - uuid, username, email, wallet_address (optional)
     getUser: '/api/user/info', // POST - uuid
     getContests: '/api/getcontest', // GET - match_id
@@ -34,7 +35,7 @@ const endpoints = {
     var endDate = moment(lastDate).format('DD/MM/YYYY');
     var todayDate = moment().format('l'); 
     const matches = [] ;
-    const matchList = [];
+    const fantacyMatchCreditForEachMatch = [];
 
     async function upcomingMatches(){
         host.pathname = endpoints.staticData;
@@ -42,20 +43,39 @@ const endpoints = {
             const response = await axios.get(host.href);
             const upcomingList = response.data.data.matcheslist;
             upcomingList.forEach(element => {
-                const date = moment().add(15, 'days').calendar();
                 var startDate = moment.unix(element.start_at).format("DD/MM/YYYY");
                 let newStartDate = moment(startDate,'DD/MM/YYYY');
                 let newEndDate = moment(endDate,'DD/MM/YYYY');
                 element.start_at = startDate;
                 if((element.status === 'not_started' && newStartDate.isBefore(newEndDate) ) && newStartDate.isAfter(todayDate)){
-                    matches.push(element)
-                }
+                    var ret = fetchlist(element);
+                    }
             });
-            localStorage.setItem('upcomingMatches', JSON.stringify(matches));
         }catch(err){
         console.log("Err",err)
         }
     }
+
+    async function fetchlist(props) {
+        host.pathname = endpoints.fantacyMatchCredits;
+            const body = {
+                "match_key": props.key
+            }
+            try{
+            const fantacyCreditResponse = await axios.post(host.href,body);
+                if(fantacyCreditResponse.data.data.length>0){
+                    matches.push(props);
+                    fantacyMatchCreditForEachMatch.push(fantacyCreditResponse);
+                }
+            }catch(err){
+                console.log("Error",err);
+            }
+            localStorage.setItem('upcomingMatches', JSON.stringify(matches));
+            localStorage.setItem('fantacyMatchCreditForEachMatch', JSON.stringify(fantacyMatchCreditForEachMatch));
+        return fantacyCreditResponse;
+    }
+
+  
 
 // async function authenticationToken() {
 //     host.pathname = endpoints.auth;

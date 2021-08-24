@@ -9,7 +9,15 @@ import upcomingMatches from "./Helpers/APIHelpers";
 const App = () => {
   
   useEffect(() => {
-    upcomingMatches();
+
+    if(!JSON.parse(localStorage.getItem('upcomingMatches'))){
+      upcomingMatches()
+    }
+    
+    setInterval(()=>{
+      upcomingMatches();
+    },86400000)
+    
   }, [])
 
 
