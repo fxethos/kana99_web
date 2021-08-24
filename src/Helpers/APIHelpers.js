@@ -72,7 +72,6 @@ const endpoints = {
             }
             localStorage.setItem('upcomingMatches', JSON.stringify(matches));
             localStorage.setItem('fantacyMatchCreditForEachMatch', JSON.stringify(fantacyMatchCreditForEachMatch));
-        return fantacyCreditResponse;
     }
 
   
