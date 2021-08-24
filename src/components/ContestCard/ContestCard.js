@@ -4,7 +4,8 @@ import { Button } from "../Button/Button";
 import cup from "../../images/small-icons/cup.svg";
 import group from "../../images/small-icons/group.png";
 
-function ContestCard() {
+function ContestCard(props) {
+  console.log(props);
   return (
     <div className="wrapper">
       <div className="card3">
@@ -16,7 +17,7 @@ function ContestCard() {
           <div className="d-flex">
             <span>
               <select className="selectpicker">
-                <option>₹ 300</option>
+                <option>₹ {props.contest && props.contest.contest_value}</option>
                 <option>₹ 400</option>
                 <option>₹ 500</option>
               </select>
@@ -41,7 +42,7 @@ function ContestCard() {
             </div>
             <div className="col-lg-2 col-sm-2 col-md-2 col-4">
               <div className="ml-auto">
-                <Button buttonStyle="btn--primary">₹300</Button>
+                <Button buttonStyle="btn--primary">₹{props.contest && props.contest.entry_fee}</Button>
               </div>
             </div>
           </div>
@@ -60,7 +61,7 @@ function ContestCard() {
             </div>
             <div className="credits">
               <img src={cup} alt="group" className="pr-1" />
-              <span>₹ 300 Top Prize</span>
+              <span>₹ {props.contest && props.contest.contest_value} Total Pot</span>
             </div>
             <div className="duration">
               <img src={cup} alt="group" className="pr-1" />

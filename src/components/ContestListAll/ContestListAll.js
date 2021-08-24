@@ -13,7 +13,7 @@ class ContestListAll extends React.Component {
   }
 
   componentDidMount() {
-    getContests(1).then(res => {
+    getContests('c__match__zimw_vs_thaw__08e71').then(res => {
       this.setState(() => ({
         contests: res.data.data
       }));
@@ -50,7 +50,7 @@ class ContestListAll extends React.Component {
             return <ContestCard contest={contest} />;
           })}
         </div>
-        <div className="list_block">
+        {/*<div className="list_block">
           <div className="row align-items-center">
             <div className="col-lg-9 col-sm-8 col-6">
               <div className="logo-text">
@@ -71,7 +71,7 @@ class ContestListAll extends React.Component {
             </div>
           </div>
           <ContestCard />
-        </div>
+        </div>*/}
       </div>
     );
   }
