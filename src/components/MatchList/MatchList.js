@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import MatchListCricket from "../MatchListCricket/MatchListCricket";
 
-import moment from "moment";
 
 var response;
 const MatchList = () => {
@@ -10,11 +9,7 @@ const MatchList = () => {
 
   useEffect(() => {
     response = JSON.parse(localStorage.getItem('upcomingMatches'));
-    response.forEach(element => {
-      var matches = moment.unix(element.start_at).format("MM/DD/YYYY");
-      element.start_at = matches;    
-    });
-  setState(response);
+    setState(response);
   }, [])
 
 
