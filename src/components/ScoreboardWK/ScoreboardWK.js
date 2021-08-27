@@ -1,8 +1,89 @@
 import React from "react";
 import "./ScoreboardWK.scss";
 
-function ScoreboardWK() {
-  return (
+
+var bowlers=[];
+var batsmans=[];
+var wicketKeepers=[];
+var allrounders=[];
+var allPlayers=[];
+
+export default class ScoreboardWK extends React.Component{
+
+  constructor(props){
+    super(props);
+    this.state = {
+      players : this.props.players
+      // batsmans:this.props.batsmans, 
+      // bowlers:this.props.bowlers, 
+      // wicketKeepers:this.props.wicketKeepers, 
+      // allrounders:this.props.allrounders,
+      // selectedBatsman : this.props.selectedBatsman,
+      // selectedBowler : this.props.selectedBowler,
+      // selectedAllRounder : this.props.selectedAllRounder,
+      // selectedWicketKeeper : this.props.selectedWicketKeeper,
+      // selectedPlayers : this.props.selectedPlayers,
+    }
+    console.log("Props:",props)
+  }
+
+   selectPlayers = (player) => {
+     console.log("Props in select player",player)
+    const {playersDetails} = this.state;
+    const selectedPlayer = player;
+    const filter = this.state.players.map(item => {
+      console.log("Item",item)
+      if(item.key === player.key){
+        if(player.playerSelected){
+          player.playerSelected = false
+        }else{
+          player.playerSelected = true
+        }
+        // item.playerSelected = !item.playerSelected
+      } 
+    })
+    console.log("Filter:  ",filter);
+   // this.setState({players:filter})
+    
+
+
+   
+    // // name.map(element => {
+    //  name.playerSelected = name.playerSelected === false ? true : false;
+    //   if(name.playerSelected){
+    //     allPlayers.push(name)
+    //     switch(name.seasonal_role){
+    //       case "batsman":batsmans.push(name)
+    //       //this.setState({batsmans:batsman});
+          
+    //                       break;
+    //       case "bowler":bowlers.push(name)
+    //       // this.setState({bowlers:bowler})
+    //                       break;
+    //       case "keeper":wicketKeepers.push(name)
+    //       // this.setState({wicketKeepers:wicketKeeper})
+    //                       break;
+    //       case "all_rounder":allrounders.push(name)
+    //       // this.setState({allrounders:allrounder})
+    //                       break;      
+    //       default:console.log("Error")
+    //               break;
+                      
+    //     }
+    //   } 
+    //   const noOfPlayers = allPlayers.filter(topic => topic.key != name.key)
+
+   
+      
+    // });
+    // console.log("All Players: ",this.state.players)
+  }
+  render(){
+    return(
+
+   
+
+  
     <div>
       <table class="rwd-table">
         <thead>
@@ -28,16 +109,21 @@ function ScoreboardWK() {
           </tr>
         </thead>
         <tbody>
-          <tr>
+        {
+          this.state.players?.map((index)=>{
+            return(
+              <>
+               <tr>
+                 <div onClick={()=>{this.selectPlayers(index)}}>
             <td data-th="Players">
               <div class="info">
                 <div class="avatar">
                   <img src="//via.placeholder.com/200" alt="doc name" />
                 </div>
                 <div class="details">
-                  <div class="name">MS Wade</div>
+                  <div class="name">{index.name}</div>
                   <div class="meta-info">
-                    <span class="sp">AUS</span>
+                    <span class="sp">{index.team_key}</span>
                   </div>
                 </div>
               </div>
@@ -51,10 +137,17 @@ function ScoreboardWK() {
               </span>
             </td>
             <td data-th="Credits">
-              <div className="credit_value"> 1</div>
+              <div className="credit_value"> {index.credit}</div>
             </td>
+            </div>
           </tr>
-          <tr>
+
+              </>
+            )
+          })
+        }
+         
+          {/* <tr>
             <td data-th="Players">
               <div class="info">
                 <div class="avatar">
@@ -206,7 +299,7 @@ function ScoreboardWK() {
               </span>
             </td>
             <td data-th="Credits">1</td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
 
@@ -218,7 +311,9 @@ function ScoreboardWK() {
         </div>
       </div>
     </div>
-  );
+     )
+    }
+
 }
 
-export default ScoreboardWK;
+// export default ScoreboardWK;

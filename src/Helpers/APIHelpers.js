@@ -41,13 +41,14 @@ const endpoints = {
         try{
             const response = await axios.get(host.href);
             const upcomingList = response.data.data.matcheslist;
+            console.log("Upcoming Matches:",upcomingList);
             upcomingList.forEach(element => {
                 var startDate = moment.unix(element.start_at).format("DD/MM/YYYY");
                 let newStartDate = moment(startDate,'DD/MM/YYYY');
                 let newEndDate = moment(endDate,'DD/MM/YYYY');
                 element.start_at = startDate;
                 if((element.status === 'not_started' && newStartDate.isBefore(newEndDate) ) && newStartDate.isAfter(todayDate)){
-                    var ret = fetchlist(element);
+                    matches.push(element);
                     }
             });
         }catch(err){
@@ -55,23 +56,34 @@ const endpoints = {
         }
     }
 
-    async function fetchlist(props) {
+    export const fetchlist = async (props) => {
         host.pathname = endpoints.fantacyMatchCredits;
-            const body = {
-                "match_key": props.key
-            }
-            try{
+        const body = {
+            "match_key": "tnplt20_2021_g24"
+        }
+        try {
             const fantacyCreditResponse = await axios.post(host.href,body);
-                if(fantacyCreditResponse.data.data.length>0){
-                    matches.push(props);
-                    fantacyMatchCreditForEachMatch.push(fantacyCreditResponse);
-                }
-            }catch(err){
-                console.log("Error",err);
-            }
-            localStorage.setItem('upcomingMatches', JSON.stringify(matches));
-            localStorage.setItem('fantacyMatchCreditForEachMatch', JSON.stringify(fantacyMatchCreditForEachMatch));
+            return fantacyCreditResponse;
+        } catch (err) {
+            console.log(err);
+        }
     }
+//    export async function fetchlist(props) {
+//         host.pathname = endpoints.fantacyMatchCredits;
+//             const body = {
+//                 "match_key": "tnplt20_2021_g24"
+//             }
+//             try{
+//             const fantacyCreditResponse = await axios.post(host.href,body);
+//             return fantacyCreditResponse;
+//             // fantacyMatchCreditForEachMatch.push(fantacyCreditResponse);
+//             }catch(err){
+//                 console.log("Error",err);
+//                 return err;
+//             }
+//             // localStorage.setItem('upcomingMatches', JSON.stringify(matches));
+//             // localStorage.setItem('fantacyMatchCreditForEachMatch', JSON.stringify(fantacyMatchCreditForEachMatch));
+//     }
 
   
 
