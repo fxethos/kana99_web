@@ -85,7 +85,7 @@ export default class ScoreboardWK extends React.Component{
 
   
     <div>
-      <table class="rwd-table">
+      <table className="rwd-table">
         <thead>
           <tr>
             <th>
@@ -116,20 +116,20 @@ export default class ScoreboardWK extends React.Component{
                <tr>
                  <div onClick={()=>{this.selectPlayers(index)}}>
             <td data-th="Players">
-              <div class="info">
-                <div class="avatar">
+              <div className="info">
+                <div className="avatar">
                   <img src="//via.placeholder.com/200" alt="doc name" />
                 </div>
-                <div class="details">
-                  <div class="name">{index.name}</div>
-                  <div class="meta-info">
-                    <span class="sp">{index.team_key}</span>
+                <div className="details">
+                  <div className="name">{index.name}</div>
+                  <div className="meta-info">
+                    <span className="sp">{index.team_key}</span>
                   </div>
                 </div>
               </div>
             </td>
             <td data-th="Points">
-              <span class="star_bg">
+              <span className="star_bg">
                 <span>
                   <i className="fas fa-star"></i>
                   <span className="star_value"> 0</span>
@@ -149,20 +149,20 @@ export default class ScoreboardWK extends React.Component{
          
           {/* <tr>
             <td data-th="Players">
-              <div class="info">
-                <div class="avatar">
+              <div className="info">
+                <div className="avatar">
                   <img src="//via.placeholder.com/200" alt="doc name" />
                 </div>
-                <div class="details">
-                  <div class="name">MS Wade</div>
-                  <div class="meta-info">
-                    <span class="sp">AUS</span>
+                <div className="details">
+                  <div className="name">MS Wade</div>
+                  <div className="meta-info">
+                    <span className="sp">AUS</span>
                   </div>
                 </div>
               </div>
             </td>
             <td data-th="Points">
-              <span class="star_bg">
+              <span className="star_bg">
                 <span>
                   <i className="fas fa-star"></i>
                   <span className="star_value"> 0</span>
@@ -176,20 +176,20 @@ export default class ScoreboardWK extends React.Component{
 
           <tr>
             <td data-th="Players">
-              <div class="info">
-                <div class="avatar">
+              <div className="info">
+                <div className="avatar">
                   <img src="//via.placeholder.com/200" alt="doc name" />
                 </div>
-                <div class="details">
-                  <div class="name">MS Wade</div>
-                  <div class="meta-info">
-                    <span class="sp">AUS</span>
+                <div className="details">
+                  <div className="name">MS Wade</div>
+                  <div className="meta-info">
+                    <span className="sp">AUS</span>
                   </div>
                 </div>
               </div>
             </td>
             <td data-th="Points">
-              <span class="star_bg">
+              <span className="star_bg">
                 <span>
                   <i className="fas fa-star"></i>
                   <span className="star_value"> 0</span>
@@ -203,20 +203,20 @@ export default class ScoreboardWK extends React.Component{
 
           <tr>
             <td data-th="Players">
-              <div class="info">
-                <div class="avatar">
+              <div className="info">
+                <div className="avatar">
                   <img src="//via.placeholder.com/200" alt="doc name" />
                 </div>
-                <div class="details">
-                  <div class="name">MS Wade</div>
-                  <div class="meta-info">
-                    <span class="sp">AUS</span>
+                <div className="details">
+                  <div className="name">MS Wade</div>
+                  <div className="meta-info">
+                    <span className="sp">AUS</span>
                   </div>
                 </div>
               </div>
             </td>
             <td data-th="Points">
-              <span class="star_bg">
+              <span className="star_bg">
                 <span>
                   <i className="fas fa-star"></i>
                   <span className="star_value"> 0</span>
@@ -230,20 +230,20 @@ export default class ScoreboardWK extends React.Component{
 
           <tr>
             <td data-th="Players">
-              <div class="info">
-                <div class="avatar">
+              <div className="info">
+                <div className="avatar">
                   <img src="//via.placeholder.com/200" alt="doc name" />
                 </div>
-                <div class="details">
-                  <div class="name">MS Wade</div>
-                  <div class="meta-info">
-                    <span class="sp">AUS</span>
+                <div className="details">
+                  <div className="name">MS Wade</div>
+                  <div className="meta-info">
+                    <span className="sp">AUS</span>
                   </div>
                 </div>
               </div>
             </td>
             <td data-th="Points">
-              <span class="star_bg">
+              <span className="star_bg">
                 <span>
                   <i className="fas fa-star"></i>
                   <span className="star_value"> 0</span>
@@ -254,20 +254,20 @@ export default class ScoreboardWK extends React.Component{
           </tr>
           <tr>
             <td data-th="Players">
-              <div class="info">
-                <div class="avatar">
+              <div className="info">
+                <div className="avatar">
                   <img src="//via.placeholder.com/200" alt="doc name" />
                 </div>
-                <div class="details">
-                  <div class="name">MS Wade</div>
-                  <div class="meta-info">
-                    <span class="sp">AUS</span>
+                <div className="details">
+                  <div className="name">MS Wade</div>
+                  <div className="meta-info">
+                    <span className="sp">AUS</span>
                   </div>
                 </div>
               </div>
             </td>
             <td data-th="Points">
-              <span class="star_bg">
+              <span className="star_bg">
                 <span>
                   <i className="fas fa-star"></i>
                   <span className="star_value"> 0</span>
@@ -278,20 +278,20 @@ export default class ScoreboardWK extends React.Component{
           </tr>
           <tr>
             <td data-th="Players">
-              <div class="info">
-                <div class="avatar">
+              <div className="info">
+                <div className="avatar">
                   <img src="//via.placeholder.com/200" alt="doc name" />
                 </div>
-                <div class="details">
-                  <div class="name">MS Wade</div>
-                  <div class="meta-info">
-                    <span class="sp">AUS</span>
+                <div className="details">
+                  <div className="name">MS Wade</div>
+                  <div className="meta-info">
+                    <span className="sp">AUS</span>
                   </div>
                 </div>
               </div>
             </td>
             <td data-th="Points">
-              <span class="star_bg">
+              <span className="star_bg">
                 <span>
                   <i className="fas fa-star"></i>
                   <span className="star_value"> 0</span>
@@ -304,8 +304,8 @@ export default class ScoreboardWK extends React.Component{
       </table>
 
       <div classs="row justify-content-center align-items-center">
-        <div class="col-6 align-self-center m-auto">
-          <button type="button" class="btn btn-primary custom_red_btn">
+        <div className="col-6 align-self-center m-auto">
+          <button type="button" className="btn btn-primary custom_red_btn">
             Continue
           </button>
         </div>

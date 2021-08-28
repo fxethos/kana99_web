@@ -34,7 +34,7 @@ const endpoints = {
     var endDate = moment(lastDate).format('DD/MM/YYYY');
     var todayDate = moment().format('l'); 
     const matches = [] ;
-    const fantacyMatchCreditForEachMatch = [];
+    // const fantacyMatchCreditForEachMatch = [];
 
     async function upcomingMatches(){
         host.pathname = endpoints.staticData;

@@ -29,47 +29,47 @@ export default class ScoreboardTabs extends React.Component {
   // console.log(props.wicketKeeper)
   render(){
     return (
-      <div class="scoreboard_tabs_block">
-        <div class="container">
-          <ul id="tabs" class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
+      <div className="scoreboard_tabs_block">
+        <div className="container">
+          <ul id="tabs" className="nav nav-tabs" role="tablist">
+            <li className="nav-item">
               <a
                 id="tab-A"
                 href="#pane-A"
-                class="nav-link active"
+                className="nav-link active"
                 data-toggle="tab"
                 role="tab"
               >
               WK({this.state.selectedWicketKeeper})
               </a>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <a
                 id="tab-B"
                 href="#pane-B"
-                class="nav-link"
+                className="nav-link"
                 data-toggle="tab"
                 role="tab" 
               >
                BAT({this.state.selectedBatsman})
               </a>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <a
                 id="tab-C"
                 href="#pane-C"
-                class="nav-link"
+                className="nav-link"
                 data-toggle="tab"
                 role="tab"
               >
                  AR({this.state.selectedAllRounder})
               </a>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <a 
                 id="tab-D"
                 href="#pane-D"
-                class="nav-link"
+                className="nav-link"
                 data-toggle="tab"
                 role="tab"
               >
@@ -78,15 +78,15 @@ export default class ScoreboardTabs extends React.Component {
             </li>
           </ul>
   
-          <div id="content" class="tab-content" role="tablist">
+          <div id="content" className="tab-content" role="tablist">
             <div
               id="pane-A"
-              class="card tab-pane fade show active"
+              className="card tab-pane fade show active"
               role="tabpanel"
               aria-labelledby="tab-A"
             >
-              <div class="card-header" role="tab" id="heading-A">
-                <h5 class="mb-0">
+              <div className="card-header" role="tab" id="heading-A">
+                <h5 className="mb-0">
                   <a
                     data-toggle="collapse"
                     href="#collapse-A"
@@ -99,22 +99,22 @@ export default class ScoreboardTabs extends React.Component {
               </div>
               <div
                 id="collapse-A"
-                class="collapse show"
+                className="collapse show"
                 data-parent="#content"
                 role="tabpanel"
                 aria-labelledby="heading-A"
               >
-                <div class="card-body">
-                  <div class="text_content">
+                <div className="card-body">
+                  <div className="text_content">
                     <p>Pick 1-4 Wicket-Keeper</p>
-                    <div class="ml-auto">
+                    <div className="ml-auto">
                       <span className="p-1">
                         <i className="fas fa-chevron-down"></i>
                       </span>
-                      <div class="switch-button switch-button-xs">
-                        <input type="checkbox" name="item1" id="item1" checked />
+                      <div className="switch-button switch-button-xs">
+                        <input type="checkbox" name="item1" id="item1" defaultChecked />
                         <span>
-                          <label for="item1"></label>
+                          <label htmlFor="item1"></label>
                         </span>
                       </div>
                     </div>
@@ -127,14 +127,14 @@ export default class ScoreboardTabs extends React.Component {
   
             <div
               id="pane-B"
-              class="card tab-pane fade"
+              className="card tab-pane fade"
               role="tabpanel"
               aria-labelledby="tab-B"
             >
-              <div class="card-header" role="tab" id="heading-B">
-                <h5 class="mb-0">
+              <div className="card-header" role="tab" id="heading-B">
+                <h5 className="mb-0">
                   <a
-                    class="collapsed"
+                    className="collapsed"
                     data-toggle="collapse"
                     href="#collapse-B"
                     aria-expanded="false"
@@ -146,22 +146,22 @@ export default class ScoreboardTabs extends React.Component {
               </div>
               <div
                 id="collapse-B"
-                class="collapse"
+                className="collapse"
                 data-parent="#content"
                 role="tabpanel"
                 aria-labelledby="heading-B"
               >
-               <div class="card-body">
-                  <div class="text_content">
+               <div className="card-body">
+                  <div className="text_content">
                     <p>Pick Batsman</p>
-                    <div class="ml-auto">
+                    <div className="ml-auto">
                       <span className="p-1">
                         <i className="fas fa-chevron-down"></i>
                       </span>
-                      <div class="switch-button switch-button-xs">
-                        <input type="checkbox" name="item1" id="item1" checked />
+                      <div className="switch-button switch-button-xs">
+                        <input type="checkbox" name="item1" id="item1" defaultChecked />
                         <span>
-                          <label for="item1"></label>
+                          <label htmlFor="item1"></label>
                         </span>
                       </div>
                     </div>
@@ -173,14 +173,14 @@ export default class ScoreboardTabs extends React.Component {
   
             <div
               id="pane-C"
-              class="card tab-pane fade"
+              className="card tab-pane fade"
               role="tabpanel"
               aria-labelledby="tab-C"
             >
-              <div class="card-header" role="tab" id="heading-C">
-                <h5 class="mb-0">
+              <div className="card-header" role="tab" id="heading-C">
+                <h5 className="mb-0">
                   <a
-                    class="collapsed"
+                    className="collapsed"
                     data-toggle="collapse"
                     href="#collapse-C"
                     aria-expanded="false"
@@ -192,22 +192,22 @@ export default class ScoreboardTabs extends React.Component {
               </div>
               <div
                 id="collapse-C"
-                class="collapse"
+                className="collapse"
                 role="tabpanel"
                 data-parent="#content"
                 aria-labelledby="heading-C"
               >
-                <div class="card-body">
-                  <div class="text_content">
+                <div className="card-body">
+                  <div className="text_content">
                     <p>Pick Allrounder</p>
-                    <div class="ml-auto">
+                    <div className="ml-auto">
                       <span className="p-1">
                         <i className="fas fa-chevron-down"></i>
                       </span>
-                      <div class="switch-button switch-button-xs">
-                        <input type="checkbox" name="item1" id="item1" checked />
+                      <div className="switch-button switch-button-xs">
+                        <input type="checkbox" name="item1" id="item1" defaultChecked />
                         <span>
-                          <label for="item1"></label>
+                          <label htmlFor="item1"></label>
                         </span>
                       </div>
                     </div>
@@ -219,14 +219,14 @@ export default class ScoreboardTabs extends React.Component {
   
             <div
               id="pane-D"
-              class="card tab-pane fade"
+              className="card tab-pane fade"
               role="tabpanel"
               aria-labelledby="tab-D"
             >
-              <div class="card-header" role="tab" id="heading-D">
-                <h5 class="mb-0">
+              <div className="card-header" role="tab" id="heading-D">
+                <h5 className="mb-0">
                   <a
-                    class="collapsed"
+                    className="collapsed"
                     data-toggle="collapse"
                     href="#collapse-D"
                     aria-expanded="false"
@@ -238,22 +238,22 @@ export default class ScoreboardTabs extends React.Component {
               </div>
               <div
                 id="collapse-D"
-                class="collapse"
+                className="collapse"
                 role="tabpanel"
                 data-parent="#content"
                 aria-labelledby="heading-D"
               >
-               <div class="card-body">
-                  <div class="text_content">
+               <div className="card-body">
+                  <div className="text_content">
                     <p>Pick Bowlers</p>
-                    <div class="ml-auto">
+                    <div className="ml-auto">
                       <span className="p-1">
                         <i className="fas fa-chevron-down"></i>
                       </span>
-                      <div class="switch-button switch-button-xs">
-                        <input type="checkbox" name="item1" id="item1" checked />
+                      <div className="switch-button switch-button-xs">
+                        <input type="checkbox" name="item1" id="item1" defaultChecked />
                         <span>
-                          <label for="item1"></label>
+                          <label htmlFor="item1"></label>
                         </span>
                       </div>
                     </div>
