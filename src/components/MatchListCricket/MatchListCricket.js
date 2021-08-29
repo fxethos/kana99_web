@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import "./MatchListCricket.scss";
 import m1 from "../../images/matchlist-icons/m1.png";
 
@@ -15,7 +16,7 @@ const MatchListCricket = (props) => {
                 <img src={m1} className="match-logo" alt="match-logo" />
               </span>
               <span>
-                <input type="text" placeholder={props.start_at} />
+                <input type="text" placeholder={moment.unix(parseInt(props.start_at)).format('DD/MM/YYYY')} />
               </span>
               <span className="match-logo-bg">
                 <img src={m1} className="match-logo" alt="match-logo" />
