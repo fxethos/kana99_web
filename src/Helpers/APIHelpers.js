@@ -7,13 +7,14 @@ const axios = require('axios');
 
 const host = new URL('http://35.154.51.112:3000');
 const endpoints = {
-    staticData:'/api/getstaticdata',
-    fantacyMatchCredits:'/api/fantasy_match_credits/db',
+    staticData: '/api/getstaticdata',
+    fantacyMatchCredits: '/api/fantasy_match_credits/db',
     signup: '/api/user/signup', // POST - uuid, username, email, wallet_address (optional)
     getUser: '/api/user/info', // POST - uuid
     getContests: '/api/getcontest', // GET - match_id
     postContests: '/api/postcontest' // POST - contest_id, match_id, contest_name, contest_value, max_contest_size, entry_fee
 }
+
 
 
 
@@ -30,44 +31,90 @@ const endpoints = {
 
 
 
-    const lastDate = moment().add(20, 'days').calendar();
-    var endDate = moment(lastDate).format('DD/MM/YYYY');
-    var todayDate = moment().format('l'); 
-    const matches = [] ;
-    const fantacyMatchCreditForEachMatch = [];
+const lastDate = moment().add(20, 'days').calendar();
+var endDate = moment(lastDate).format('DD/MM/YYYY');
+var todayDate = moment().format('l');
+const matches = [];
+const fantacyMatchCreditForEachMatch = [];
 
-    async function upcomingMatches(){
-        host.pathname = endpoints.staticData;
-        try{
-            const response = await axios.get(host.href);
-            const upcomingList = response.data.data.matcheslist;
-            console.log("Upcoming Matches:",upcomingList);
-            upcomingList.forEach(element => {
-                var startDate = moment.unix(element.start_at).format("DD/MM/YYYY");
-                let newStartDate = moment(startDate,'DD/MM/YYYY');
-                let newEndDate = moment(endDate,'DD/MM/YYYY');
-                element.start_at = startDate;
-                if((element.status === 'not_started' && newStartDate.isBefore(newEndDate) ) && newStartDate.isAfter(todayDate)){
-                    matches.push(element);
-                    }
+export const upcomingMatches = async () => {
+    host.pathname = endpoints.staticData;
+    try {
+        const response = await axios.get(host.href);
+        const upcomingList = response.data.data.matcheslist;
+        console.log("Upcoming Matches:", upcomingList);
+        upcomingList.forEach(element => {
+            var startDate = moment.unix(element.start_at).format("DD/MM/YYYY");
+            let newStartDate = moment(startDate, 'DD/MM/YYYY');
+            let newEndDate = moment(endDate, 'DD/MM/YYYY');
+            element.start_at = startDate;
+            if ((element.status === 'not_started' && newStartDate.isBefore(newEndDate)) && newStartDate.isAfter(todayDate)) {
+                matches.push(element);
+            }
+        });
+    } catch (err) {
+        console.log("Err", err)
+    }
+}
+
+export const fetchlisting = async (props) => {
+    var players = [];
+    var credits = [];
+    var batsmans = [];
+    var bowlers = [];
+    var allrounders = [];
+    var wicketKeepers = [];
+    var teamA;
+    var teamB;
+    host.pathname = endpoints.fantacyMatchCredits;
+    const body = {
+        "match_key": "tnplt20_2021_g24"
+    }
+    try {
+        await axios.post(host.href, body).then(response => {
+            console.log("Response:", response);
+            players = response.data.data[0].players;
+            credits = response.data.data[0].credits;
+            
+
+
+            credits.map(function (x) {
+                var result = players.filter(a1 => a1.key == x.player_key);
+                if (result) { result[0].credit = x.value; result[0].playerSelected = false; 
+                     }
+                return x
+            })
+           
+            players.map(element => {
+
+                switch (element.seasonal_role) {
+                    case "batsman": batsmans.push(element)
+                        //this.setState({batsmans:batsman});
+
+                        break;
+                    case "bowler": bowlers.push(element)
+                        //this.setState({bowlers:bowler})
+                        break;
+                    case "keeper": wicketKeepers.push(element)
+                        //this.setState({wicketKeepers:wicketKeeper})
+                        break;
+                    case "all_rounder": allrounders.push(element)
+                        // this.setState({allrounders:allrounder})
+                        break;
+                    default: console.log("Error")
+                        break;
+
+                }
+
             });
-        }catch(err){
-        console.log("Err",err)
-        }
+            console.log("BAtsmans:", batsmans)
+           
+        });
+        return { bowlers, batsmans, wicketKeepers, allrounders,players }
+    } catch (err) {
+        console.log(err);
     }
-
-    export const fetchlist = async (props) => {
-        host.pathname = endpoints.fantacyMatchCredits;
-        const body = {
-            "match_key": "tnplt20_2021_g24"
-        }
-        try {
-            const fantacyCreditResponse = await axios.post(host.href,body);
-            return fantacyCreditResponse;
-        } catch (err) {
-            console.log(err);
-        }
-    }
+}
 //    export async function fetchlist(props) {
 //         host.pathname = endpoints.fantacyMatchCredits;
 //             const body = {
@@ -85,7 +132,7 @@ const endpoints = {
 //             // localStorage.setItem('fantacyMatchCreditForEachMatch', JSON.stringify(fantacyMatchCreditForEachMatch));
 //     }
 
-  
+
 
 // async function authenticationToken() {
 //     host.pathname = endpoints.auth;
@@ -170,5 +217,3 @@ export const getContests = async (match_id) => {
         console.log(err);
     }
 }
-
-export default upcomingMatches;

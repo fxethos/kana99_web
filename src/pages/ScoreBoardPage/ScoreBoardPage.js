@@ -9,103 +9,53 @@ import wallet from "../../images/scoreboard_icons/wallet.png";
 import VS from "../../images/scoreboard_icons/VS.png";
 import clogo1 from "../../images/scoreboard_icons/c1.png";
 import clogo2 from "../../images/scoreboard_icons/c2.png";
-import fetchlist from "../../Helpers/APIHelpers";
+import {fetchlisting} from "../../Helpers/APIHelpers";
 
-const axios = require('axios');
 
-var response;
-
-const host = new URL('http://35.154.51.112:3000');
-const endpoints = {
-    staticData:'/api/getstaticdata',
-    fantacyMatchCredits:'/api/fantasy_match_credits/db',
-    signup: '/api/user/signup', // POST - uuid, username, email, wallet_address (optional)
-    getUser: '/api/user/info', // POST - uuid
-    getContests: '/api/getcontest', // GET - match_id
-    postContests: '/api/postcontest' // POST - contest_id, match_id, contest_name, contest_value, max_contest_size, entry_fee
-}
-var fantacyCreditResponse;
-var seasonalRole;
-var players;
-var credits;
-var batsman = [];
-var bowler = [];
-var allrounder = [];
-var wicketKeeper = [];
+var bowlers;
 
 class ScoreBoardPage extends React.Component {
 
   constructor(props){  
-    super(props);  
-
+    super(props); 
     this.state = {
-      batsmans: [],
-      bowlers: [],
-      allrounders : [],
-      wicketKeepers : [],
-      selectedBatsman:0,
-      selectedBowler:0,
-      selectedAllRounder:0,
-      selectedWicketKeeper:0,
-      selectedPlayers:0
+      bowlers:[],
+      batsmans:[],
+      allrounders:[],
+      wicketKeepers:[],
+      players:[]
+      
 
     }
 }  
 
-  componentDidMount(){
-    this.fetchAPI();
+  async componentDidMount(){
+    console.log("Bowlers",bowlers)
+    
+    bowlers = JSON.parse(localStorage.getItem('bowlers'));
+    bowlers == undefined ?
+   
+    fetchlisting().then(res => {
+  console.log("res.bowlers",res.bowlers)   
+  bowlers = res.bowlers;
+  console.log("Bowlers",bowlers)
+  localStorage.setItem('bowlers',JSON.stringify(res.bowlers));
+  localStorage.setItem('batsmans',JSON.stringify(res.batsmans));
+  localStorage.setItem('allrounders',JSON.stringify(res.allrounders));
+  localStorage.setItem('wicketKeepers',JSON.stringify(res.wicketKeepers));
+  this.setState({bowlers:res.bowlers,batsmans:res.batsmans,wicketKeepers:res.wicketKeepers,allrounders:res.allrounders,players:res.players})
+})
+  
+:
+this.setState({bowlers:JSON.parse(localStorage.getItem('bowlers')),
+    batsmans:JSON.parse(localStorage.getItem('batsmans')),
+    allrounders:JSON.parse(localStorage.getItem('allrounders')),
+    wicketKeepers:JSON.parse(localStorage.getItem('wicketKeepers'))})
    
   }
-fetchAPI = async()=>{
-  const host = new URL('http://35.154.51.112:3000');
-  host.pathname = endpoints.fantacyMatchCredits;
-  const body = {
-    "match_key": "tnplt20_2021_g24"
-}
-try {
-     fantacyCreditResponse = await axios.post(host.href,body);
-     console.log(fantacyCreditResponse);
-     players = fantacyCreditResponse.data.data[0].players;
-     credits =  fantacyCreditResponse.data.data[0].credits
 
-
-     credits.map(function(x){ 
-      var result=players.filter(a1=> a1.key==x.player_key);
-      if(result) {  result[0].credit= x.value; result[0].playerSelected=false }
-      return x })
-
-    
-
-     players.map(element => {
-      
-      switch(element.seasonal_role){
-        case "batsman":batsman.push(element)
-        this.setState({batsmans:batsman});
-        
-                        break;
-        case "bowler":bowler.push(element)
-        this.setState({bowlers:bowler})
-                        break;
-        case "keeper":wicketKeeper.push(element)
-        this.setState({wicketKeepers:wicketKeeper})
-                        break;
-        case "all_rounder":allrounder.push(element)
-        this.setState({allrounders:allrounder})
-                        break;      
-        default:console.log("Error")
-                break;
-                    
-      }
-      
-    });
-    //  console.log("Batsman",batsman);
-   
-} catch (err) {
-    console.log(err);
-}
-}
   render() {
-   
+    console.log("this.state.bowlers",this.state)
   return (
     
     <React.Fragment>
@@ -183,17 +133,16 @@ try {
                       <span className="select_box">11</span>
                       <span className="select_red_box">0/11</span>
                     </div>
-                    {/* {console.log("Batsmans:",batsmans)} */}
-                    <ScoreboardTabs batsman={this.state.batsmans} 
-                    bowler={this.state.bowlers} 
-                    wicketKeeper={this.state.wicketKeepers} 
-                    allrounder={this.state.allrounders}
-                    selectedBatsman = {this.state.selectedBatsman}
-                    selectedBowler = {this.state.selectedBowler}
-                    selectedAllRounder = {this.state.selectedAllRounder}
-                    selectedWicketKeeper = {this.state.selectedWicketKeeper}
-                    selectedPlayers = {this.state.selectedPlayers}
-                    />
+                    {
+                      this.state.allrounders?.length >0  && 
+                      <ScoreboardTabs batsman={this.state.batsmans} 
+                      bowler={this.state.bowlers} 
+                      wicketKeeper={this.state.wicketKeepers} 
+                      allrounder={this.state.allrounders}
+                      players={this.state.players}
+                      />
+                    }
+                   
                   </div>
                 </div>
               </div>

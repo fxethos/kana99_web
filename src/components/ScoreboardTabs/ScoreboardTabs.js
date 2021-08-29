@@ -2,35 +2,124 @@ import React, { useEffect } from "react";
 import "./ScoreboardTabs.scss";
 import ScoreboardWK from "../ScoreboardWK/ScoreboardWK";
 
+var selectedWicketKeepers;
+var selectedBowlers;
+var selectedAllRounders;
+var selectedBatsmans;
 export default class ScoreboardTabs extends React.Component {
-  constructor(props){
-    console.log("Prosp:",props);
+  constructor(props) {
+    console.log("Prosp:", props);
     super(props);
     this.state = {
-      batsmans:this.props.batsman, 
-      bowlers:this.props.bowler, 
-      wicketKeepers:this.props.wicketKeeper, 
-      allrounders:this.props.allrounder,
-      selectedBatsman : this.props.selectedBatsman,
-      selectedBowler : this.props.selectedBowler,
-      selectedAllRounder : this.props.selectedAllRounder,
-      selectedWicketKeeper : this.props.selectedWicketKeeper,
-      selectedPlayers : this.props.selectedPlayers,
+      players: this.props.players,
+      batsmans: this.props.batsman,
+      bowlers: this.props.bowler,
+      wicketKeepers: this.props.wicketKeeper,
+      allrounders: this.props.allrounder,
+      selectedBatsman: selectedBatsmans,
+      selectedBowler: selectedBowlers,
+      selectedAllRounder: selectedAllRounders,
+      selectedWicketKeeper: selectedWicketKeepers,
     }
+    this.onSubmitMessage = this.onSubmitMessage.bind(this);
+    //this.changeValue = this.changeValue.bind(this);
+
   }
- 
+
+
+  componentDidMount() {
+    //console.log("Players: ",this.props.players)
+    this.onDidSelectedPlayers();
+  }
+
+  onDidSelectedPlayers = () => {
+
+    selectedBatsmans = JSON.parse(localStorage.getItem('selectedBatsmans'))
+    this.setState({ selectedBatsman: selectedBatsmans });
+    selectedBowlers = JSON.parse(localStorage.getItem('selectedBowlers'))
+    this.setState({ selectedBowler: selectedBowlers });
+    selectedWicketKeepers = JSON.parse(localStorage.getItem('selectedWicketKeepers'))
+    this.setState({ selectedWicketKeeper: selectedWicketKeepers });
+    selectedAllRounders = JSON.parse(localStorage.getItem('selectedAllRounders'))
+    this.setState({ selectedAllRounder: selectedAllRounders });
+
+
+
+  }
+
+  onSubmitMessage(message) {
+    
+   
+    switch (message[0].seasonal_role) {
+      case 'bowler':  console.log("Message:", message)
+
+      // console.log(message.filter(item => item.playerSelected)) 
+      // console.log("Selected Bowlers:",selectedBowlers)
+      console.log(selectedBowlers)
+      var filterMessage = message.filter(item => item.playerSelected)
+      console.log("FilterMessage:",filterMessage)
+      selectedBowlers = selectedBowlersfilterMessage;
+      this.setState({selectedBowler:selectedBowlers})
+
+        localStorage.setItem('selectedBowlers', JSON.stringify(selectedBowlers));
+        //console.log("SelectedBowlers", selectedBowlers)
+
+        //this.setState({ selectedbowler: selectedBowlers.length })
+        break;
+      case 'keeper':
+        selectedWicketKeepers = message.filter(item => item.playerSelected)
+        console.log("SelectedWicketKeeper", selectedWicketKeepers)
+        localStorage.setItem('selectedWicketKeepers', JSON.stringify(selectedWicketKeepers));
+        this.setState({ selectedWicketKeeper: selectedWicketKeepers.length });
+        break;
+      case 'batsman':
+        selectedBatsmans = message.filter(item => item.playerSelected)
+        localStorage.setItem('selectedBatsmans', JSON.stringify(selectedBatsmans));
+        console.log("SelectedWicketKeeper", selectedBatsmans)
+        this.setState({ selectedBatsman: selectedBatsmans.length });
+        break;
+      case 'all_rounder':
+        selectedAllRounders = message.filter(item => item.playerSelected)
+        console.log("SelectedWicketKeeper", selectedAllRounders)
+        localStorage.setItem('selectedAllRounders', JSON.stringify(selectedAllRounders));
+        this.setState({ selectedAllRounder: selectedAllRounders.length });
+        break;
+    }
+
+
+    // var players = message.map((item)=>{
+    //   if(item.playerSelected){
+    //     console.log("Item: ",item)
+    //     switch(item.seasonal_role){
+    //       case 'batsman': this.setState({selectedBatsman: this.state.selectedBatsman+1})
+    //       break;
+    //       case 'bowler': this.setState({selectedBowler: this.state.selectedBowler+1})
+    //       break;
+    //       case 'keeper': this.setState({selectedWicketKeeper: this.state.selectedWicketKeeper+1})
+    //       break;
+    //       case 'all_rounder': this.setState({selectedWicketKeeper: + 1})
+    //       break;
+    //     }
+    //   }
+
+
+    // })
+
+    // this.setState({ message: message });
+  }
+
   // console.log("Props:",props);
   // useEffect(()=>{
-   
+
   //   setState(props)
 
   // },[])
   // console.log(props.wicketKeeper)
-  render(){
+  render() {
     return (
       <div class="scoreboard_tabs_block">
         <div class="container">
-          {/* <ul id="tabs" class="nav nav-tabs" role="tablist">
+          <ul id="tabs" class="nav nav-tabs" role="tablist">
             <li class="nav-item">
               <a
                 id="tab-A"
@@ -39,7 +128,7 @@ export default class ScoreboardTabs extends React.Component {
                 data-toggle="tab"
                 role="tab"
               >
-                WK({state.wicketKeeper?.length})
+                WK({selectedWicketKeepers?.length})
               </a>
             </li>
             <li class="nav-item">
@@ -48,9 +137,9 @@ export default class ScoreboardTabs extends React.Component {
                 href="#pane-B"
                 class="nav-link"
                 data-toggle="tab"
-                role="tab" 
+                role="tab"
               >
-                BAT(0)
+                BAT({selectedBatsmans?.length})
               </a>
             </li>
             <li class="nav-item">
@@ -61,22 +150,22 @@ export default class ScoreboardTabs extends React.Component {
                 data-toggle="tab"
                 role="tab"
               >
-                AR(0)
+                AR({selectedAllRounders?.length})
               </a>
             </li>
             <li class="nav-item">
-              <a 
+              <a
                 id="tab-D"
                 href="#pane-D"
                 class="nav-link"
                 data-toggle="tab"
                 role="tab"
               >
-                BOW(0)
+                BOW({selectedBowlers?.length})
               </a>
             </li>
-          </ul> */}
-  
+          </ul>
+
           <div id="content" class="tab-content" role="tablist">
             <div
               id="pane-A"
@@ -92,7 +181,7 @@ export default class ScoreboardTabs extends React.Component {
                     aria-expanded="true"
                     aria-controls="collapse-A"
                   >
-                    WK({this.state.selectedWicketKeeper})
+                    WK({selectedWicketKeepers?.length})
                   </a>
                 </h5>
               </div>
@@ -118,11 +207,12 @@ export default class ScoreboardTabs extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <ScoreboardWK players={this.state.wicketKeepers}/>
+                  {/* {console.log("Selected Players:",this.state.wicketKeepers)} */}
+                  <ScoreboardWK players={this.state.wicketKeepers} onSubmitMessage={this.onSubmitMessage} />
                 </div>
               </div>
             </div>
-  
+
             <div
               id="pane-B"
               class="card tab-pane fade"
@@ -138,7 +228,7 @@ export default class ScoreboardTabs extends React.Component {
                     aria-expanded="false"
                     aria-controls="collapse-B"
                   >
-                    BAT({this.state.selectedBatsman})
+                    BAT({selectedBatsmans?.length})
                   </a>
                 </h5>
               </div>
@@ -149,7 +239,7 @@ export default class ScoreboardTabs extends React.Component {
                 role="tabpanel"
                 aria-labelledby="heading-B"
               >
-               <div class="card-body">
+                <div class="card-body">
                   <div class="text_content">
                     <p>Pick Batsman</p>
                     <div class="ml-auto">
@@ -164,11 +254,11 @@ export default class ScoreboardTabs extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <ScoreboardWK players={this.state.batsmans}/>
+                  <ScoreboardWK players={this.state.batsmans} onSubmitMessage={this.onSubmitMessage} />
                 </div>
               </div>
             </div>
-  
+
             <div
               id="pane-C"
               class="card tab-pane fade"
@@ -184,7 +274,7 @@ export default class ScoreboardTabs extends React.Component {
                     aria-expanded="false"
                     aria-controls="collapse-C"
                   >
-                    AR({this.state.selectedAllRounder})
+                    AR({selectedAllRounders?.length})
                   </a>
                 </h5>
               </div>
@@ -210,11 +300,11 @@ export default class ScoreboardTabs extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <ScoreboardWK players={this.state.allrounders}/>
+                  <ScoreboardWK players={this.state.allrounders} onSubmitMessage={this.onSubmitMessage} />
                 </div>
               </div>
             </div>
-  
+
             <div
               id="pane-D"
               class="card tab-pane fade"
@@ -230,7 +320,7 @@ export default class ScoreboardTabs extends React.Component {
                     aria-expanded="false"
                     aria-controls="collapse-D"
                   >
-                    BOW({this.state.selectedBowler})
+                    BOW({selectedBowlers?.length})
                   </a>
                 </h5>
               </div>
@@ -241,7 +331,7 @@ export default class ScoreboardTabs extends React.Component {
                 data-parent="#content"
                 aria-labelledby="heading-D"
               >
-               <div class="card-body">
+                <div class="card-body">
                   <div class="text_content">
                     <p>Pick Bowlers</p>
                     <div class="ml-auto">
@@ -256,7 +346,7 @@ export default class ScoreboardTabs extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <ScoreboardWK players={this.state.bowlers}/>
+                  <ScoreboardWK players={this.state.bowlers} onSubmitMessage={this.onSubmitMessage} />
                 </div>
               </div>
             </div>
@@ -265,7 +355,7 @@ export default class ScoreboardTabs extends React.Component {
       </div>
     );
   }
-  
+
 }
 
 // export default ScoreboardTabs;

@@ -2,68 +2,118 @@ import React from "react";
 import "./ScoreboardWK.scss";
 
 
-var bowlers=[];
-var batsmans=[];
-var wicketKeepers=[];
-var allrounders=[];
-var allPlayers=[];
+var selectedBowlers=[];
+var selectedBatsmans=[];
+var selectedWicketKeepers=[];
+var selectedAllRounders=[];
+var selectedBowlersLength = 0;
+
 
 export default class ScoreboardWK extends React.Component{
 
   constructor(props){
+    console.log("Props:",props)
     super(props);
     this.state = {
-      players : this.props.players
-      // batsmans:this.props.batsmans, 
-      // bowlers:this.props.bowlers, 
-      // wicketKeepers:this.props.wicketKeepers, 
-      // allrounders:this.props.allrounders,
-      // selectedBatsman : this.props.selectedBatsman,
-      // selectedBowler : this.props.selectedBowler,
-      // selectedAllRounder : this.props.selectedAllRounder,
-      // selectedWicketKeeper : this.props.selectedWicketKeeper,
-      // selectedPlayers : this.props.selectedPlayers,
+      players : this.props.players,
+      // selectedBowler:null,
+      // selectedBatsman:null,
+      // selectedAllRounder:null,
+      // selectedWicketKeeper:null,
+      teamA:null,
+      teamB:null,
     }
+    this.selectPlayers = this.selectPlayers.bind(this);
+    console.log("Players in wk:",props)
   }
 
-   selectPlayers = (name) => {
+  setItem(){
+    selectedBatsmans = JSON.parse(localStorage.getItem('selectedBatsmans'))
+    //this.setState({ selectedBatsman: selectedBatsmans });
+    selectedBowlers = JSON.parse(localStorage.getItem('selectedBowlers'))
+    //this.setState({ selectedBowler: selectedBowlers });
+    selectedWicketKeepers = JSON.parse(localStorage.getItem('selectedWicketKeepers'))
+    //this.setState({ selectedWicketKeeper: selectedWicketKeepers });
+    selectedAllRounders = JSON.parse(localStorage.getItem('selectedAllRounders'))
+    //this.setState({ selectedAllRounder: selectedAllRounders });
+  }
+  componentDidMount(){
+    
+    this.setItem()
+  }
+  // ccompon(){
+  //   this.setItem()
+  // }
+   selectPlayers = (player) => {
+     console.log("Player: ",player)
+    
 
-    // name.map(element => {
-     name.playerSelected = name.playerSelected === false ? true : false;
-      if(name.playerSelected){
-        allPlayers.push(name)
-        switch(name.seasonal_role){
-          case "batsman":batsmans.push(name)
-          //this.setState({batsmans:batsman});
-          
-                          break;
-          case "bowler":bowlers.push(name)
-          // this.setState({bowlers:bowler})
-                          break;
-          case "keeper":wicketKeepers.push(name)
-          // this.setState({wicketKeepers:wicketKeeper})
-                          break;
-          case "all_rounder":allrounders.push(name)
-          // this.setState({allrounders:allrounder})
-                          break;      
-          default:console.log("Error")
-                  break;
-                      
-        }
-      } 
-      const noOfPlayers = allPlayers.filter(topic => topic.key != name.key)
-
+    const filter = this.state.players.map(item => {
+      if(item.key === player.key){
+          switch(player.seasonal_role){
+            case 'bowler': 
+            if(!player.playerSelected){
+            if(selectedBowlersLength < 6){
+              player.playerSelected = true;
+              selectedBowlersLength = selectedBowlersLength + 1 ;
+              
+              console.log("selectedBowlersLength",selectedBowlersLength)
+              // selectedBowlers = JSON.parse(localStorage.getItem('selectedBowlers'));
+              // this.setState({selectedBowler:selectedBowlers});
+            }
+            else{
+            
+            }
+          }
+             else{
+            player.playerSelected = false;
+            selectedBowlersLength = selectedBowlersLength - 1 ;
+            selectedBowlers = JSON.parse(localStorage.getItem('selectedBowlers'));
+           // this.setState({selectedBowler:selectedBowlers});
+          }
    
-      
-    // });
-console.log("All Players: ",this.state.players)
+            
+            // (this.state.selectedBowlers?.filter(item=> player.team_key === item.team_key).length<7) 
+            
+            break;
+          // case 'keeper':
+          //   selectedWicketKeepers = message.filter(item => item.playerSelected)
+          //   console.log("SelectedWicketKeeper", selectedWicketKeepers)
+          //   localStorage.setItem('selectedWicketKeepers', JSON.stringify(selectedWicketKeepers));
+          //   this.setState({ selectedWicketKeeper: selectedWicketKeepers.length });
+          //   break;
+          // case 'batsman':
+          //   selectedBatsmans = message.filter(item => item.playerSelected)
+          //   localStorage.setItem('selectedBatsmans', JSON.stringify(selectedBatsmans));
+          //   console.log("SelectedWicketKeeper", selectedBatsmans)
+          //   this.setState({ selectedBatsman: selectedBatsmans.length });
+          //   break;
+          // case 'all_rounder':
+          //   selectedAllRounders = message.filter(item => item.playerSelected)
+          //   console.log("SelectedWicketKeeper", selectedAllRounders)
+          //   localStorage.setItem('selectedAllRounders', JSON.stringify(selectedAllRounders));
+          //   this.setState({ selectedAllRounder: selectedAllRounders.length });
+          //   break;
+          }
+
+          
+        }
+      // } 
+      // else{
+      //       player.playerSelected = false;
+      //       selectedBowlers = JSON.parse(localStorage.getItem('selectedBowlers'));
+      //       this.setState({selectedBowler:selectedBowlers});
+      //     }
+   
+
+    })
+
+    this.props.onSubmitMessage(this.state.players);
+   
   }
+
   render(){
     return(
-
-   
-
-  
     <div>
       <table class="rwd-table">
         <thead>
