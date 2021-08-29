@@ -75,16 +75,45 @@ export const fetchlisting = async (props) => {
             console.log("Response:", response);
             players = response.data.data[0].players;
             credits = response.data.data[0].credits;
-            
+            var teams = Object.keys(response.data.data[0].teams);
+            teamA = teams[0]
+            teamB = teams[1];
+            var column = {
+                "SNo": [{ "group": "true", "sort": "true", "filter": "true", "type": "number", "min": 1, "max": 1000, "format": "{0:c}" }],
+                "Name": [{ "group": "true", "sort": "true", "type": "string", "columnmenu": "true" }],
+                "City": [{ "group": "true", "type": "number", "filter": "true", "width": "100px", "columnmenu": "false" }]
+            };
+            var first_array = Object.keys(column);
+            console.log("first Array",first_array)
+            var second_array = [];
+            var third_array = [];
+            var fourth_array = [];
+
+            first_array.forEach(function (inner_key) {
+                var keysInInnerKey = Object.keys(column[inner_key][0]);
+                var valuesInInnerKey = keysInInnerKey.map(function (key) {
+                    return column[inner_key][0][key];
+                });
+                second_array = second_array.concat(keysInInnerKey);
+                third_array = third_array.concat(valuesInInnerKey);
+                fourth_array.push(keysInInnerKey.length);
+                console.log("Second Array:", second_array);
+            });
+            console.log("teamA", teamA);
+            console.log("TeamB", teamB);
+
+
+
 
 
             credits.map(function (x) {
                 var result = players.filter(a1 => a1.key == x.player_key);
-                if (result) { result[0].credit = x.value; result[0].playerSelected = false; 
-                     }
+                if (result) {
+                    result[0].credit = x.value; result[0].playerSelected = false;
+                }
                 return x
             })
-           
+
             players.map(element => {
 
                 switch (element.seasonal_role) {
@@ -108,9 +137,9 @@ export const fetchlisting = async (props) => {
 
             });
             console.log("BAtsmans:", batsmans)
-           
+
         });
-        return { bowlers, batsmans, wicketKeepers, allrounders,players }
+        return { bowlers, batsmans, wicketKeepers, allrounders, players,teamA,teamB }
     } catch (err) {
         console.log(err);
     }
