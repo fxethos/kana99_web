@@ -2,6 +2,7 @@ import React from "react";
 import "./SignUp.scss";
 import AuthFragment from "../../components/AuthFragment/AuthFragment";
 import UserPool from '../../UserPool';
+import { saveSignupInfo } from "../../Helpers/APIHelpers";
 
 const SignUp = (props) => {
   const onSignUp = (creds) => {
@@ -11,11 +12,12 @@ const SignUp = (props) => {
       creds.password, 
       [{"Name": "email", "Value": creds.email}], 
       null, 
-      (err, res) => {
+      (err, signupResponse) => {
         if (err) {
           console.log(err);
         } else {
-          console.log(res);
+          creds.uuid = signupResponse.userSub;
+          saveSignupInfo(creds);
           props.history.push('/sign-in');
         }
       });
