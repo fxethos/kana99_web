@@ -24,7 +24,7 @@ const SignIn = (props) => {
     user.authenticateUser(authDetails, {
       onSuccess: (data) => {
         console.log("onSuccess:", data);
-        props.history.push('/match-list');
+        props.history.push('/scoreboard');
       },
       onFailure: (err) => {
         console.log("onFailure:", err);
