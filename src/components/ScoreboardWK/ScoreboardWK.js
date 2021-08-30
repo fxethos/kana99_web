@@ -4,6 +4,9 @@ import "./ScoreboardWK.scss";
 var teamAPlayers = [];
 var teamBPlayers = [];
 var selectedPlayers = [];
+var allSelectedPlayers = [];
+var selectedCredits;
+var cred = 0;
 
 
 export default class ScoreboardWK extends React.Component {
@@ -14,20 +17,28 @@ export default class ScoreboardWK extends React.Component {
     this.state = {
       players: this.props.players,
       teamA: this.props.teamA,
-      teamB: this.props.teamB
+      teamB: this.props.teamB,
+      allSelectedPlayers: (JSON.parse(localStorage.getItem('allSelectedPlayers'))?.length)>0?JSON.parse(localStorage.getItem('allSelectedPlayers')):[]
 
     }
 
 
   }
+  componentDidMount(){
+    allSelectedPlayers = this.state.allSelectedPlayers;
+    teamAPlayers = allSelectedPlayers.filter(element=>element.team_key==this.state.teamA);
+    teamBPlayers = allSelectedPlayers.filter(element=>element.team_key==this.state.teamB);
+  }
 
   selectPlayers = (player) => {
-    console.log("Player",player)
+    if(allSelectedPlayers.length<11){
+      
     var tes = this.props.players;
-    var selectedKeeperLength = JSON.parse(localStorage.getItem('selectedKeepers'))?.length
-    var selectedBowlerLength = JSON.parse(localStorage.getItem('selectedBowlers'))?.length
-    var selectedAllRounderLength = JSON.parse(localStorage.getItem('selectedAllRounders'))?.length
-    var selectedBatsmanLength = JSON.parse(localStorage.getItem('selectedBowlers'))?.length
+    var selectedKeeperLength = (JSON.parse(localStorage.getItem('selectedKeepers'))?.length) > 0 ? (JSON.parse(localStorage.getItem('selectedKeepers')).length) : 0
+    var selectedBowlerLength = (JSON.parse(localStorage.getItem('selectedBowlers'))?.length) > 0 ? (JSON.parse(localStorage.getItem('selectedBowlers')).length) : 0
+    var selectedAllRounderLength = (JSON.parse(localStorage.getItem('selectedAllRounders'))?.length) > 0 ? (JSON.parse(localStorage.getItem('selectedAllRounders')).length) : 0
+    var selectedBatsmanLength = (JSON.parse(localStorage.getItem('selectedBowlers'))?.length) > 0 ? (JSON.parse(localStorage.getItem('selectedBowlers')).length) : 0
+   
     switch (player.seasonal_role) {
       case 'keeper': if (selectedKeeperLength < 3) {
         if (player.playerSelected) {
@@ -41,7 +52,7 @@ export default class ScoreboardWK extends React.Component {
         this.FiltersUnSelect(player);
       }
         break;
-      case 'bowler': if (selectedBowlerLength <6) {
+      case 'bowler': if (selectedBowlerLength < 6) {
         if (player.playerSelected) {
           this.FiltersUnSelect(player);
         } else {
@@ -49,38 +60,40 @@ export default class ScoreboardWK extends React.Component {
         }
       }
       else if (player.playerSelected) {
-        console.log("Player")
         this.FiltersUnSelect(player);
       }
         break;
-        case 'all_rounder': if (selectedAllRounderLength <4) {
-          if (player.playerSelected) {
-            this.FiltersUnSelect(player);
-          } else {
-            this.FiltersSelect(player);
-          }
-        }
-        else if (player.playerSelected) {
-          console.log("Player")
+      case 'all_rounder': if (selectedAllRounderLength < 4) {
+        if (player.playerSelected) {
           this.FiltersUnSelect(player);
+        } else {
+          this.FiltersSelect(player);
         }
-          break;
-          case 'batsman': if (selectedBatsmanLength <6) {
-            if (player.playerSelected) {
-              this.FiltersUnSelect(player);
-            } else {
-              this.FiltersSelect(player);
-            }
-          }
-          else if (player.playerSelected) {
-            console.log("Player")
-            this.FiltersUnSelect(player);
-          }
-            break;
+      }
+      else if (player.playerSelected) {
+        this.FiltersUnSelect(player);
+      }
+        break;
+      case 'batsman': if (selectedBatsmanLength < 6) {
+        if (player.playerSelected) {
+          this.FiltersUnSelect(player);
+        } else {
+          this.FiltersSelect(player);
+        }
+      }
+      else if (player.playerSelected) {
+        this.FiltersUnSelect(player);
+      }
+        break;
     }
+  }
+  else{
+    alert("Maximum Players Reached")
+  }
   }
 
   FiltersSelect = (player) => {
+   
     if (!player.playerSelected) {
 
       if (((player.team_key == this.state.teamA) && (teamAPlayers.length < 7))) {
@@ -88,9 +101,13 @@ export default class ScoreboardWK extends React.Component {
         selectedPlayers = allPlayers.map((index) => {
           if (index.key == player.key) {
             player.playerSelected = true;
-            teamAPlayers.push(player)
+            teamAPlayers.push(player);
+           allSelectedPlayers.push(player);
+           
+            localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
           }
         })
+
         if (player.seasonal_role === 'keeper') {
           localStorage.setItem('wicketKeepers', JSON.stringify(allPlayers))
         } else if (player.seasonal_role === 'all_rounder') {
@@ -103,12 +120,17 @@ export default class ScoreboardWK extends React.Component {
         this.props.selectedPlayerss(allPlayers)
 
       }
-      else if ((player.team_key === this.state.teamB) && (teamBPlayers.length < 7)) {
+      else{
+        alert("Maximum Players Reached")
+      }
+      if ((player.team_key === this.state.teamB) && (teamBPlayers.length < 7)) {
         var allPlayers = this.state.players;
         selectedPlayers = allPlayers.map((index) => {
           if (index.key == player.key) {
             player.playerSelected = true;
-            teamBPlayers.push(player)
+            teamBPlayers.push(player);
+            allSelectedPlayers.push(player);
+            localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
           }
         })
         if (player.seasonal_role === 'keeper') {
@@ -121,6 +143,8 @@ export default class ScoreboardWK extends React.Component {
           localStorage.setItem('bowlers', JSON.stringify(allPlayers))
         }
         this.props.selectedPlayerss(allPlayers)
+      }else{
+        alert("Maximum Players Reached")
       }
     }
 
@@ -146,6 +170,8 @@ export default class ScoreboardWK extends React.Component {
           localStorage.setItem('bowlers', JSON.stringify(allPlayers))
         }
         teamAPlayers = allPlayers.filter(item => item.playerSelected == true)
+        allSelectedPlayers = allSelectedPlayers.filter(item=>item.playerSelected == true)
+        localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
         this.props.selectedPlayerss(allPlayers)
       }
       else if (player.team_key === this.state.teamB) {
@@ -164,11 +190,14 @@ export default class ScoreboardWK extends React.Component {
           localStorage.setItem('bowlers', JSON.stringify(allPlayers))
         }
         teamBPlayers = allPlayers.filter(item => item.playerSelected == true)
+        allSelectedPlayers = allSelectedPlayers.filter(item=>item.playerSelected == true)
+        localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
         this.props.selectedPlayerss(allPlayers)
       }
     }
   }
   render() {
+    console.log("AllSelectedPlayers",allSelectedPlayers);
     return (
       <div>
         <table class="rwd-table">

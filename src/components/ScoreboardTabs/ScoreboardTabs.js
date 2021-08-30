@@ -50,7 +50,7 @@ export default class ScoreboardTabs extends React.Component {
       previousSelectedAllRounders = props.filter(element => 
         element.playerSelected !=  false
       );
-      this.setState({selectedAllRounders:previousSelectedAllRounders})
+      this.setState({selectedAllRounders:previousSelectedAllRounders},()=>{console.log("AllRounders",this.state.selectedAllRounders)})
       localStorage.setItem('selectedAllRounders',JSON.stringify(previousSelectedAllRounders))
       console.log("selectedAllRounders",previousSelectedAllRounders)
       this.props.selectedPlayers(previousSelectedAllRounders)
