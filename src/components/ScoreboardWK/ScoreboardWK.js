@@ -1,153 +1,299 @@
 import React from "react";
 import "./ScoreboardWK.scss";
 
+var teamAPlayers = [];
+var teamBPlayers = [];
+var selectedPlayers = [];
+var allSelectedPlayers = [];
+var selectedCredits;
+var credit = 0;
 
-var bowlers=[];
-var batsmans=[];
-var wicketKeepers=[];
-var allrounders=[];
-var allPlayers=[];
 
-export default class ScoreboardWK extends React.Component{
+export default class ScoreboardWK extends React.Component {
 
-  constructor(props){
+  constructor(props) {
+    console.log("Props:", props)
     super(props);
     this.state = {
-      players : this.props.players
-      // batsmans:this.props.batsmans, 
-      // bowlers:this.props.bowlers, 
-      // wicketKeepers:this.props.wicketKeepers, 
-      // allrounders:this.props.allrounders,
-      // selectedBatsman : this.props.selectedBatsman,
-      // selectedBowler : this.props.selectedBowler,
-      // selectedAllRounder : this.props.selectedAllRounder,
-      // selectedWicketKeeper : this.props.selectedWicketKeeper,
-      // selectedPlayers : this.props.selectedPlayers,
+      players: this.props.players,
+      teamA: this.props.teamA,
+      teamB: this.props.teamB,
+      allSelectedPlayers: (JSON.parse(localStorage.getItem('allSelectedPlayers'))?.length)>0?JSON.parse(localStorage.getItem('allSelectedPlayers')):[]
+
     }
-    console.log("Props:",props)
-  }
 
-   selectPlayers = (player) => {
-     console.log("Props in select player",player)
-    const {playersDetails} = this.state;
-    const selectedPlayer = player;
-    const filter = this.state.players.map(item => {
-      console.log("Item",item)
-      if(item.key === player.key){
-        if(player.playerSelected){
-          player.playerSelected = false
-        }else{
-          player.playerSelected = true
-        }
-        // item.playerSelected = !item.playerSelected
-      } 
+
+  }
+  componentDidMount(){
+    credit = 0;
+    allSelectedPlayers = this.state.allSelectedPlayers;
+    teamAPlayers = allSelectedPlayers.filter(element=>element.team_key==this.state.teamA);
+    teamBPlayers = allSelectedPlayers.filter(element=>element.team_key==this.state.teamB);
+    selectedCredits = allSelectedPlayers.map((index)=>{
+     credit =+index.credit;
+     return credit 
     })
-    console.log("Filter:  ",filter);
-   // this.setState({players:filter})
-    
-
-
+    console.log("selectedCredits",selectedCredits)
    
-    // // name.map(element => {
-    //  name.playerSelected = name.playerSelected === false ? true : false;
-    //   if(name.playerSelected){
-    //     allPlayers.push(name)
-    //     switch(name.seasonal_role){
-    //       case "batsman":batsmans.push(name)
-    //       //this.setState({batsmans:batsman});
-          
-    //                       break;
-    //       case "bowler":bowlers.push(name)
-    //       // this.setState({bowlers:bowler})
-    //                       break;
-    //       case "keeper":wicketKeepers.push(name)
-    //       // this.setState({wicketKeepers:wicketKeeper})
-    //                       break;
-    //       case "all_rounder":allrounders.push(name)
-    //       // this.setState({allrounders:allrounder})
-    //                       break;      
-    //       default:console.log("Error")
-    //               break;
-                      
-    //     }
-    //   } 
-    //   const noOfPlayers = allPlayers.filter(topic => topic.key != name.key)
-
-   
-      
-    // });
-    // console.log("All Players: ",this.state.players)
+    for(var i=0;i<selectedCredits.length;i++){
+      credit += selectedCredits[i];
+      // credit = credit + credit[i]
+    }
+    console.log("Credits",credit)
+   // selectedCredits = allSelectedPlayers.filter(index=> credit = index.credit)
+    //console.log("selected Credits",credit);
   }
-  render(){
-    return(
 
-   
-
+  selectPlayers = (player) => {
   
-    <div>
-      <table className="rwd-table">
-        <thead>
-          <tr>
-            <th>
-              Players
-              <span className="p-1">
-                <i className="fas fa-chevron-down"></i>
-              </span>
-            </th>
-            <th>
-              Points
-              <span className="p-1">
-                <i className="fas fa-chevron-down"></i>
-              </span>
-            </th>
-            <th>
-              Credits
-              <span className="p-1">
-                <i className="fas fa-chevron-down"></i>
-              </span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-        {
-          this.state.players?.map((index)=>{
-            return(
-              <>
-               <tr>
-                 <div onClick={()=>{this.selectPlayers(index)}}>
-            <td data-th="Players">
-              <div className="info">
-                <div className="avatar">
-                  <img src="//via.placeholder.com/200" alt="doc name" />
-                </div>
-                <div className="details">
-                  <div className="name">{index.name}</div>
-                  <div className="meta-info">
-                    <span className="sp">{index.team_key}</span>
-                  </div>
-                </div>
-              </div>
-            </td>
-            <td data-th="Points">
-              <span className="star_bg">
-                <span>
-                  <i className="fas fa-star"></i>
-                  <span className="star_value"> 0</span>
-                </span>
-              </span>
-            </td>
-            <td data-th="Credits">
-              <div className="credit_value"> {index.credit}</div>
-            </td>
-            </div>
-          </tr>
-
-              </>
-            )
-          })
+      
+    var tes = this.props.players;
+    var selectedKeeperLength = (JSON.parse(localStorage.getItem('selectedKeepers'))?.length) > 0 ? (JSON.parse(localStorage.getItem('selectedKeepers')).length) : 0
+    var selectedBowlerLength = (JSON.parse(localStorage.getItem('selectedBowlers'))?.length) > 0 ? (JSON.parse(localStorage.getItem('selectedBowlers')).length) : 0
+    var selectedAllRounderLength = (JSON.parse(localStorage.getItem('selectedAllRounders'))?.length) > 0 ? (JSON.parse(localStorage.getItem('selectedAllRounders')).length) : 0
+    var selectedBatsmanLength = (JSON.parse(localStorage.getItem('selectedBatsmans'))?.length) > 0 ? (JSON.parse(localStorage.getItem('selectedBatsmans')).length) : 0
+   
+    switch (player.seasonal_role) {
+      
+      case 'keeper': if (credit<100 && selectedKeeperLength < 3 && selectedBowlerLength<3 && selectedBatsmanLength<3 &&selectedAllRounderLength<1 && allSelectedPlayers.length<11) {
+        if (player.playerSelected) {
+          this.FiltersUnSelect(player);
+        } else {
+          this.FiltersSelect(player);
         }
-         
-          {/* <tr>
+      }
+      else if (player.playerSelected) {
+        console.log("Player")
+        this.FiltersUnSelect(player);
+      }
+      else{
+        alert('Please change the order of selection')
+      }
+        break;
+      case 'bowler': if (credit<100 && selectedBowlerLength < 6 && selectedBatsmanLength < 3 && selectedAllRounderLength < 1 && selectedKeeperLength < 1 && allSelectedPlayers.length<11 ) {
+        if (player.playerSelected) {
+          this.FiltersUnSelect(player);
+        } else {
+          this.FiltersSelect(player);
+        }
+      }
+      else if (player.playerSelected) {
+        this.FiltersUnSelect(player);
+      }
+      else{
+        alert('Please change the order of selection')
+      }
+        break;
+      case 'all_rounder': if (credit<100 &&  selectedAllRounderLength < 4 && selectedBatsmanLength<3 && selectedBowlerLength<3 && selectedKeeperLength<1 && allSelectedPlayers.length<11) {
+        if (player.playerSelected) {
+          this.FiltersUnSelect(player);
+        } else {
+          this.FiltersSelect(player);
+        }
+      }
+      else if (player.playerSelected) {
+        this.FiltersUnSelect(player);
+      }
+      else{
+        alert('Please change the order of selection')
+      }
+        break;
+      case 'batsman': if (credit<100 && selectedBatsmanLength < 6 &&selectedBowlerLength <3 &&selectedAllRounderLength<1 &&selectedKeeperLength<1 && allSelectedPlayers.length<11) {
+        if (player.playerSelected) {
+          this.FiltersUnSelect(player);
+        } else {
+          this.FiltersSelect(player);
+        }
+      }
+      else if (player.playerSelected) {
+        this.FiltersUnSelect(player);
+      }
+      else{
+        alert('Please change the order of selection')
+      }
+        break;
+    }
+ 
+ 
+  }
+
+  FiltersSelect = (player) => {
+   
+    if (!player.playerSelected) {
+
+      if (player.team_key == this.state.teamA){
+        if((teamAPlayers.length < 7)){
+          var allPlayers = this.state.players;
+          selectedPlayers = allPlayers.map((index) => {
+            if (index.key == player.key) {
+              player.playerSelected = true;
+              teamAPlayers.push(player);
+             allSelectedPlayers.push(player);
+              localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
+            }
+          })
+  
+          if (player.seasonal_role === 'keeper') {
+            localStorage.setItem('wicketKeepers', JSON.stringify(allPlayers))
+          } else if (player.seasonal_role === 'all_rounder') {
+            localStorage.setItem('allrounders', JSON.stringify(allPlayers))
+          } else if (player.seasonal_role === 'batsman') {
+            localStorage.setItem('batsmans', JSON.stringify(allPlayers))
+          } else if (player.seasonal_role === 'bowler') {
+            localStorage.setItem('bowlers', JSON.stringify(allPlayers))
+          }
+          this.props.selectedPlayerss(allPlayers)
+  
+        } else{
+          alert("Cannot select more than 7 players from one team")
+        }
+      } 
+     
+     
+      if (player.team_key === this.state.teamB){
+        if(teamBPlayers.length < 7) {
+          var allPlayers = this.state.players;
+          selectedPlayers = allPlayers.map((index) => {
+            if (index.key == player.key) {
+              player.playerSelected = true;
+              teamBPlayers.push(player);
+              allSelectedPlayers.push(player);
+              localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
+            }
+          })
+          if (player.seasonal_role === 'keeper') {
+            localStorage.setItem('wicketKeepers', JSON.stringify(allPlayers))
+          } else if (player.seasonal_role === 'all_rounder') {
+            localStorage.setItem('allrounders', JSON.stringify(allPlayers))
+          } else if (player.seasonal_role === 'batsman') {
+            localStorage.setItem('batsmans', JSON.stringify(allPlayers))
+          } else if (player.seasonal_role === 'bowler') {
+            localStorage.setItem('bowlers', JSON.stringify(allPlayers))
+          }
+          this.props.selectedPlayerss(allPlayers)
+        }
+        else{
+          alert("Cannot select more than 7 players from one team")
+        }
+      
+      } 
+    }
+
+  }
+
+  FiltersUnSelect = (player) => {
+    console.log("False")
+    if (player.playerSelected) {
+      if (player.team_key == this.state.teamA) {
+        var allPlayers = this.state.players;
+        selectedPlayers = allPlayers.map((index) => {
+          if (index.key === player.key) {
+            player.playerSelected = false;
+          }
+        })
+        if (player.seasonal_role === 'keeper') {
+          localStorage.setItem('wicketKeepers', JSON.stringify(allPlayers))
+        } else if (player.seasonal_role === 'all_rounder') {
+          localStorage.setItem('allrounders', JSON.stringify(allPlayers))
+        } else if (player.seasonal_role === 'batsman') {
+          localStorage.setItem('batsmans', JSON.stringify(allPlayers))
+        } else if (player.seasonal_role === 'bowler') {
+          localStorage.setItem('bowlers', JSON.stringify(allPlayers))
+        }
+        teamAPlayers = allPlayers.filter(item => item.playerSelected == true)
+        allSelectedPlayers = allSelectedPlayers.filter(item=>item.playerSelected == true)
+        localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
+        this.props.selectedPlayerss(allPlayers)
+      }
+      else if (player.team_key === this.state.teamB) {
+        var allPlayers = this.state.players;
+        selectedPlayers = allPlayers.map((index) => {
+          if (index.key == player.key)
+            player.playerSelected = false;
+        })
+        if (player.seasonal_role === 'keeper') {
+          localStorage.setItem('wicketKeepers', JSON.stringify(allPlayers))
+        } else if (player.seasonal_role === 'all_rounder') {
+          localStorage.setItem('allrounders', JSON.stringify(allPlayers))
+        } else if (player.seasonal_role === 'batsman') {
+          localStorage.setItem('batsmans', JSON.stringify(allPlayers))
+        } else if (player.seasonal_role === 'bowler') {
+          localStorage.setItem('bowlers', JSON.stringify(allPlayers))
+        }
+        teamBPlayers = allPlayers.filter(item => item.playerSelected == true)
+        allSelectedPlayers = allSelectedPlayers.filter(item=>item.playerSelected == true)
+        localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
+        this.props.selectedPlayerss(allPlayers)
+      }
+    }
+  }
+  render() {
+    console.log("AllSelectedPlayers",allSelectedPlayers);
+    return (
+      <div>
+        <table class="rwd-table">
+          <thead>
+            <tr>
+              <th>
+                Players
+                <span className="p-1">
+                  <i className="fas fa-chevron-down"></i>
+                </span>
+              </th>
+              <th>
+                Points
+                <span className="p-1">
+                  <i className="fas fa-chevron-down"></i>
+                </span>
+              </th>
+              <th>
+                Credits
+                <span className="p-1">
+                  <i className="fas fa-chevron-down"></i>
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              this.state.players?.map((index) => {
+                return (
+                  <>
+                    <tr>
+                      <div onClick={() => { this.selectPlayers(index) }}>
+                        <td data-th="Players">
+                          <div class="info">
+                            <div class="avatar">
+                              <img src="//via.placeholder.com/200" alt="doc name" />
+                            </div>
+                            <div class="details">
+                              <div class="name">{index.name}</div>
+                              <div class="meta-info">
+                                <span class="sp">{index.team_key}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td data-th="Points">
+                          <span class="star_bg">
+                            <span>
+                              <i className="fas fa-star"></i>
+                              <span className="star_value"> 0</span>
+                            </span>
+                          </span>
+                        </td>
+                        <td data-th="Credits">
+                          <div className="credit_value"> {index.credit}</div>
+                        </td>
+                      </div>
+                    </tr>
+
+                  </>
+                )
+              })
+            }
+
+            {/* <tr>
             <td data-th="Players">
               <div className="info">
                 <div className="avatar">
@@ -300,19 +446,19 @@ export default class ScoreboardWK extends React.Component{
             </td>
             <td data-th="Credits">1</td>
           </tr> */}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
 
-      <div classs="row justify-content-center align-items-center">
-        <div className="col-6 align-self-center m-auto">
-          <button type="button" className="btn btn-primary custom_red_btn">
-            Continue
-          </button>
+        <div classs="row justify-content-center align-items-center">
+          <div class="col-6 align-self-center m-auto">
+            <button type="button" class="btn btn-primary custom_red_btn">
+              Continue
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-     )
-    }
+    )
+  }
 
 }
 

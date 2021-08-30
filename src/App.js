@@ -3,8 +3,8 @@ import GlobalStyle from "./globalStyles";
 import AppRouter from "./Routers/AppRouter";
 import "./App.scss";
 import { useEffect } from "react";
-import upcomingMatches from "./Helpers/APIHelpers";
 import { Authenticator } from './Helpers/AuthHelpers';
+import {upcomingMatches} from "./Helpers/APIHelpers";
 
 const App = () => {
   

@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import "./ScoreboardTabs.scss";
 import ScoreboardWK from "../ScoreboardWK/ScoreboardWK";
 
+var previousSelectedKeeper;
+var previousselectedBowlers;
+var previousSelectedAllRounders;
+var previousSelectedBatsmans;
 export default class ScoreboardTabs extends React.Component {
   constructor(props){
     console.log("Prosp:",props);
@@ -11,254 +15,296 @@ export default class ScoreboardTabs extends React.Component {
       bowlers:this.props.bowler, 
       wicketKeepers:this.props.wicketKeeper, 
       allrounders:this.props.allrounder,
-      selectedBatsman : this.props.selectedBatsman,
-      selectedBowler : this.props.selectedBowler,
-      selectedAllRounder : this.props.selectedAllRounder,
-      selectedWicketKeeper : this.props.selectedWicketKeeper,
-      selectedPlayers : this.props.selectedPlayers,
+      teamA:this.props.teamA,
+      teamB:this.props.teamB,
+      selectedKeepers:this.props.selectedKeepers,
+      selectedBowlers:this.props.selectedBowlers,
+      selectedAllRounders:this.props.selectedAllRounders,
+      selectedBatsmans:this.props.selectedBatsmans,
+      updatedPlayers: this.props.updatedPlayers
     }
-    console.log("Props in Tabs:",props)
+    console.log("Selected Keepers",this.state.selectedKeepers)
+  }
+
+  selectedPlayers = (props) =>{
+    console.log("In Tab",props)
+    if(props[0].seasonal_role === "keeper"){
+      previousSelectedKeeper = props.filter(element => 
+        element.playerSelected !=  false
+      );
+      this.setState({selectedKeepers:previousSelectedKeeper})
+      localStorage.setItem('selectedKeepers',JSON.stringify(previousSelectedKeeper))
+      console.log("SelectedKeepers",previousSelectedKeeper)
+      this.props.selectedPlayers(previousSelectedKeeper)
+    }
+    if(props[0].seasonal_role === "bowler"){
+      previousselectedBowlers = props.filter(element => 
+        element.playerSelected !=  false
+      );
+      this.setState({selectedBowlers:previousselectedBowlers})
+      localStorage.setItem('selectedBowlers',JSON.stringify(previousselectedBowlers))
+      console.log("selectedBowlers",previousselectedBowlers)
+      this.props.selectedPlayers(previousselectedBowlers)
+    }
+    if(props[0].seasonal_role === "all_rounder"){
+      previousSelectedAllRounders = props.filter(element => 
+        element.playerSelected !=  false
+      );
+      this.setState({selectedAllRounders:previousSelectedAllRounders},()=>{console.log("AllRounders",this.state.selectedAllRounders)})
+      localStorage.setItem('selectedAllRounders',JSON.stringify(previousSelectedAllRounders))
+      console.log("selectedAllRounders",previousSelectedAllRounders)
+      this.props.selectedPlayers(previousSelectedAllRounders)
+    }
+    if(props[0].seasonal_role === "batsman"){
+      previousSelectedBatsmans = props.filter(element => 
+        element.playerSelected !=  false
+      );
+      this.setState({selectedBatsmans:previousSelectedBatsmans})
+      localStorage.setItem('selectedBatsmans',JSON.stringify(previousSelectedBatsmans))
+      console.log("selectedBatsmans",previousSelectedBatsmans)
+      this.props.selectedPlayers(previousSelectedBatsmans)
+    }
+
   }
  
-  // console.log("Props:",props);
-  // useEffect(()=>{
-   
-  //   setState(props)
-
-  // },[])
-  // console.log(props.wicketKeeper)
   render(){
     return (
-      <div className="scoreboard_tabs_block">
-        <div className="container">
-          <ul id="tabs" className="nav nav-tabs" role="tablist">
-            <li className="nav-item">
+      <div class="scoreboard_tabs_block">
+        <div class="container">
+          <ul id="tabs" class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
               <a
                 id="tab-A"
                 href="#pane-A"
-                className="nav-link active"
+                class="nav-link active"
                 data-toggle="tab"
                 role="tab"
               >
-              WK({this.state.selectedWicketKeeper})
+              WK({this.state.selectedKeepers?.length})
+             
               </a>
             </li>
-            <li className="nav-item">
+            <li class="nav-item">
               <a
                 id="tab-B"
                 href="#pane-B"
-                className="nav-link"
+                class="nav-link"
                 data-toggle="tab"
                 role="tab" 
               >
-               BAT({this.state.selectedBatsman})
+               BAT({this.state.selectedBatsmans?.length})
               </a>
             </li>
-            <li className="nav-item">
+            <li class="nav-item">
               <a
                 id="tab-C"
                 href="#pane-C"
-                className="nav-link"
+                class="nav-link"
                 data-toggle="tab"
                 role="tab"
               >
-                 AR({this.state.selectedAllRounder})
+                
+                 AR({this.state.selectedAllRounders?.length})
               </a>
             </li>
-            <li className="nav-item">
+            <li class="nav-item">
               <a 
                 id="tab-D"
                 href="#pane-D"
-                className="nav-link"
+                class="nav-link"
                 data-toggle="tab"
                 role="tab"
               >
-                BOW({this.state.selectedBowler})
+                 
+                BOW({this.state.selectedBowlers?.length})
               </a>
             </li>
           </ul>
   
-          <div id="content" className="tab-content" role="tablist">
+          <div id="content" class="tab-content" role="tablist">
             <div
               id="pane-A"
-              className="card tab-pane fade show active"
+              class="card tab-pane fade show active"
               role="tabpanel"
               aria-labelledby="tab-A"
             >
-              <div className="card-header" role="tab" id="heading-A">
-                <h5 className="mb-0">
+              <div class="card-header" role="tab" id="heading-A">
+                <h5 class="mb-0">
                   <a
                     data-toggle="collapse"
                     href="#collapse-A"
                     aria-expanded="true"
                     aria-controls="collapse-A"
                   >
-                    WK({this.state.selectedWicketKeeper})
+                  WK({this.state.selectedKeepers?.length})
                   </a>
                 </h5>
               </div>
               <div
                 id="collapse-A"
-                className="collapse show"
+                class="collapse show"
                 data-parent="#content"
                 role="tabpanel"
                 aria-labelledby="heading-A"
               >
-                <div className="card-body">
-                  <div className="text_content">
+                <div class="card-body">
+                  <div class="text_content">
                     <p>Pick 1-4 Wicket-Keeper</p>
-                    <div className="ml-auto">
+                    <div class="ml-auto">
                       <span className="p-1">
                         <i className="fas fa-chevron-down"></i>
                       </span>
-                      <div className="switch-button switch-button-xs">
-                        <input type="checkbox" name="item1" id="item1" defaultChecked />
+                      <div class="switch-button switch-button-xs">
+                        <input type="checkbox" name="item1" id="item1" checked />
                         <span>
-                          <label htmlFor="item1"></label>
+                          <label for="item1"></label>
                         </span>
                       </div>
                     </div>
                   </div>
-                  {/* {console.log("Selected Players:",this.state.wicketKeepers)} */}
-                  <ScoreboardWK players={this.state.wicketKeepers}/>
+                  {console.log("Selected Players:",this.state.teamA)}
+                  <ScoreboardWK players={this.state.wicketKeepers} teamA={this.state.teamA} teamB={this.state.teamB} updatedPlayers = {this.state.updatedPlayers} selectedPlayerss={this.selectedPlayers}/>
                 </div>
               </div>
             </div>
   
             <div
               id="pane-B"
-              className="card tab-pane fade"
+              class="card tab-pane fade"
               role="tabpanel"
               aria-labelledby="tab-B"
             >
-              <div className="card-header" role="tab" id="heading-B">
-                <h5 className="mb-0">
+              <div class="card-header" role="tab" id="heading-B">
+                <h5 class="mb-0">
                   <a
-                    className="collapsed"
+                    class="collapsed"
                     data-toggle="collapse"
                     href="#collapse-B"
                     aria-expanded="false"
                     aria-controls="collapse-B"
                   >
-                    BAT({this.state.selectedBatsman})
+                    BAT({this.state.selectedBatsmans?.length})
                   </a>
                 </h5>
               </div>
               <div
                 id="collapse-B"
-                className="collapse"
+                class="collapse"
                 data-parent="#content"
                 role="tabpanel"
                 aria-labelledby="heading-B"
               >
-               <div className="card-body">
-                  <div className="text_content">
+               <div class="card-body">
+                  <div class="text_content">
                     <p>Pick Batsman</p>
-                    <div className="ml-auto">
+                    <div class="ml-auto">
                       <span className="p-1">
                         <i className="fas fa-chevron-down"></i>
                       </span>
-                      <div className="switch-button switch-button-xs">
-                        <input type="checkbox" name="item1" id="item1" defaultChecked />
+                      <div class="switch-button switch-button-xs">
+                        <input type="checkbox" name="item1" id="item1" checked />
                         <span>
-                          <label htmlFor="item1"></label>
+                          <label for="item1"></label>
                         </span>
                       </div>
                     </div>
                   </div>
-                  <ScoreboardWK players={this.state.batsmans}/>
+                  <ScoreboardWK players={this.state.batsmans} teamA={this.state.teamA} teamB={this.state.teamB} updatedPlayers = {this.state.updatedPlayers} selectedPlayerss={this.selectedPlayers}/>
+             
                 </div>
               </div>
             </div>
   
             <div
               id="pane-C"
-              className="card tab-pane fade"
+              class="card tab-pane fade"
               role="tabpanel"
               aria-labelledby="tab-C"
             >
-              <div className="card-header" role="tab" id="heading-C">
-                <h5 className="mb-0">
+              <div class="card-header" role="tab" id="heading-C">
+                <h5 class="mb-0">
                   <a
-                    className="collapsed"
+                    class="collapsed"
                     data-toggle="collapse"
                     href="#collapse-C"
                     aria-expanded="false"
                     aria-controls="collapse-C"
                   >
-                    AR({this.state.selectedAllRounder})
+                 AR({this.state.selectedAllRounders?.length})
                   </a>
                 </h5>
               </div>
               <div
                 id="collapse-C"
-                className="collapse"
+                class="collapse"
                 role="tabpanel"
                 data-parent="#content"
                 aria-labelledby="heading-C"
               >
-                <div className="card-body">
-                  <div className="text_content">
+                <div class="card-body">
+                  <div class="text_content">
                     <p>Pick Allrounder</p>
-                    <div className="ml-auto">
+                    <div class="ml-auto">
                       <span className="p-1">
                         <i className="fas fa-chevron-down"></i>
                       </span>
-                      <div className="switch-button switch-button-xs">
-                        <input type="checkbox" name="item1" id="item1" defaultChecked />
+                      <div class="switch-button switch-button-xs">
+                        <input type="checkbox" name="item1" id="item1" checked />
                         <span>
-                          <label htmlFor="item1"></label>
+                          <label for="item1"></label>
                         </span>
                       </div>
                     </div>
                   </div>
-                  <ScoreboardWK players={this.state.allrounders}/>
+                  <ScoreboardWK players={this.state.allrounders} teamA={this.state.teamA} teamB={this.state.teamB} updatedPlayers = {this.state.updatedPlayers} selectedPlayerss={this.selectedPlayers}/>
+              
                 </div>
               </div>
             </div>
   
             <div
               id="pane-D"
-              className="card tab-pane fade"
+              class="card tab-pane fade"
               role="tabpanel"
               aria-labelledby="tab-D"
             >
-              <div className="card-header" role="tab" id="heading-D">
-                <h5 className="mb-0">
+              <div class="card-header" role="tab" id="heading-D">
+                <h5 class="mb-0">
                   <a
-                    className="collapsed"
+                    class="collapsed"
                     data-toggle="collapse"
                     href="#collapse-D"
                     aria-expanded="false"
                     aria-controls="collapse-D"
                   >
-                    BOW({this.state.selectedBowler})
+                    BOW({this.state.selectedBowlers?.length})
                   </a>
                 </h5>
               </div>
               <div
                 id="collapse-D"
-                className="collapse"
+                class="collapse"
                 role="tabpanel"
                 data-parent="#content"
                 aria-labelledby="heading-D"
               >
-               <div className="card-body">
-                  <div className="text_content">
+               <div class="card-body">
+                  <div class="text_content">
                     <p>Pick Bowlers</p>
-                    <div className="ml-auto">
+                    <div class="ml-auto">
                       <span className="p-1">
                         <i className="fas fa-chevron-down"></i>
                       </span>
-                      <div className="switch-button switch-button-xs">
-                        <input type="checkbox" name="item1" id="item1" defaultChecked />
+                      <div class="switch-button switch-button-xs">
+                        <input type="checkbox" name="item1" id="item1" checked />
                         <span>
-                          <label htmlFor="item1"></label>
+                          <label for="item1"></label>
                         </span>
                       </div>
                     </div>
                   </div>
-                  <ScoreboardWK players={this.state.bowlers}/>
+                  <ScoreboardWK players={this.state.bowlers} teamA={this.state.teamA} teamB={this.state.teamB} updatedPlayers = {this.state.updatedPlayers} selectedPlayerss={this.selectedPlayers}/>
+              
                 </div>
               </div>
             </div>
