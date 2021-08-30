@@ -58,12 +58,13 @@ export const upcomingMatches = async () => {
 }
 
 export const fetchlisting = async (props) => {
-    var players = [];
+    console.log("FetchListing")
+    var players ;
     var credits = [];
-    var batsmans = [];
-    var bowlers = [];
-    var allrounders = [];
-    var wicketKeepers = [];
+    var batsmans ;
+    var bowlers ;
+    var allRounders ;
+    var wicketKeepers ;
     var teamA;
     var teamB;
     host.pathname = endpoints.fantacyMatchCredits;
@@ -72,139 +73,34 @@ export const fetchlisting = async (props) => {
     }
     try {
         await axios.post(host.href, body).then(response => {
-            console.log("Response:", response);
-            players = response.data.data[0].players;
-            credits = response.data.data[0].credits;
-            var teams = Object.keys(response.data.data[0].teams);
-            teamA = teams[0]
-            teamB = teams[1];
-          
-            console.log("teamA", teamA);
-            console.log("TeamB", teamB);
+            console.log("Response:",response)
+            if(response){
+                
+               
+    
+           allRounders=response.data.data[0].players[0].all_rounder;
+           wicketKeepers=response.data.data[0].players[0].keeper;
+           batsmans=response.data.data[0].players[0].batsman;
+           bowlers=response.data.data[0].players[0].bowler;
+           var teams = Object.keys(response.data.data[0].teams);
+           teamA = teams[0];
+           teamB = teams[1];
+           players = [...allRounders, ...wicketKeepers, ...batsmans, ...bowlers]
+           console.log("Players",players);
 
+           allRounders.map((index)=>index.playerSelected = false)
+           wicketKeepers.map((index)=>index.playerSelected = false)
+           batsmans.map((index)=>index.playerSelected = false)
+           bowlers.map((index)=>index.playerSelected = false)
 
-
-
-
-            credits.map(function (x) {
-                var result = players.filter(a1 => a1.key == x.player_key);
-                if (result) {
-                    result[0].credit = x.value; result[0].playerSelected = false;
-                }
-                return x
-            })
-
-            players.map(element => {
-
-                switch (element.seasonal_role) {
-                    case "batsman": batsmans.push(element)
-                        //this.setState({batsmans:batsman});
-
-                        break;
-                    case "bowler": bowlers.push(element)
-                        //this.setState({bowlers:bowler})
-                        break;
-                    case "keeper": wicketKeepers.push(element)
-                        //this.setState({wicketKeepers:wicketKeeper})
-                        break;
-                    case "all_rounder": allrounders.push(element)
-                        // this.setState({allrounders:allrounder})
-                        break;
-                    default: console.log("Error")
-                        break;
-
-                }
-
-            });
-            console.log("BAtsmans:", batsmans)
-
-        });
-        return { bowlers, batsmans, wicketKeepers, allrounders, players,teamA,teamB }
+            }
+                   });
+        return { bowlers, batsmans, wicketKeepers, allRounders, players,teamA,teamB }
     } catch (err) {
         console.log(err);
     }
 }
-//    export async function fetchlist(props) {
-//         host.pathname = endpoints.fantacyMatchCredits;
-//             const body = {
-//                 "match_key": "tnplt20_2021_g24"
-//             }
-//             try{
-//             const fantacyCreditResponse = await axios.post(host.href,body);
-//             return fantacyCreditResponse;
-//             // fantacyMatchCreditForEachMatch.push(fantacyCreditResponse);
-//             }catch(err){
-//                 console.log("Error",err);
-//                 return err;
-//             }
-//             // localStorage.setItem('upcomingMatches', JSON.stringify(matches));
-//             // localStorage.setItem('fantacyMatchCreditForEachMatch', JSON.stringify(fantacyMatchCreditForEachMatch));
-//     }
 
-
-
-// async function authenticationToken() {
-//     host.pathname = endpoints.auth;
-//     const body = {
-//         "api_key": "RS5:7ca04571e349f24371cc6692c80c64ac"
-//     }
-//     try {
-
-//         const response = await axios.post(host.href, body);
-//         localStorage.setItem('authCricket', response.data.data.token);
-//         associationList();
-//     } catch (err) {
-//         console.log("Error:", err);
-//     }
-
-// }
-
-// async function associationList() {
-//     host.pathname = endpoints.associationList;
-//     const authToken = localStorage.getItem('authCricket');
-//     const body = {
-//         "rs_token": authToken
-//     }
-//     try {
-//         const response = await axios.post(host.href, body);
-//         association = response.data.data.associations[3].key;
-//         tournamentList();
-//     } catch (err) {
-//         console.log("Error:", err);
-//     }
-// }
-
-// async function tournamentList() {
-//     host.pathname = endpoints.cBoard;
-//     const authToken = localStorage.getItem('authCricket');
-//     const body = {
-//         "rs_token": authToken,
-//         "page_key": association
-//     }
-//     try {
-//         const response = await axios.post(host.href, body);
-//         tournaments = response.data.data.tournaments[3].key;
-//         schedule();
-//     } catch (err) {
-//         console.log("Error:", err);
-//     }
-// }
-
-// async function schedule() {
-//     host.pathname = endpoints.fixtures;
-//     const authToken = localStorage.getItem('authCricket');
-//     const body = {
-//         "rs_token": authToken,
-//         "page_key": tournaments
-//     }
-//     try {
-//         const response = await axios.post(host.href, body);
-//         localStorage.setItem('schedule', JSON.stringify(response.data.data.matches));
-
-//     } catch (err) {
-//         console.log("Error:", err);
-//     }
-// }
 
 export const saveSignupInfo = async (userInfo) => {
     host.pathname = endpoints.signup;

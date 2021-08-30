@@ -34,14 +34,14 @@ class ScoreBoardPage extends React.Component {
 
     bowlers = JSON.parse(localStorage.getItem('bowlers'));
     bowlers == undefined ?
-
-      fetchlisting().then(res => {
-        console.log("res.bowlers", res.bowlers)
+      
+    fetchlisting().then(res => {
+        console.log("res", res)
         bowlers = res.bowlers;
         console.log("Bowlers", bowlers)
         localStorage.setItem('bowlers', JSON.stringify(res.bowlers));
         localStorage.setItem('batsmans', JSON.stringify(res.batsmans));
-        localStorage.setItem('allrounders', JSON.stringify(res.allrounders));
+        localStorage.setItem('allrounders', JSON.stringify(res.allRounders));
         localStorage.setItem('wicketKeepers', JSON.stringify(res.wicketKeepers));
         localStorage.setItem('teamA', res.teamA);
         localStorage.setItem('teamB', res.teamB);
@@ -49,7 +49,7 @@ class ScoreBoardPage extends React.Component {
         localStorage.setItem('selectedBowlers',null)
         localStorage.setItem('selectedAllRounders',null)
         localStorage.setItem('selectedBatsmans',null)
-        this.setState({ bowlers: res.bowlers, batsmans: res.batsmans, wicketKeepers: res.wicketKeepers, allrounders: res.allrounders, players: res.players, teamA: res.teamA, teamB: res.teamB,selectedKeepers:null })
+        this.setState({ bowlers: res.Bowlers, batsmans: res.Batsmans, wicketKeepers: res.wicket_Keepers, allrounders: res.all_Rounders, players: res.players, teamA: res.teamA, teamB: res.teamB,selectedKeepers:null })
       })
 
       :
@@ -85,9 +85,14 @@ this.setState({updatedPlayers:JSON.parse(localStorage.getItem('Players'))})
     // }
     
   }
+  ScoreboardTabs =() =>{
+    // return(
+      
+    // )
+  }
 
   render() {
-    console.log("this.state.bowlers", this.state)
+    // console.log("this.state.bowlers", this.state)
     return (
 
       <React.Fragment>
@@ -182,7 +187,7 @@ this.setState({updatedPlayers:JSON.parse(localStorage.getItem('Players'))})
                           updatedPlayers = {this.state.updatedPlayers}
 
                         />
-                      }
+                     } 
 
                     </div>
                   </div>
