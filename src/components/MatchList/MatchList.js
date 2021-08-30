@@ -4,13 +4,12 @@ import { upcomingMatches } from "../../Helpers/APIHelpers";
 
 
 const MatchList = () => {
-
-  const [state, setState] = React.useState({});
+  const [state, setState] = React.useState([]);
 
   useEffect(() => {
     // response = JSON.parse(localStorage.getItem('upcomingMatches'));
-    upcomingMatches().then(response => {
-      setState(response);
+    upcomingMatches().then(res => {
+      setState(res);
     })
   }, [])
 
