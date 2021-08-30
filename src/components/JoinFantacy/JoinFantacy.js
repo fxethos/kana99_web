@@ -105,9 +105,12 @@ const JoinFantacy = () => {
           </div>
 
           <div className="col-sm-4 offset-sm-4  header-content">
-            <Button big fontBig primary>
-              Play Fantasy
-            </Button>
+            <Link to="/match-list">
+              <Button big fontBig primary>
+                Play Fantasy
+              </Button>
+            </Link>
+            
           </div>
           {/* </Zoom> */}
         </div>
