@@ -1,10 +1,10 @@
 import React from "react";
 import GlobalStyle from "./globalStyles";
-// import ScrollToTop from "./components/ScrollToTop";
 import AppRouter from "./Routers/AppRouter";
 import "./App.scss";
 import { useEffect } from "react";
 import upcomingMatches from "./Helpers/APIHelpers";
+import { Authenticator } from './Helpers/AuthHelpers';
 
 const App = () => {
   
@@ -22,11 +22,11 @@ const App = () => {
 
 
   return (
-    <div>
+    <Authenticator>
       <GlobalStyle />
       {/*<ScrollToTop />*/}
       <AppRouter />
-    </div>
+    </Authenticator>
   );
 };
 

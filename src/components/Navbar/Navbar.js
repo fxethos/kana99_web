@@ -18,7 +18,7 @@ import {
 } from "./Navbar.elements";
 import logo from "../../images/logo.svg";
 
-const Navbar = ({ children }) => {
+const Navbar = ({ children, authStatus, onLogout }) => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -82,13 +82,13 @@ const Navbar = ({ children }) => {
               </NavItemBtn>
               <NavItemBtn>
                 {button ? (
-                  <NavBtnLink to="/sign-in">
-                    <Button buttonStyle="btn--secondary"> Sign In</Button>
+                  <NavBtnLink to={!authStatus && "/sign-in"}>
+                    <Button buttonStyle="btn--secondary" onClick={authStatus ? onLogout : () => {}}>{authStatus ? "Sign Out" : "Sign In"}</Button>
                   </NavBtnLink>
                 ) : (
-                  <NavBtnLink to="/sign-in">
+                  <NavBtnLink to={!authStatus && "/sign-in"}>
                     <Button
-                      onClick={closeMobileMenu}
+                      onClick={authStatus ? onLogout : closeMobileMenu}
                       fontBig
                       buttonStyle="btn--secondary"
                     >

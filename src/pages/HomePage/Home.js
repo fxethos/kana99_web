@@ -1,32 +1,27 @@
-import React from "react";
-// import { homeObjOne, homeObjTwo, homeObjThree, homeObjFour } from './Data';
-// import { homeObjOne } from './Data';
+import React, { useContext, useEffect, useState } from "react";
 import {
   InfoSection,
   JoinFantacy,
-  // PowerPlay,
-  // Members,
-  // FrequentQuestion,
   Navbar,
   Footer,
-  // FooterBottom,
 } from "../../components";
+import { AuthContext } from "../../Helpers/AuthHelpers";
 
 const Home = () => {
+  const { getSession, logout } = useContext(AuthContext);
+  const [authStatus, setAuthStatus] = useState(false);
+  if (!authStatus) {
+    getSession().then(session => {
+      console.log("Session:", session);
+      setAuthStatus(true);
+    })
+  }
   return (
     <React.Fragment>
-      <Navbar />
+      <Navbar authStatus={authStatus} onLogout={logout} />
       <InfoSection />
       <JoinFantacy />
-      {/* <PowerPlay /> */}
-      {/* <Members /> */}
-      {/* <FrequentQuestion /> */}
       <Footer />
-      {/* <FooterBottom /> */}
-      {/* <Pricing /> */}
-      {/* <InfoSection {...homeObjThree} />
-         <InfoSection {...homeObjTwo} /> */}
-      {/* <InfoSection {...homeObjFour} /> */}
     </React.Fragment>
   );
 };
