@@ -4,7 +4,7 @@ import { Button } from "../Button/Button";
 import "./ContestHeader.scss";
 import m1 from "../../images/matchlist-icons/m1.png";
 
-function ContestHeader() {
+function ContestHeader(props) {
   return (
     <div>
       <div className="header">
@@ -40,8 +40,13 @@ function ContestHeader() {
                 </Link>
               </div>
               <div className="col-4 p-1 m-1">
-                <Link to="/sign-in">
-                  <Button buttonStyle="btn--secondary"> Sign in</Button>
+                <Link to={!props.authStatus && "/sign-in"}>
+                  <Button 
+                    buttonStyle="btn--secondary"
+                    onClick={props.authStatus ? props.onLogout : () => {}}
+                  >
+                    {props.authStatus ? "Sign Out" : "Sign in"}
+                  </Button>
                 </Link>
               </div>
             </div>
