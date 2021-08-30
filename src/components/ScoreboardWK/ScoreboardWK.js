@@ -87,9 +87,7 @@ export default class ScoreboardWK extends React.Component {
         break;
     }
   }
-  else{
-    alert("Maximum Players Reached")
-  }
+ 
   }
 
   FiltersSelect = (player) => {
@@ -120,9 +118,7 @@ export default class ScoreboardWK extends React.Component {
         this.props.selectedPlayerss(allPlayers)
 
       }
-      else{
-        alert("Maximum Players Reached")
-      }
+     
       if ((player.team_key === this.state.teamB) && (teamBPlayers.length < 7)) {
         var allPlayers = this.state.players;
         selectedPlayers = allPlayers.map((index) => {
@@ -143,8 +139,6 @@ export default class ScoreboardWK extends React.Component {
           localStorage.setItem('bowlers', JSON.stringify(allPlayers))
         }
         this.props.selectedPlayerss(allPlayers)
-      }else{
-        alert("Maximum Players Reached")
       }
     }
 
