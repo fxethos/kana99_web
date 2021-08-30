@@ -69,11 +69,11 @@ const Navbar = ({ children, authStatus, onLogout }) => {
 
               <NavItemBtn>
                 {button ? (
-                  <NavBtnLink to="/contest-list">
+                  <NavBtnLink to="/match-list">
                     <Button primary> Start Playing Now</Button>
                   </NavBtnLink>
                 ) : (
-                  <NavBtnLink to="/contest-list">
+                  <NavBtnLink to="/match-list">
                     <Button onClick={closeMobileMenu} fontBig primary mobile>
                       Start Playing Now
                     </Button>
@@ -83,7 +83,12 @@ const Navbar = ({ children, authStatus, onLogout }) => {
               <NavItemBtn>
                 {button ? (
                   <NavBtnLink to={!authStatus && "/sign-in"}>
-                    <Button buttonStyle="btn--secondary" onClick={authStatus ? onLogout : () => {}}>{authStatus ? "Sign Out" : "Sign In"}</Button>
+                    <Button 
+                      buttonStyle="btn--secondary" 
+                      onClick={authStatus ? onLogout : () => {}}
+                    >
+                      {authStatus ? "Sign Out" : "Sign In"}
+                    </Button>
                   </NavBtnLink>
                 ) : (
                   <NavBtnLink to={!authStatus && "/sign-in"}>
@@ -92,7 +97,7 @@ const Navbar = ({ children, authStatus, onLogout }) => {
                       fontBig
                       buttonStyle="btn--secondary"
                     >
-                      Sign In
+                    {authStatus ? "Sign Out" : "Sign In"}
                     </Button>
                   </NavBtnLink>
                 )}

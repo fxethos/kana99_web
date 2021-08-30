@@ -52,6 +52,7 @@ export const upcomingMatches = async () => {
                 matches.push(element);
             }
         });
+        return upcomingList;
     } catch (err) {
         console.log("Err", err)
     }
