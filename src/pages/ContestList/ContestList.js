@@ -5,7 +5,7 @@ import ContestHeader from "../../components/ContestHeader/ContestHeader";
 import ContestFooter from "../../components/ContestFooter/ContestFooter";
 import { AuthContext } from '../../Helpers/AuthHelpers';
 
-const ContestList = () => {
+const ContestList = (props) => {
   const [authStatus, setAuthStatus] = useState(false);
   const { getSession, logout } = useContext(AuthContext);
   useEffect(() => {
@@ -18,7 +18,7 @@ const ContestList = () => {
       <ContestHeader authStatus={authStatus} onLogout={logout} />
       <div className="contest-block">
         <div className="container-fluid pl-0 pr-0">
-          <ContestListPage />
+          <ContestListPage matchKey={props.location.query.matchKey} />
         </div>
       </div>
       <ContestFooter />

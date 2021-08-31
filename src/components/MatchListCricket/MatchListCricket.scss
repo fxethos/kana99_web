@@ -110,6 +110,7 @@ input::-ms-input-placeholder {
   div {
     padding: 5px 0px;
     flex: 1 2;
+    justify-content: space-evenly;
   }
   border: 1px solid #ddd;
   text-align: center;
@@ -130,4 +131,9 @@ input::-ms-input-placeholder {
 
 .table-card:hover {
   background-color: lighten($color: #fe7a49, $amount: 30%);
+}
+
+.table-card > a {
+  flex-basis: min-content;
+  margin: 0.5rem 1rem;
 }

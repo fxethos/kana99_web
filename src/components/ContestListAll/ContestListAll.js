@@ -13,7 +13,7 @@ class ContestListAll extends React.Component {
   }
 
   componentDidMount() {
-    getContests('c__match__zimw_vs_thaw__08e71').then(res => {
+    getContests(this.props.matchKey).then(res => {
       this.setState(() => ({
         contests: res.data.data
       }));

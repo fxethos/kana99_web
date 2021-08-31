@@ -24,7 +24,7 @@ const MatchList = () => {
       <div className="card-body">
         {state?.map((match, index) => {
          
-            return <MatchListCricket {...match} />;
+            return <MatchListCricket matchKey={match.key} {...match} key={index} />;
         })}
       </div>
     </div>

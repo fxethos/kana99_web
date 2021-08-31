@@ -2,7 +2,7 @@ import React from "react";
 import "./ContestListPage.scss";
 import ContestListNav from "../ContestListNav/ContestListNav";
 import ContestListAll from "../ContestListAll/ContestListAll";
-function ContestListPage() {
+function ContestListPage(props) {
   return (
     <React.Fragment>
       <div className="contest-list">
@@ -35,7 +35,7 @@ function ContestListPage() {
               aria-labelledby="heading-all"
             >
               <div className="card-body">
-                <ContestListAll />
+                <ContestListAll matchKey={props.matchKey} />
               </div>
             </div>
           </div>
