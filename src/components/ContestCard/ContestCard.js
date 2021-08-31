@@ -17,9 +17,7 @@ function ContestCard(props) {
           <div className="d-flex">
             <span>
               <select className="selectpicker">
-                <option>₹ {props.contest && props.contest.contest_value}</option>
-                <option>₹ 400</option>
-                <option>₹ 500</option>
+                <option>{props.contest && props.contest.contest_value} SOL</option>
               </select>
             </span>
             <span className="ml-auto">40%</span>
@@ -38,11 +36,11 @@ function ContestCard(props) {
                   <span className="title">60%</span>
                 </div>
               </div>
-              <div className="joined">0 ∞ Joined</div>
+              <div className="joined">0/3 Joined</div>
             </div>
             <div className="col-lg-2 col-sm-2 col-md-2 col-4">
               <div className="ml-auto">
-                <Button buttonStyle="btn--primary">₹{props.contest && props.contest.entry_fee}</Button>
+                <Button buttonStyle="btn--primary">{props.contest && props.contest.entry_fee} SOL</Button>
               </div>
             </div>
           </div>
@@ -57,11 +55,11 @@ function ContestCard(props) {
           <div className="meta">
             <div className="shared">
               <img src={group} alt="group" className="pr-1 pb-1" />
-              <span>Upto 15 Teams</span>
+              <span>Upto 3 Players</span>
             </div>
             <div className="credits">
               <img src={cup} alt="group" className="pr-1" />
-              <span>₹ {props.contest && props.contest.contest_value} Total Pot</span>
+              <span>{props.contest && props.contest.contest_value} SOL Total Pot</span>
             </div>
             <div className="duration">
               <img src={cup} alt="group" className="pr-1" />
