@@ -24,7 +24,7 @@ const MatchListCricket = (props) => {
               <span>{props.teams.b.name}</span>
             </div>
           </div>
-          <div>170 Players</div>
+          <div>3 Players</div>
         </div>
       </div>
     </div>

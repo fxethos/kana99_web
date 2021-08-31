@@ -9,10 +9,6 @@ function ContestCard(props) {
   return (
     <div className="wrapper">
       <div className="card3">
-        {/* <div className="header"></div>
-        <div className="icon">
-          <i className="fa fa-book"></i>
-        </div> */}
         <div className="body">
           <div className="d-flex">
             <span>
@@ -45,13 +41,6 @@ function ContestCard(props) {
             </div>
           </div>
 
-          {/* <div className="description">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-              et orci gravida mi placerat consectetur sagittis non ligula. Proin
-              sit amet augue a neque sagittis gravida ac ut metus.
-            </p>
-          </div> */}
           <div className="meta">
             <div className="shared">
               <img src={group} alt="group" className="pr-1 pb-1" />
