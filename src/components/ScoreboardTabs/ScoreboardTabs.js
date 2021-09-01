@@ -53,6 +53,7 @@ export default class ScoreboardTabs extends React.Component {
 
     console.log("SelectedWicketKeeperLength", JSON.parse(localStorage.getItem('selectedKeepers'))?.length)
     this.setState({ selectedKeepers: JSON.parse(localStorage.getItem('selectedKeepers'))?.length })
+    this.props.creditPlayers()
 
   }
 

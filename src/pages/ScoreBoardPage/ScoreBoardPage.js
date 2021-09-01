@@ -74,10 +74,10 @@ class ScoreBoardPage extends React.Component {
         //localStorage.setItem('players',JSON.stringify(res.players))
         this.setState({ bowlers: res.Bowlers, batsmans: res.Batsmans, wicketKeepers: res.wicket_Keepers, allrounders: res.all_Rounders, players: res.players, teamA: res.teamA, teamB: res.teamB, selectedKeepers: null }, () => this.forceUpdate())
       }
-    }):this.selectedPlayers()
+    }):this.creditPlayers()
   }
 
-  selectedPlayers = () => {
+  creditPlayers = () => {
     console.log("State")
     response = true
     // bowlers = res.bowlers;
@@ -96,8 +96,8 @@ class ScoreBoardPage extends React.Component {
  
   }
 
-  ScoreboardTabs = () => {
-  }
+  // creditPlayers = () => {
+  // }
 
   render() {
 
@@ -194,7 +194,7 @@ class ScoreBoardPage extends React.Component {
                           selectedBowlers={this.state.selectedBowlers}
                           selectedAllRounders={this.state.selectedAllRounders}
                           selectedBatsmans={this.state.selectedBatsmans}
-                          selectedPlayers={this.selectedPlayers}
+                          creditPlayers={this.creditPlayers}
                           updatedPlayers={this.state.updatedPlayers}
 
                         />
