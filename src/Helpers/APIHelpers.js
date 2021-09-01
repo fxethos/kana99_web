@@ -60,12 +60,12 @@ export const upcomingMatches = async () => {
 
 export const fetchlisting = async (props) => {
     console.log("FetchListing")
-    var players ;
+    var players;
     var credits = [];
-    var batsmans ;
-    var bowlers ;
-    var allRounders ;
-    var wicketKeepers ;
+    var batsmans;
+    var bowlers;
+    var allRounders;
+    var wicketKeepers;
     var teamA;
     var teamB;
     host.pathname = endpoints.fantacyMatchCredits;
@@ -74,29 +74,24 @@ export const fetchlisting = async (props) => {
     }
     try {
         await axios.post(host.href, body).then(response => {
-            console.log("Response:",response)
-            if(response){
-                
-               
-    
-           allRounders=response.data.data[0].players[0].all_rounder;
-           wicketKeepers=response.data.data[0].players[0].keeper;
-           batsmans=response.data.data[0].players[0].batsman;
-           bowlers=response.data.data[0].players[0].bowler;
-           var teams = Object.keys(response.data.data[0].teams);
-           teamA = teams[0];
-           teamB = teams[1];
-           players = [...allRounders, ...wicketKeepers, ...batsmans, ...bowlers]
-           console.log("Players",players);
-
-           allRounders.map((index)=>index.playerSelected = false)
-           wicketKeepers.map((index)=>index.playerSelected = false)
-           batsmans.map((index)=>index.playerSelected = false)
-           bowlers.map((index)=>index.playerSelected = false)
-
+            console.log("Response:", response)
+            if (response) {
+                allRounders = response.data.data[0].players[0].all_rounder;
+                wicketKeepers = response.data.data[0].players[0].keeper;
+                batsmans = response.data.data[0].players[0].batsman;
+                bowlers = response.data.data[0].players[0].bowler;
+                var teams = Object.keys(response.data.data[0].teams);
+                teamA = teams[0];
+                teamB = teams[1];
+                players = [...allRounders, ...wicketKeepers, ...batsmans, ...bowlers]
+                console.log("Players", players);
+                allRounders.map((index) => index.playerSelected = false)
+                wicketKeepers.map((index) => index.playerSelected = false)
+                batsmans.map((index) => index.playerSelected = false)
+                bowlers.map((index) => index.playerSelected = false)
             }
-                   });
-        return { bowlers, batsmans, wicketKeepers, allRounders, players,teamA,teamB }
+        });
+        return { bowlers, batsmans, wicketKeepers, allRounders, players, teamA, teamB }
     } catch (err) {
         console.log(err);
     }

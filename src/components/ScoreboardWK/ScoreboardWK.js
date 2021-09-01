@@ -7,6 +7,8 @@ var selectedPlayers = [];
 var allSelectedPlayers = [];
 var selectedCredits;
 var credit = 0;
+var credits;
+var x;
 
 
 export default class ScoreboardWK extends React.Component {
@@ -29,20 +31,29 @@ export default class ScoreboardWK extends React.Component {
     allSelectedPlayers = this.state.allSelectedPlayers;
     teamAPlayers = allSelectedPlayers.filter(element=>element.team_key==this.state.teamA);
     teamBPlayers = allSelectedPlayers.filter(element=>element.team_key==this.state.teamB);
-    selectedCredits = allSelectedPlayers.map((index)=>{
-     credit =+index.credit;
-     return credit 
-    })
-    console.log("selectedCredits",selectedCredits)
-   
-    for(var i=0;i<selectedCredits.length;i++){
-      credit += selectedCredits[i];
-      // credit = credit + credit[i]
-    }
-    console.log("Credits",credit)
+    this.creditsCalculate()
+    
    // selectedCredits = allSelectedPlayers.filter(index=> credit = index.credit)
     //console.log("selected Credits",credit);
   }
+ creditsCalculate = () =>{
+  selectedCredits = allSelectedPlayers.map((index)=>{
+    credit =+index.credit;
+    return credit 
+   })
+  //  for(var i=0;i<selectedCredits.length;i++){
+  //    console.log(x,selectedCredits)
+  //   x+= selectedCredits[i];
+  //   // credit = credit + credit[i]
+  // }
+  
+   credit = selectedCredits.reduce(function(acc, val) { return acc + val; }, 0)
+ 
+  console.log("selectedCredits",selectedCredits)
+   
+   
+    console.log("Credits",credit)
+ }
 
   selectPlayers = (player) => {
   
@@ -55,7 +66,7 @@ export default class ScoreboardWK extends React.Component {
    
     switch (player.seasonal_role) {
       
-      case 'keeper': if (credit<100 && selectedKeeperLength < 3 && selectedBowlerLength<3 && selectedBatsmanLength<3 &&selectedAllRounderLength<1 && allSelectedPlayers.length<11) {
+      case 'keeper': if (credit<100 && allSelectedPlayers.length<11) {
         if (player.playerSelected) {
           this.FiltersUnSelect(player);
         } else {
@@ -70,7 +81,7 @@ export default class ScoreboardWK extends React.Component {
         alert('Please change the order of selection')
       }
         break;
-      case 'bowler': if (credit<100 && selectedBowlerLength < 6 && selectedBatsmanLength < 3 && selectedAllRounderLength < 1 && selectedKeeperLength < 1 && allSelectedPlayers.length<11 ) {
+      case 'bowler': if (credit<100 && allSelectedPlayers.length<11 ) {
         if (player.playerSelected) {
           this.FiltersUnSelect(player);
         } else {
@@ -84,7 +95,7 @@ export default class ScoreboardWK extends React.Component {
         alert('Please change the order of selection')
       }
         break;
-      case 'all_rounder': if (credit<100 &&  selectedAllRounderLength < 4 && selectedBatsmanLength<3 && selectedBowlerLength<3 && selectedKeeperLength<1 && allSelectedPlayers.length<11) {
+      case 'all_rounder': if (credit<100  && allSelectedPlayers.length<11) {
         if (player.playerSelected) {
           this.FiltersUnSelect(player);
         } else {
@@ -98,7 +109,7 @@ export default class ScoreboardWK extends React.Component {
         alert('Please change the order of selection')
       }
         break;
-      case 'batsman': if (credit<100 && selectedBatsmanLength < 6 &&selectedBowlerLength <3 &&selectedAllRounderLength<1 &&selectedKeeperLength<1 && allSelectedPlayers.length<11) {
+      case 'batsman': if (credit<100  && allSelectedPlayers.length<11) {
         if (player.playerSelected) {
           this.FiltersUnSelect(player);
         } else {
@@ -129,6 +140,7 @@ export default class ScoreboardWK extends React.Component {
               player.playerSelected = true;
               teamAPlayers.push(player);
              allSelectedPlayers.push(player);
+             this.creditsCalculate();
               localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
             }
           })
@@ -158,6 +170,7 @@ export default class ScoreboardWK extends React.Component {
               player.playerSelected = true;
               teamBPlayers.push(player);
               allSelectedPlayers.push(player);
+              this.creditsCalculate();
               localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
             }
           })
@@ -200,8 +213,9 @@ export default class ScoreboardWK extends React.Component {
         } else if (player.seasonal_role === 'bowler') {
           localStorage.setItem('bowlers', JSON.stringify(allPlayers))
         }
-        teamAPlayers = allPlayers.filter(item => item.playerSelected == true)
-        allSelectedPlayers = allSelectedPlayers.filter(item=>item.playerSelected == true)
+        teamAPlayers = allPlayers.filter(item => item.playerSelected === true)
+        allSelectedPlayers = allSelectedPlayers.filter(item=>item.playerSelected === true)
+        this.creditsCalculate()
         localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
         this.props.selectedPlayerss(allPlayers)
       }
@@ -220,8 +234,9 @@ export default class ScoreboardWK extends React.Component {
         } else if (player.seasonal_role === 'bowler') {
           localStorage.setItem('bowlers', JSON.stringify(allPlayers))
         }
-        teamBPlayers = allPlayers.filter(item => item.playerSelected == true)
-        allSelectedPlayers = allSelectedPlayers.filter(item=>item.playerSelected == true)
+        teamBPlayers = allPlayers.filter(item => item.playerSelected === true)
+        allSelectedPlayers = allSelectedPlayers.filter(item=>item.playerSelected === true)
+        this.creditsCalculate()
         localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
         this.props.selectedPlayerss(allPlayers)
       }
