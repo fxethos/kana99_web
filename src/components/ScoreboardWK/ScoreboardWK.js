@@ -6,9 +6,19 @@ var teamBPlayers = [];
 var selectedPlayers = [];
 var allSelectedPlayers = [];
 var selectedCredits;
-var credit = 0;
+var credit = 100;
 var credits;
 var x;
+var selectedKeeper = []; 
+var selectedBowler = []; 
+var selectedAllRounder = [];
+var selectedBatsman = [];
+var selectedKeeperLength; 
+var selectedBowlerLength; 
+var selectedAllRounderLength;
+var selectedBatsmanLength;
+var teamAPlayerLength;
+var teamBPlayerLength;
 
 
 export default class ScoreboardWK extends React.Component {
@@ -20,183 +30,209 @@ export default class ScoreboardWK extends React.Component {
       players: this.props.players,
       teamA: this.props.teamA,
       teamB: this.props.teamB,
-      allSelectedPlayers: (JSON.parse(localStorage.getItem('allSelectedPlayers'))?.length)>0?JSON.parse(localStorage.getItem('allSelectedPlayers')):[]
-
+      allSelectedPlayers: (JSON.parse(localStorage.getItem('allSelectedPlayers'))?.length)>0?JSON.parse(localStorage.getItem('allSelectedPlayers')):[],
+      selectedKeeper : (JSON.parse(localStorage.getItem('selectedKeepers'))) ? (JSON.parse(localStorage.getItem('selectedKeepers'))) : [],
+      selectedBowler : (JSON.parse(localStorage.getItem('selectedBowlers'))) ? (JSON.parse(localStorage.getItem('selectedBowlers'))) : [],
+      selectedAllRounder : (JSON.parse(localStorage.getItem('selectedAllRounders'))) ? (JSON.parse(localStorage.getItem('selectedAllRounders'))) : [],
+      selectedBatsman : (JSON.parse(localStorage.getItem('selectedBatsmans'))) ? (JSON.parse(localStorage.getItem('selectedBatsmans'))) : []
     }
 
 
   }
   componentDidMount(){
-    credit = 0;
+    credit = localStorage.getItem('credit');
+    console.log("Creditttt",credit)
+    // credit = (credit === null ? 100 : credit)
+    // console.log("Credittttttttttt",credit)
     allSelectedPlayers = this.state.allSelectedPlayers;
-    teamAPlayers = allSelectedPlayers.filter(element=>element.team_key==this.state.teamA);
-    teamBPlayers = allSelectedPlayers.filter(element=>element.team_key==this.state.teamB);
-    this.creditsCalculate()
-    
-   // selectedCredits = allSelectedPlayers.filter(index=> credit = index.credit)
-    //console.log("selected Credits",credit);
-  }
- creditsCalculate = () =>{
-  selectedCredits = allSelectedPlayers.map((index)=>{
-    credit =+index.credit;
-    return credit 
-   })
-  //  for(var i=0;i<selectedCredits.length;i++){
-  //    console.log(x,selectedCredits)
-  //   x+= selectedCredits[i];
-  //   // credit = credit + credit[i]
-  // }
+    selectedKeeper = this.state.selectedKeeper;
+   selectedBowler = this.state.selectedBowler;
+   selectedAllRounder = this.state.selectedAllRounder;
+   selectedBatsman = this.state.selectedBatsman;
+    this.categoryUpdate();
   
-   credit = selectedCredits.reduce(function(acc, val) { return acc + val; }, 0)
- 
-  console.log("selectedCredits",selectedCredits)
-   
-   
-    console.log("Credits",credit)
+  }
+
+  categoryUpdate = () => {
+    console.log('CAtegory Update')
+    teamAPlayers = (JSON.parse(localStorage.getItem('teamAPlayers'))) ?   (JSON.parse(localStorage.getItem('teamAPlayers'))) : [] ;
+    teamBPlayers = (JSON.parse(localStorage.getItem('teamBPlayers')))  ? (JSON.parse(localStorage.getItem('teamBPlayers'))) : [] ;
+  // this.creditsCalculate()
+   teamAPlayerLength = teamAPlayers ? teamAPlayers.length : 0;
+   teamBPlayerLength = teamBPlayers ? teamBPlayers.length : 0;
+  }
+
+
+ creditsCalculate = (selectedCredit) =>{
+  credits = localStorage.getItem('credit');
+   credit = credits - selectedCredit;
+   localStorage.setItem('credit',credit);
+  
  }
 
-  selectPlayers = (player) => {
-  
-      
-    var tes = this.props.players;
-    var selectedKeeperLength = (JSON.parse(localStorage.getItem('selectedKeepers'))?.length) > 0 ? (JSON.parse(localStorage.getItem('selectedKeepers')).length) : 0
-    var selectedBowlerLength = (JSON.parse(localStorage.getItem('selectedBowlers'))?.length) > 0 ? (JSON.parse(localStorage.getItem('selectedBowlers')).length) : 0
-    var selectedAllRounderLength = (JSON.parse(localStorage.getItem('selectedAllRounders'))?.length) > 0 ? (JSON.parse(localStorage.getItem('selectedAllRounders')).length) : 0
-    var selectedBatsmanLength = (JSON.parse(localStorage.getItem('selectedBatsmans'))?.length) > 0 ? (JSON.parse(localStorage.getItem('selectedBatsmans')).length) : 0
-   
-    switch (player.seasonal_role) {
-      
-      case 'keeper': if (credit<100 && allSelectedPlayers.length<11) {
-        if (player.playerSelected) {
-          this.FiltersUnSelect(player);
-        } else {
-          this.FiltersSelect(player);
+ creditsSubtract = (selectedCredit) =>{
+   credits = localStorage.getItem('credit');
+   credit = credits + selectedCredit.credit;
+   localStorage.setItem('credit',credit); 
+ }
+
+ selectionQualifier = (player) =>{
+  if((selectedBowler.length<6)){
+    if(selectedBatsman.length < 6){
+      if(selectedAllRounder.length < 4){
+        if(selectedKeeper.length < 4){
+            if((player.team_key === this.state.teamA && teamAPlayerLength < 7) || (player.team_key === this.state.teamB && teamBPlayerLength < 7)){
+             if(allSelectedPlayers.length < 11){
+               console.log("Player.credit",player.credit)
+               if(player.credit < credit ){
+                 this.FiltersSelect(player)
+               }else{
+                 alert('Canot select players more than 100 credit')
+               }
+
+             }else{
+               alert('Cannot select more than 11 players')
+             }
+            }else{
+              alert('canot select more than 7 players from each team')
+            }
+        }else{
+          alert('canot select more than 4 Wicket Keeper')
         }
+      }else{
+        alert('canot select more than 4 All Rounder')
       }
-      else if (player.playerSelected) {
-        console.log("Player")
-        this.FiltersUnSelect(player);
-      }
-      else{
-        alert('Please change the order of selection')
-      }
-        break;
-      case 'bowler': if (credit<100 && allSelectedPlayers.length<11 ) {
-        if (player.playerSelected) {
-          this.FiltersUnSelect(player);
-        } else {
-          this.FiltersSelect(player);
-        }
-      }
-      else if (player.playerSelected) {
-        this.FiltersUnSelect(player);
-      }
-      else{
-        alert('Please change the order of selection')
-      }
-        break;
-      case 'all_rounder': if (credit<100  && allSelectedPlayers.length<11) {
-        if (player.playerSelected) {
-          this.FiltersUnSelect(player);
-        } else {
-          this.FiltersSelect(player);
-        }
-      }
-      else if (player.playerSelected) {
-        this.FiltersUnSelect(player);
-      }
-      else{
-        alert('Please change the order of selection')
-      }
-        break;
-      case 'batsman': if (credit<100  && allSelectedPlayers.length<11) {
-        if (player.playerSelected) {
-          this.FiltersUnSelect(player);
-        } else {
-          this.FiltersSelect(player);
-        }
-      }
-      else if (player.playerSelected) {
-        this.FiltersUnSelect(player);
-      }
-      else{
-        alert('Please change the order of selection')
-      }
-        break;
+
+    }else{
+      alert('canot select more than 6 batsman')
     }
- 
- 
+  } else{
+    alert('canot select more than 6 bowlers')
   }
 
+  }
+
+  submissionQualifier = (player) =>{
+    if(selectedBowlerLength <= 3){
+      if(selectedBatsmanLength <=3){
+        console.log("Selected Wicket keeeper length",selectedKeeperLength)
+        if(selectedKeeperLength <=1){
+          if(selectedAllRounderLength <=1){
+            alert('Everything Fine')
+            // this.FiltersSelect(player)
+          }else{
+            alert('Please select minimum of 1 All Rounder')
+          }
+        }else{
+          alert('Please select minimum of 1 Wicket Keeper')
+        }
+      }else{
+        alert('Please select minimum of 3 Batsmans')
+      }
+    }else{
+      alert('Please select minimum of 3 Bowlers')
+    }
+  }
+
+
+selectPlayers = (player) =>{
+  console.log("Player",player)
+  if(player.playerSelected){
+    console.log("Filters unselect")
+    this.FiltersUnSelect(player)
+  }else{
+    console.log("Selection Qualifier")
+    this.selectionQualifier(player)
+  }
+
+}
+
+
   FiltersSelect = (player) => {
-   
-    if (!player.playerSelected) {
+   console.log("Player");
+    // if (!player.playerSelected) {
 
       if (player.team_key == this.state.teamA){
-        if((teamAPlayers.length < 7)){
+      
           var allPlayers = this.state.players;
           selectedPlayers = allPlayers.map((index) => {
             if (index.key == player.key) {
               player.playerSelected = true;
               teamAPlayers.push(player);
              allSelectedPlayers.push(player);
-             this.creditsCalculate();
-              localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
+
+             this.creditsCalculate(player.credit);
+             
+             localStorage.setItem('teamAPlayers',JSON.stringify(teamAPlayers))
+             localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
             }
           })
   
           if (player.seasonal_role === 'keeper') {
             localStorage.setItem('wicketKeepers', JSON.stringify(allPlayers))
+            selectedKeeper.push(player);
+            localStorage.setItem('selectedKeepers',JSON.stringify(selectedKeeper))
           } else if (player.seasonal_role === 'all_rounder') {
             localStorage.setItem('allrounders', JSON.stringify(allPlayers))
+            selectedAllRounder.push(player);
+            localStorage.setItem('selectedAllRounders',JSON.stringify(selectedAllRounder))
           } else if (player.seasonal_role === 'batsman') {
             localStorage.setItem('batsmans', JSON.stringify(allPlayers))
+            selectedBatsman.push(player);
+            localStorage.setItem('selectedBatsmans',JSON.stringify(selectedBatsman))
           } else if (player.seasonal_role === 'bowler') {
             localStorage.setItem('bowlers', JSON.stringify(allPlayers))
+            selectedBowler.push(player);
+            localStorage.setItem('selectedBowlers',JSON.stringify(selectedBowler))
           }
           this.props.selectedPlayerss(allPlayers)
+          this.categoryUpdate()
   
-        } else{
-          alert("Cannot select more than 7 players from one team")
-        }
       } 
      
      
       if (player.team_key === this.state.teamB){
-        if(teamBPlayers.length < 7) {
+     
           var allPlayers = this.state.players;
           selectedPlayers = allPlayers.map((index) => {
             if (index.key == player.key) {
               player.playerSelected = true;
               teamBPlayers.push(player);
-              allSelectedPlayers.push(player);
-              this.creditsCalculate();
-              localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
+             allSelectedPlayers.push(player);
+             this.creditsCalculate(player.credit);
+             localStorage.setItem('teamBPlayers',JSON.stringify(teamBPlayers))
+             localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
             }
           })
           if (player.seasonal_role === 'keeper') {
             localStorage.setItem('wicketKeepers', JSON.stringify(allPlayers))
+            selectedKeeper.push(player);
+            localStorage.setItem('selectedKeepers',JSON.stringify(selectedKeeper))
           } else if (player.seasonal_role === 'all_rounder') {
             localStorage.setItem('allrounders', JSON.stringify(allPlayers))
+            selectedAllRounder.push(player);
+            localStorage.setItem('selectedAllRounders',JSON.stringify(selectedAllRounder))
           } else if (player.seasonal_role === 'batsman') {
             localStorage.setItem('batsmans', JSON.stringify(allPlayers))
+            selectedBatsman.push(player);
+            localStorage.setItem('selectedBatsmans',JSON.stringify(selectedBatsman))
           } else if (player.seasonal_role === 'bowler') {
             localStorage.setItem('bowlers', JSON.stringify(allPlayers))
+            selectedBowler.push(player);
+            localStorage.setItem('selectedBowlers',JSON.stringify(selectedBowler))
           }
           this.props.selectedPlayerss(allPlayers)
-        }
-        else{
-          alert("Cannot select more than 7 players from one team")
-        }
+          this.categoryUpdate()
+       
       
       } 
-    }
+    // }
 
   }
 
   FiltersUnSelect = (player) => {
     console.log("False")
-    if (player.playerSelected) {
+    // if (player.playerSelected) {
       if (player.team_key == this.state.teamA) {
         var allPlayers = this.state.players;
         selectedPlayers = allPlayers.map((index) => {
@@ -206,19 +242,36 @@ export default class ScoreboardWK extends React.Component {
         })
         if (player.seasonal_role === 'keeper') {
           localStorage.setItem('wicketKeepers', JSON.stringify(allPlayers))
+          var temp = JSON.parse(localStorage.getItem('selectedKeepers'))
+          selectedKeeper = temp.filter(item => (item.playerSelected  === true) && (item.key !== player.key))
+          localStorage.setItem('selectedKeepers',JSON.stringify(selectedKeeper))
         } else if (player.seasonal_role === 'all_rounder') {
           localStorage.setItem('allrounders', JSON.stringify(allPlayers))
+          var temp = JSON.parse(localStorage.getItem('selectedAllRounders'))
+          selectedAllRounder = temp.filter(item => (item.playerSelected  === true) && (item.key !== player.key))
+          localStorage.setItem('selectedAllRounders',JSON.stringify(selectedAllRounder))
         } else if (player.seasonal_role === 'batsman') {
           localStorage.setItem('batsmans', JSON.stringify(allPlayers))
+          var temp = JSON.parse(localStorage.getItem('selectedBatsmans'))
+          selectedBatsman = temp.filter(item => (item.playerSelected  === true) && (item.key !== player.key))
+          localStorage.setItem('selectedBatsmans',JSON.stringify(selectedBatsman))
         } else if (player.seasonal_role === 'bowler') {
           localStorage.setItem('bowlers', JSON.stringify(allPlayers))
+          var temp = JSON.parse(localStorage.getItem('selectedBowlers'))
+          selectedBowler = temp.filter(item => (item.playerSelected  === true) && (item.key !== player.key))
+          localStorage.setItem('selectedBowlers',JSON.stringify(selectedBowler))
         }
-        teamAPlayers = allPlayers.filter(item => item.playerSelected === true)
-        allSelectedPlayers = allSelectedPlayers.filter(item=>item.playerSelected === true)
-        this.creditsCalculate()
+       var tempPlayers = JSON.parse(localStorage.getItem('teamAPlayers'))
+        teamAPlayers = tempPlayers.filter(item => (item.playerSelected  === true) && (item.key !== player.key))
+        var allPlayers = JSON.parse(localStorage.getItem('allSelectedPlayers'))
+        allSelectedPlayers = allPlayers.filter(item=> (item.playerSelected  === true) && (item.key !== player.key))
+        this.creditsSubtract(player)
+        localStorage.setItem('teamAPlayers',JSON.stringify(teamAPlayers))
         localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
         this.props.selectedPlayerss(allPlayers)
+        this.categoryUpdate()
       }
+
       else if (player.team_key === this.state.teamB) {
         var allPlayers = this.state.players;
         selectedPlayers = allPlayers.map((index) => {
@@ -227,20 +280,37 @@ export default class ScoreboardWK extends React.Component {
         })
         if (player.seasonal_role === 'keeper') {
           localStorage.setItem('wicketKeepers', JSON.stringify(allPlayers))
+          var temp = JSON.parse(localStorage.getItem('selectedKeepers'))
+          selectedKeeper = temp.filter(item => (item.playerSelected  === true) && (item.key !== player.key))
+          localStorage.setItem('selectedKeepers',JSON.stringify(selectedKeeper))
         } else if (player.seasonal_role === 'all_rounder') {
           localStorage.setItem('allrounders', JSON.stringify(allPlayers))
+          var temp = JSON.parse(localStorage.getItem('selectedAllRounders'))
+          selectedAllRounder = temp.filter(item => (item.playerSelected  === true) && (item.key !== player.key))
+          localStorage.setItem('selectedAllRounders',JSON.stringify(selectedAllRounder))
         } else if (player.seasonal_role === 'batsman') {
           localStorage.setItem('batsmans', JSON.stringify(allPlayers))
+          var temp = JSON.parse(localStorage.getItem('selectedBatsmans'))
+          selectedBatsman = temp.filter(item => (item.playerSelected  === true) && (item.key !== player.key))
+          localStorage.setItem('selectedBatsmans',JSON.stringify(selectedBatsman))
         } else if (player.seasonal_role === 'bowler') {
           localStorage.setItem('bowlers', JSON.stringify(allPlayers))
+          var temp = JSON.parse(localStorage.getItem('selectedBowlers'))
+          selectedBowler = temp.filter(item => (item.playerSelected  === true) && (item.key !== player.key))
+          localStorage.setItem('selectedBowlers',JSON.stringify(selectedBowler))
         }
-        teamBPlayers = allPlayers.filter(item => item.playerSelected === true)
-        allSelectedPlayers = allSelectedPlayers.filter(item=>item.playerSelected === true)
-        this.creditsCalculate()
+      var tempPlayers = JSON.parse(localStorage.getItem('teamBPlayers'))
+        teamBPlayers = tempPlayers.filter(item => (item.playerSelected  === true) && (item.key !== player.key))
+
+        var allPlayers = JSON.parse(localStorage.getItem('allSelectedPlayers'))
+        allSelectedPlayers = allPlayers.filter(item=> (item.playerSelected  === true) && (item.key !== player.key))
+        this.creditsSubtract(player)
+        localStorage.setItem('teamBPlayers',JSON.stringify(teamBPlayers))
         localStorage.setItem('allSelectedPlayers',JSON.stringify(allSelectedPlayers))
         this.props.selectedPlayerss(allPlayers)
+        this.categoryUpdate()
       }
-    }
+    // }
   }
   render() {
     console.log("AllSelectedPlayers",allSelectedPlayers);
@@ -293,7 +363,7 @@ export default class ScoreboardWK extends React.Component {
                           <span class="star_bg">
                             <span>
                               <i className="fas fa-star"></i>
-                              <span className="star_value"> 0</span>
+                              <span className="star_value"> {index.performance[0]?.points}</span>
                             </span>
                           </span>
                         </td>
@@ -466,7 +536,8 @@ export default class ScoreboardWK extends React.Component {
 
         <div classs="row justify-content-center align-items-center">
           <div class="col-6 align-self-center m-auto">
-            <button type="button" class="btn btn-primary custom_red_btn">
+            <button type="button" class="btn btn-primary custom_red_btn"
+            onClick = {this.submissionQualifier}>
               Continue
             </button>
           </div>

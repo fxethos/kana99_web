@@ -19,6 +19,11 @@ var batsmans;
 var allrounders;
 var wicketKeepers;
 var players;
+var match_key;
+var teamA;
+var teamB;
+var creditsLeft;
+var allSelectedPlayers = [];
 class ScoreBoardPage extends React.Component {
 
   constructor(props) {
@@ -29,20 +34,27 @@ class ScoreBoardPage extends React.Component {
       allrounders: [],
       wicketKeepers: [],
       players: [],
-
-
-
+      matchKey:props.location.query?.matchKey ,
+      creditsLeft:100,
+      allSelectedPlayers:null
     }
   }
 
   componentDidMount() {
-    fetchlisting(this.props.location.query.matchKey).then(res => {
+    console.log("This.state.matchKey",this.state.matchKey);
+    match_key = this.state.matchKey ? localStorage.setItem('match_Key',JSON.stringify(this.state.matchKey)) : JSON.parse(localStorage.getItem('match_Key')) ? JSON.parse(localStorage.getItem('match_Key')) : '';
+    console.log('Match Key check',match_key);
+   
+    (this.state.matchKey) ? 
+   fetchlisting(this.state.matchKey).then(res => {
       if (res) {
         response = true
         bowlers = res.bowlers;
         batsmans = res.batsmans;
         allrounders = res.allRounders;
         wicketKeepers = res.wicketKeepers;
+        teamA = res.teamA;
+        teamB = res.teamB;
         localStorage.setItem('bowlers', JSON.stringify(res.bowlers));
         localStorage.setItem('batsmans', JSON.stringify(res.batsmans));
         localStorage.setItem('allrounders', JSON.stringify(res.allRounders));
@@ -53,29 +65,43 @@ class ScoreBoardPage extends React.Component {
         localStorage.setItem('selectedBowlers', null)
         localStorage.setItem('selectedAllRounders', null)
         localStorage.setItem('selectedBatsmans', null)
+        localStorage.setItem('teamAPlayers',null);
+        localStorage.setItem('teamBPlayers',null);
+        localStorage.setItem('credit',100);
+        // localStorage.setItem('credit',null);
+        localStorage.setItem('allSelectedPlayers',null);
+        
+        //localStorage.setItem('players',JSON.stringify(res.players))
         this.setState({ bowlers: res.Bowlers, batsmans: res.Batsmans, wicketKeepers: res.wicket_Keepers, allrounders: res.all_Rounders, players: res.players, teamA: res.teamA, teamB: res.teamB, selectedKeepers: null }, () => this.forceUpdate())
       }
-    })
+    }):this.selectedPlayers()
   }
 
-  selectedPlayers = (props) => {
-    // console.log("Selected Players",props)
-    // // if(props.length > 0){
-    //   if(props[0].seasonal_role === 'keeper'){
-    //     localStorage.setItem('selectedKeepers',JSON.stringify(props))
-    //   }
-    // }
-
+  selectedPlayers = () => {
+    console.log("State")
+    response = true
+    // bowlers = res.bowlers;
+    // batsmans = res.batsmans;
+    // allrounders = res.allRounders;
+    // wicketKeepers = res.wicketKeepers;
+    bowlers = JSON.parse(localStorage.getItem('bowlers'))
+    batsmans = JSON.parse(localStorage.getItem('batsmans'))
+    allrounders =JSON.parse(localStorage.getItem('allrounders'))
+    wicketKeepers = JSON.parse(localStorage.getItem('wicketKeepers'))
+    creditsLeft = localStorage.getItem('credit')
+    allSelectedPlayers = (JSON.parse(localStorage.getItem('allSelectedPlayers'))?.length)>0?JSON.parse(localStorage.getItem('allSelectedPlayers')):[]
+     console.log("all selected plauers",allSelectedPlayers)
+    
+    this.setState({ bowlers, batsmans, wicketKeepers, allrounders, players, teamA: localStorage.getItem('teamA'), teamB:localStorage.getItem('teamB') }, () => this.forceUpdate())
+ 
   }
+
   ScoreboardTabs = () => {
-    // return(
-
-    // )
   }
 
   render() {
 
-    console.log("Render Values")
+    console.log("Render Values", teamB)
     return (
 
       <React.Fragment>
@@ -92,10 +118,11 @@ class ScoreBoardPage extends React.Component {
                           <i className="fas fa-chevron-left"></i>
                         </span>
                       </div>
+                      {response && 
                       <div className="comp_time">
-                        <p>BOK vs DUM</p>
+                        <p>{this.state.teamA} vs {this.state.teamB}</p>
                         <p>00h : 13m :13s</p>
-                      </div>
+                      </div>}
                     </div>
                   </div>
                   <div className="col-lg-4 col-sm-4 col-4 ml-auto text-right">
@@ -111,7 +138,7 @@ class ScoreBoardPage extends React.Component {
                     </div>
                     <div className="rectangle">
                       <span className="score_box_one">
-                        <span className="number_box">1</span> BOK
+                        <span className="number_box">1</span> {this.state.teamA}
                       </span>
                       <div className="circle">
                         <span>
@@ -119,9 +146,9 @@ class ScoreBoardPage extends React.Component {
                         </span>
                       </div>
                       <span className="score_box_two">
-                        DUM <span className="number_box">1</span>
+                        {this.state.teamB} <span className="number_box">1</span>
                       </span>
-                      <div className="credit_score">Credits Left 100</div>
+                      <div className="credit_score">Credits Left {creditsLeft}</div>
                     </div>
                     <div className="player_logo">
                       <div
@@ -140,18 +167,19 @@ class ScoreBoardPage extends React.Component {
                         You can select only 7 from each team
                       </h6>
                       <div className="d-flex justify-content-center align-items-center">
-                        <span className="select_box">1</span>
-                        <span className="select_box">2</span>
-                        <span className="select_box">3</span>
-                        <span className="select_box">4</span>
-                        <span className="select_box">5</span>
-                        <span className="select_box">6</span>
-                        <span className="select_box">7</span>
-                        <span className="select_box">8</span>
-                        <span className="select_box">9</span>
-                        <span className="select_box">10</span>
-                        <span className="select_box">11</span>
-                        <span className="select_red_box">0/11</span>
+                       {allSelectedPlayers[0]?.key ? <span className="select_red_box">1</span> :<span className="select_box">1</span> } 
+                       {allSelectedPlayers[1]?.key ? <span className="select_red_box">2</span> :<span className="select_box">2</span> } 
+                       {allSelectedPlayers[2]?.key ? <span className="select_red_box">3</span> :<span className="select_box">3</span> } 
+                       {allSelectedPlayers[3]?.key ? <span className="select_red_box">4</span> :<span className="select_box">4</span> } 
+                       {allSelectedPlayers[4]?.key ? <span className="select_red_box">5</span> :<span className="select_box">5</span> } 
+                       {allSelectedPlayers[5]?.key ? <span className="select_red_box">6</span> :<span className="select_box">6</span> } 
+                       {allSelectedPlayers[6]?.key ? <span className="select_red_box">7</span> :<span className="select_box">7</span> } 
+                       {allSelectedPlayers[7]?.key ? <span className="select_red_box">8</span> :<span className="select_box">8</span> } 
+                       {allSelectedPlayers[8]?.key ? <span className="select_red_box">9</span> :<span className="select_box">9</span> } 
+                       {allSelectedPlayers[9]?.key ? <span className="select_red_box">10</span> :<span className="select_box">10</span> } 
+                       {allSelectedPlayers[10]?.key ? <span className="select_red_box">11</span> :<span className="select_box">11</span> } 
+                      
+                        <span className="select_red_box">{allSelectedPlayers?.length}/11</span>
                       </div>
                       {
                         response &&
