@@ -59,7 +59,6 @@ export const upcomingMatches = async () => {
 }
 
 export const fetchlisting = async (props) => {
-    console.log("FetchListing")
     var players;
     var credits = [];
     var batsmans;
@@ -70,7 +69,7 @@ export const fetchlisting = async (props) => {
     var teamB;
     host.pathname = endpoints.fantacyMatchCredits;
     const body = {
-        "match_key": "tnplt20_2021_g24"
+        "match_key": `${props}`
     }
     try {
         await axios.post(host.href, body).then(response => {

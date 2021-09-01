@@ -13,7 +13,12 @@ import { fetchlisting } from "../../Helpers/APIHelpers";
 
 
 var bowlers;
-
+var response = false;
+var bowlers;
+var batsmans;
+var allrounders;
+var wicketKeepers;
+var players;
 class ScoreBoardPage extends React.Component {
 
   constructor(props) {
@@ -23,76 +28,54 @@ class ScoreBoardPage extends React.Component {
       batsmans: [],
       allrounders: [],
       wicketKeepers: [],
-      players: []
+      players: [],
+
 
 
     }
   }
 
-  async componentDidMount() {
-    console.log("Bowlers", bowlers)
-
-    bowlers = JSON.parse(localStorage.getItem('bowlers'));
-    bowlers == undefined ?
-      
-    fetchlisting().then(res => {
-        console.log("res", res)
+  componentDidMount() {
+    fetchlisting(this.props.location.query.matchKey).then(res => {
+      if (res) {
+        response = true
         bowlers = res.bowlers;
-        console.log("Bowlers", bowlers)
+        batsmans = res.batsmans;
+        allrounders = res.allRounders;
+        wicketKeepers = res.wicketKeepers;
         localStorage.setItem('bowlers', JSON.stringify(res.bowlers));
         localStorage.setItem('batsmans', JSON.stringify(res.batsmans));
         localStorage.setItem('allrounders', JSON.stringify(res.allRounders));
         localStorage.setItem('wicketKeepers', JSON.stringify(res.wicketKeepers));
         localStorage.setItem('teamA', res.teamA);
         localStorage.setItem('teamB', res.teamB);
-        localStorage.setItem('selectedKeepers',null)
-        localStorage.setItem('selectedBowlers',null)
-        localStorage.setItem('selectedAllRounders',null)
-        localStorage.setItem('selectedBatsmans',null)
-        this.setState({ bowlers: res.Bowlers, batsmans: res.Batsmans, wicketKeepers: res.wicket_Keepers, allrounders: res.all_Rounders, players: res.players, teamA: res.teamA, teamB: res.teamB,selectedKeepers:null })
-      })
-
-      :
-      
-      this.setState({
-        bowlers: JSON.parse(localStorage.getItem('bowlers')),
-        batsmans: JSON.parse(localStorage.getItem('batsmans')),
-        allrounders: JSON.parse(localStorage.getItem('allrounders')),
-        wicketKeepers: JSON.parse(localStorage.getItem('wicketKeepers')),
-        teamA: localStorage.getItem('teamA'),
-        teamB: localStorage.getItem('teamB'),
-        selectedKeepers: JSON.parse(localStorage.getItem('selectedKeepers')),
-        selectedBowlers:JSON.parse(localStorage.getItem('selectedBowlers')),
-        selectedAllRounders:JSON.parse(localStorage.getItem('selectedAllRounders')),
-        selectedBatsmans:JSON.parse(localStorage.getItem('selectedBatsmans')),
-        updatedPlayers:JSON.parse(localStorage.getItem('Players'))
-      },()=>
-{
-  localStorage.setItem('Players',JSON.stringify([this.state.bowlers,this.state.batsmans,this.state.wicketKeepers,this.state.allrounders]));
-this.setState({updatedPlayers:JSON.parse(localStorage.getItem('Players'))})
-}
-)
-
-      
+        localStorage.setItem('selectedKeepers', null)
+        localStorage.setItem('selectedBowlers', null)
+        localStorage.setItem('selectedAllRounders', null)
+        localStorage.setItem('selectedBatsmans', null)
+        this.setState({ bowlers: res.Bowlers, batsmans: res.Batsmans, wicketKeepers: res.wicket_Keepers, allrounders: res.all_Rounders, players: res.players, teamA: res.teamA, teamB: res.teamB, selectedKeepers: null }, () => this.forceUpdate())
+      }
+    })
   }
 
-  selectedPlayers = (props) =>{
+  selectedPlayers = (props) => {
     // console.log("Selected Players",props)
     // // if(props.length > 0){
     //   if(props[0].seasonal_role === 'keeper'){
     //     localStorage.setItem('selectedKeepers',JSON.stringify(props))
     //   }
     // }
-    
+
   }
-  ScoreboardTabs =() =>{
+  ScoreboardTabs = () => {
     // return(
-      
+
     // )
   }
 
   render() {
-    // console.log("this.state.bowlers", this.state)
+
+    console.log("Render Values")
     return (
 
       <React.Fragment>
@@ -171,23 +154,23 @@ this.setState({updatedPlayers:JSON.parse(localStorage.getItem('Players'))})
                         <span className="select_red_box">0/11</span>
                       </div>
                       {
-                        this.state.wicketKeepers?.length > 0 &&
-                        <ScoreboardTabs batsman={this.state.batsmans}
-                          bowler={this.state.bowlers}
-                          wicketKeeper={this.state.wicketKeepers}
-                          allrounder={this.state.allrounders}
+                        response &&
+                        <ScoreboardTabs batsman={batsmans}
+                          bowler={bowlers}
+                          wicketKeeper={wicketKeepers}
+                          allrounder={allrounders}
                           players={this.state.players}
                           teamA={this.state.teamA}
                           teamB={this.state.teamB}
                           selectedKeepers={this.state.selectedKeepers}
                           selectedBowlers={this.state.selectedBowlers}
                           selectedAllRounders={this.state.selectedAllRounders}
-                          selectedBatsmans ={this.state.selectedBatsmans}
-                          selectedPlayers = {this.selectedPlayers}
-                          updatedPlayers = {this.state.updatedPlayers}
+                          selectedBatsmans={this.state.selectedBatsmans}
+                          selectedPlayers={this.selectedPlayers}
+                          updatedPlayers={this.state.updatedPlayers}
 
                         />
-                     } 
+                      }
 
                     </div>
                   </div>
@@ -199,7 +182,7 @@ this.setState({updatedPlayers:JSON.parse(localStorage.getItem('Players'))})
                 <img src={kanalogo} alt="kana logo" />
               </div>
             </div>
-          </div>  
+          </div>
         </div>
       </React.Fragment>
     );
