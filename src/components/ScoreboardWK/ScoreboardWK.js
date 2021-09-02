@@ -1,4 +1,6 @@
 import React from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./ScoreboardWK.scss";
 
 var teamAPlayers = [];
@@ -41,6 +43,7 @@ export default class ScoreboardWK extends React.Component {
   }
   componentDidMount(){
     credit = localStorage.getItem('credit');
+    
     console.log("Creditttt",credit)
     // credit = (credit === null ? 100 : credit)
     // console.log("Credittttttttttt",credit)
@@ -87,27 +90,28 @@ export default class ScoreboardWK extends React.Component {
                if(player.credit < credit ){
                  this.FiltersSelect(player)
                }else{
-                 alert('Canot select players more than 100 credit')
+                toast.error('Canot select players more than 100 credit');
+                
                }
 
              }else{
-               alert('Cannot select more than 11 players')
+               toast.error('Cannot select more than 11 players')
              }
             }else{
-              alert('canot select more than 7 players from each team')
+              toast.error('canot select more than 7 players from each team')
             }
         }else{
-          alert('canot select more than 4 Wicket Keeper')
+          toast.error('canot select more than 4 Wicket Keeper')
         }
       }else{
-        alert('canot select more than 4 All Rounder')
+        toast.error('canot select more than 4 All Rounder')
       }
 
     }else{
-      alert('canot select more than 6 batsman')
+      toast.error('canot select more than 6 batsman')
     }
   } else{
-    alert('canot select more than 6 bowlers')
+    toast.error('canot select more than 6 bowlers')
   }
 
   }
@@ -118,19 +122,19 @@ export default class ScoreboardWK extends React.Component {
         console.log("Selected Wicket keeeper length",selectedKeeperLength)
         if(selectedKeeperLength <=1){
           if(selectedAllRounderLength <=1){
-            alert('Everything Fine')
+            toast.success('Everything Fine')
             // this.FiltersSelect(player)
           }else{
-            alert('Please select minimum of 1 All Rounder')
+            toast.error('Please select minimum of 1 All Rounder')
           }
         }else{
-          alert('Please select minimum of 1 Wicket Keeper')
+          toast.error('Please select minimum of 1 Wicket Keeper')
         }
       }else{
-        alert('Please select minimum of 3 Batsmans')
+        toast.error('Please select minimum of 3 Batsmans')
       }
     }else{
-      alert('Please select minimum of 3 Bowlers')
+      toast.error('Please select minimum of 3 Bowlers')
     }
   }
 
@@ -316,6 +320,7 @@ selectPlayers = (player) =>{
     console.log("AllSelectedPlayers",allSelectedPlayers);
     return (
       <div>
+        <ToastContainer/>
         <table class="rwd-table">
           <thead>
             <tr>
