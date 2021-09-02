@@ -35,7 +35,7 @@ class ScoreBoardPage extends React.Component {
       wicketKeepers: [],
       players: [],
       matchKey:props.location.query?.matchKey ,
-      creditsLeft:100,
+      creditsLeft:0,
       allSelectedPlayers:null
     }
   }
@@ -67,7 +67,7 @@ class ScoreBoardPage extends React.Component {
         localStorage.setItem('selectedBatsmans', null)
         localStorage.setItem('teamAPlayers',null);
         localStorage.setItem('teamBPlayers',null);
-        localStorage.setItem('credit',100);
+        localStorage.setItem('credit',0);
         // localStorage.setItem('credit',null);
         localStorage.setItem('allSelectedPlayers',null);
         
@@ -148,7 +148,7 @@ class ScoreBoardPage extends React.Component {
                       <span className="score_box_two">
                         {this.state.teamB} <span className="number_box">1</span>
                       </span>
-                      <div className="credit_score">Credits Left {creditsLeft}</div>
+                      <div className="credit_score">Credits Left {100 - creditsLeft}</div>
                     </div>
                     <div className="player_logo">
                       <div
