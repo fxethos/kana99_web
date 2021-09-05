@@ -2,6 +2,8 @@ import React from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./ScoreboardWK.scss";
+import { postStandings } from '../../Helpers/APIHelpers';
+import send from "../../Helpers/WalletHelpers";
 
 var teamAPlayers = [];
 var teamBPlayers = [];
@@ -25,23 +27,20 @@ var teamBPlayerLength;
 
 export default class ScoreboardWK extends React.Component {
 
-  constructor(props) {
-    console.log("Props:", props)
-    super(props);
-    this.state = {
-      players: this.props.players,
-      teamA: this.props.teamA,
-      teamB: this.props.teamB,
-      allSelectedPlayers: (JSON.parse(localStorage.getItem('allSelectedPlayers'))?.length) > 0 ? JSON.parse(localStorage.getItem('allSelectedPlayers')) : [],
-      selectedKeeper: (JSON.parse(localStorage.getItem('selectedKeepers'))) ? (JSON.parse(localStorage.getItem('selectedKeepers'))) : [],
-      selectedBowler: (JSON.parse(localStorage.getItem('selectedBowlers'))) ? (JSON.parse(localStorage.getItem('selectedBowlers'))) : [],
-      selectedAllRounder: (JSON.parse(localStorage.getItem('selectedAllRounders'))) ? (JSON.parse(localStorage.getItem('selectedAllRounders'))) : [],
-      selectedBatsman: (JSON.parse(localStorage.getItem('selectedBatsmans'))) ? (JSON.parse(localStorage.getItem('selectedBatsmans'))) : []
-    }
-
-
+  state = {
+    players: this.props.players,
+    teamA: this.props.teamA,
+    teamB: this.props.teamB,
+    allSelectedPlayers: (JSON.parse(localStorage.getItem('allSelectedPlayers'))?.length) > 0 ? JSON.parse(localStorage.getItem('allSelectedPlayers')) : [],
+    selectedKeeper: (JSON.parse(localStorage.getItem('selectedKeepers'))) ? (JSON.parse(localStorage.getItem('selectedKeepers'))) : [],
+    selectedBowler: (JSON.parse(localStorage.getItem('selectedBowlers'))) ? (JSON.parse(localStorage.getItem('selectedBowlers'))) : [],
+    selectedAllRounder: (JSON.parse(localStorage.getItem('selectedAllRounders'))) ? (JSON.parse(localStorage.getItem('selectedAllRounders'))) : [],
+    selectedBatsman: (JSON.parse(localStorage.getItem('selectedBatsmans'))) ? (JSON.parse(localStorage.getItem('selectedBatsmans'))) : [],
+    contest_id: this.props.contest_id
   }
+
   componentDidMount() {
+    console.log(this.props);
     credit = localStorage.getItem('credit');
 
     console.log("Creditttt", credit)
@@ -53,7 +52,6 @@ export default class ScoreboardWK extends React.Component {
     selectedAllRounder = this.state.selectedAllRounder;
     selectedBatsman = this.state.selectedBatsman;
     this.categoryUpdate();
-
   }
 
   categoryUpdate = () => {
@@ -96,14 +94,19 @@ export default class ScoreboardWK extends React.Component {
     }
 
     selectionQualifier = (player) => {
+      console.log("selected players:", allSelectedPlayers);
       if (!(selectedBowler.length <6 && (selectedBowler.length === 5 && (player.seasonal_role === 'bowler'))) ) {
         if (!(selectedBatsman.length <6 && (selectedBatsman.length === 5 && (player.seasonal_role === 'batsman'))) ){
           if (!(selectedAllRounder.length <4 && (selectedAllRounder.length === 3 && (player.seasonal_role === 'all_rounder'))) ) {
             console.log("selectedKeeper.length < 4 && (player.seasonal_role !== 'keeper'", selectedKeeper.length < 4 && (player.seasonal_role !== 'keeper'))
             if (!(selectedKeeper.length <4 && (selectedKeeper.length === 3 && (player.seasonal_role === 'keeper'))) ) {
-              console.log("Team A", this.state.teamA)
+              console.log("Team A", this.state.teamA);
+              console.log("Team B", this.state.teamB);
               console.log("(player.team_key === this.state.teamA && teamAPlayerLength < 7) || (player.team_key === this.state.teamB && teamBPlayerLength < 7)", player.team_key, this.state.teamA, teamAPlayerLength < 7, player.team_key, this.state.teamB, teamBPlayerLength < 7)
               if ((player.team_key === this.state.teamA && teamAPlayerLength < 7) || (player.team_key === this.state.teamB && teamBPlayerLength < 7)) {
+                console.log(player.team_key === this.state.teamA && teamAPlayerLength < 7,
+                    player.team_key === this.state.teamB && teamBPlayerLength < 7
+                  );
                 if (allSelectedPlayers.length < 11) {
                   console.log("Player.credit", player.credit)
                   if (player.credit + credit < 100) {
@@ -142,6 +145,8 @@ export default class ScoreboardWK extends React.Component {
             if (selectedAllRounder?.length >= 1 ) {
               toast.success('Everything Fine')
               // this.FiltersSelect(player)
+              send('59254ca8-a5c8-4029-ae2d-2e1056f7b9b4')
+              postStandings(allSelectedPlayers, '59254ca8-a5c8-4029-ae2d-2e1056f7b9b4');
             } else {
               toast.error('Please select minimum of 1 All Rounder')
             }
@@ -335,7 +340,7 @@ export default class ScoreboardWK extends React.Component {
       // }
     }
     render() {
-      console.log("AllSelectedPlayers", allSelectedPlayers);
+      // console.log("AllSelectedPlayers", allSelectedPlayers);
       return (
         <div>
           <ToastContainer />

@@ -6,6 +6,7 @@ import ContestFooter from "../../components/ContestFooter/ContestFooter";
 import { AuthContext } from '../../Helpers/AuthHelpers';
 
 const ContestList = (props) => {
+  console.log(props);
   const [authStatus, setAuthStatus] = useState(false);
   const { getSession, logout } = useContext(AuthContext);
   useEffect(() => {
@@ -15,13 +16,20 @@ const ContestList = (props) => {
   }, []);
   return (
     <React.Fragment>
-      <ContestHeader authStatus={authStatus} onLogout={logout} />
+      <ContestHeader
+        authStatus={authStatus} 
+        onLogout={logout}
+        codeTeamA={props.location.query && props.location.query.codeTeamA}
+        codeTeamB={props.location.query && props.location.query.codeTeamB}
+      />
       <div className="contest-block">
         <div className="container-fluid pl-0 pr-0">
-          <ContestListPage matchKey={props.location.query.matchKey} />
+          <ContestListPage 
+            matchKey={props.location.query && props.location.query.matchKey}
+          />
         </div>
       </div>
-      <ContestFooter />
+      {/*<ContestFooter />*/}
     </React.Fragment>
   );
 };

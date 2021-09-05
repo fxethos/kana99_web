@@ -1,8 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./ContestCard.scss";
 import { Button} from "../Button/Button";
-
-import { Link } from "react-router-dom";
 import cup from "../../images/small-icons/cup.svg";
 import group from "../../images/small-icons/group.png";
 
@@ -38,7 +37,7 @@ function ContestCard(props) {
             </div>
             <div className="col-lg-2 col-sm-2 col-md-2 col-4">
               <div className="ml-auto">
-              <Link to={{pathname: "/scoreboard-page", query: {matchKey: props.contest.match_id}}}>
+              <Link to={{pathname: "/scoreboard-page", query: {matchKey: props.contest.match_id, contest_id: props.contest.contest_id}}}>
               <Button buttonStyle="btn--primary" >{props.contest && props.contest.entry_fee} SOL</Button>
           </Link>
                 

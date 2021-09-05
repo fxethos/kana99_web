@@ -5,7 +5,7 @@ import { AuthContext } from "../../Helpers/AuthHelpers";
 
 
 const SignIn = (props) => {
-  const { authenticate } = useContext(AuthContext);
+  const { authenticate, getUser } = useContext(AuthContext);
   const onSignIn = ({username, password}) => {
     authenticate(username, password).then(data => {
       console.log('Logged in:', data);

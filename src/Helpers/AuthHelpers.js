@@ -12,6 +12,7 @@ const Authenticator = (props) => {
             const authDetails = new AuthenticationDetails({Username, Password});
             user.authenticateUser(authDetails, {
                 onSuccess: (data) => {
+                    localStorage.setItem("username", Username);
                     resolve(data);
                 },
                 onFailure: (err) => {
@@ -29,6 +30,7 @@ const Authenticator = (props) => {
         return new Promise((resolve, reject) => {
             const user = Pool.getCurrentUser();
             if (user) {
+                console.log("user:", user);
                 user.getSession((err, session) => {
                     if (err) {
                         reject();
@@ -39,6 +41,7 @@ const Authenticator = (props) => {
             }
         })
     }
+
 
     const logout = () => {
         console.log("logout called");

@@ -4,7 +4,6 @@ import "./ContestListAll.scss";
 import ContestCard from "../ContestCard/ContestCard";
 import { getContests } from "../../Helpers/APIHelpers";
 import medal from "../../images/small-icons/medal.svg";
-import winner from "../../images/small-icons/winner.svg";
 
 class ContestListAll extends React.Component {
 

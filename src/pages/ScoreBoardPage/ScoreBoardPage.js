@@ -35,6 +35,7 @@ class ScoreBoardPage extends React.Component {
       wicketKeepers: [],
       players: [],
       matchKey:props.location.query?.matchKey ,
+      contest_id: props.location.query?.contest_id,
       creditsLeft:0,
       allSelectedPlayers:null
     }
@@ -196,7 +197,7 @@ class ScoreBoardPage extends React.Component {
                           selectedBatsmans={this.state.selectedBatsmans}
                           creditPlayers={this.creditPlayers}
                           updatedPlayers={this.state.updatedPlayers}
-
+                          contest_id={this.state.contest_id}
                         />
                       }
 

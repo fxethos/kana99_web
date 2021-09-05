@@ -1,18 +1,24 @@
 import moment from 'moment';
+import { useContext } from 'react';
+import {v4 as uuid} from 'uuid';
 // const path = require('path');
 const axios = require('axios');
 
 
+
 // class APIHelper {
 
-const host = new URL('http://35.154.51.112:3000');
+const host = new URL('http://localhost:3000');
+// const host = new URL('http://35.154.51.112:3000');
 const endpoints = {
     staticData: '/api/getstaticdata',
     fantacyMatchCredits: '/api/fantasy_match_credits/db',
     signup: '/api/user/signup', // POST - uuid, username, email, wallet_address (optional)
     getUser: '/api/user/info', // POST - uuid
     getContests: '/api/getcontest', // GET - match_id
-    postContests: '/api/postcontest' // POST - contest_id, match_id, contest_name, contest_value, max_contest_size, entry_fee
+    postContests: '/api/postcontest', // POST - contest_id, match_id, contest_name, contest_value, max_contest_size, entry_fee
+    postStandings: '/api/selectplayer', //POST - id, contest_id, captain_id, vice_captain_id, wkeeper_id, player1_id...player8_id, user_id
+    getPlayerAddresses: '/api/getaddressarray' //POST contest_id
 }
 
 
@@ -92,7 +98,7 @@ export const fetchlisting = async (props) => {
         });
         return { bowlers, batsmans, wicketKeepers, allRounders, players, teamA, teamB }
     } catch (err) {
-        console.log(err);
+        console.log("Error:", err);
     }
 }
 
@@ -116,4 +122,37 @@ export const getContests = async (match_id) => {
     } catch (err) {
         console.log(err);
     }
+}
+
+export const postStandings = async (players, contest_id) => {
+    console.log("conetst id: ", contest_id);
+    const player_ids = players.map(player => player.key);
+    const username = localStorage.getItem('username');
+    if (!username) {
+        console.log('username not found in local.');
+        return;
+    }
+    const keys = [
+        'id', 'contest_id', 'captain_id', 'vice_captain_id',
+        'wkeeper_id', 'player1_id', 'player2_id', 'player3_id',
+        'player4_id', 'player5_id', 'player6_id', 'player7_id', 
+        'player8_id', 'user_id'
+    ];
+    const user = await getUser(username);
+    console.log(user);
+    const values = [uuid(), contest_id, ...player_ids, user.uuid];
+    const mapped = keys.map((key, index) => {
+        return [key, values[index]];
+    });
+    const payload = Object.fromEntries(new Map(mapped));
+    console.log(payload);
+    host.pathname = endpoints.postStandings;
+    const response = await axios.post(host.href, payload);
+    console.log (response);
+}
+
+const getUser = async (username) => {
+    host.pathname = endpoints.getUser;
+    const user = await axios.post(host.href, {username});
+    return user.data.data[0];
 }

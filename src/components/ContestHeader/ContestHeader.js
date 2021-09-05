@@ -13,7 +13,7 @@ function ContestHeader(props) {
             <div className="content">
               <div className="content-details">
                 <span>
-                  <b>RAN</b>
+                  <b>{props.codeTeamA}</b>
                 </span>
                 <span className="match-logo-bg-header">
                   <img src={m1} className="match-logo" alt="match-logo" />
@@ -25,7 +25,7 @@ function ContestHeader(props) {
                   <img src={m1} className="match-logo" alt="match-logo" />
                 </span>
                 <span>
-                  <b>DHA</b>
+                  <b>{props.codeTeamB}</b>
                 </span>
               </div>
             </div>

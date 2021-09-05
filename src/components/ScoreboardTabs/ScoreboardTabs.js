@@ -7,25 +7,19 @@ var selectedBowler;
 var selectedAllRounder;
 var selectedBatsman;
 export default class ScoreboardTabs extends React.Component {
-  constructor(props) {
-    console.log("Prosp:", props);
-    super(props);
-    this.state = {
-      batsmans: this.props.batsman,
-      bowlers: this.props.bowler,
-      wicketKeepers: this.props.wicketKeeper,
-      allrounders: this.props.allrounder,
-      teamA: this.props.teamA,
-      teamB: this.props.teamB,
-      selectedKeepers : JSON.parse(localStorage.getItem('selectedKeepers')) ? JSON.parse(localStorage.getItem('selectedKeepers')) : 0,
-      selectedBowlers : JSON.parse(localStorage.getItem('selectedBowlers')) ? JSON.parse(localStorage.getItem('selectedBowlers')) : 0,
-      selectedAllRounders: JSON.parse(localStorage.getItem('selectedAllRounders')) ? JSON.parse(localStorage.getItem('selectedAllRounders')) : 0,
-      selectedBatsmans : JSON.parse(localStorage.getItem('selectedBatsmans')) ? JSON.parse(localStorage.getItem('selectedBatsmans')) : 0,
 
-      updatedPlayers: this.props.updatedPlayers
-    }
-
-    console.log("Selected Keepers", this.state.selectedKeepers)
+  state = {
+    batsmans: this.props.batsman,
+    bowlers: this.props.bowler,
+    wicketKeepers: this.props.wicketKeeper,
+    allrounders: this.props.allrounder,
+    teamA: this.props.teamA,
+    teamB: this.props.teamB,
+    selectedKeepers : JSON.parse(localStorage.getItem('selectedKeepers')) ? JSON.parse(localStorage.getItem('selectedKeepers')) : 0,
+    selectedBowlers : JSON.parse(localStorage.getItem('selectedBowlers')) ? JSON.parse(localStorage.getItem('selectedBowlers')) : 0,
+    selectedAllRounders: JSON.parse(localStorage.getItem('selectedAllRounders')) ? JSON.parse(localStorage.getItem('selectedAllRounders')) : 0,
+    selectedBatsmans : JSON.parse(localStorage.getItem('selectedBatsmans')) ? JSON.parse(localStorage.getItem('selectedBatsmans')) : 0,
+    updatedPlayers: this.props.updatedPlayers
   }
 
   componentDidMount() {
@@ -153,7 +147,7 @@ export default class ScoreboardTabs extends React.Component {
                     </div>
                   </div>
                   {console.log("Selected Players:", this.state.teamA)}
-                  <ScoreboardWK players={this.state.wicketKeepers} teamA={this.state.teamA} teamB={this.state.teamB} updatedPlayers={this.state.updatedPlayers} selectedPlayerss={this.selectedPlayers} />
+                  <ScoreboardWK players={this.state.wicketKeepers} teamA={this.state.teamA} teamB={this.state.teamB} updatedPlayers={this.state.updatedPlayers} selectedPlayerss={this.selectedPlayers} contest_id={this.props.contest_id} />
                 </div>
               </div>
             </div>

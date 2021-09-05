@@ -6,9 +6,6 @@ import { Button } from "../Button/Button";
 import { Link } from "react-router-dom";
 
 const MatchListCricket = (props) => {
-  const onJoin = (e) => {
-    console.log(e.target);
-  }
   return (
     <div>
       <div className="table-cards left">
@@ -29,8 +26,17 @@ const MatchListCricket = (props) => {
               <span>{props.teams.b.name}</span>
             </div>
           </div>
-          <Link to={{pathname: "/contest-list", query: {matchKey: props.matchKey}}}>
-            <Button buttonStyle="btn--primary" onClick={onJoin}>Join a Contest</Button>
+          <Link to={
+            {
+              pathname: "/contest-list",
+              query: {
+                matchKey: props.matchKey,
+                codeTeamA: props.teams.a.code,
+                codeTeamB: props.teams.b.code
+              }
+            }
+          }>
+            <Button buttonStyle="btn--primary">Join a Contest</Button>
           </Link>
         </div>
       </div>
