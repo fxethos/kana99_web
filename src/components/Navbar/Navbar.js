@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { connect } from "react-redux";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
-// import { Button } from '../../globalStyles';
 import { Button } from "../Button/Button";
-
 import {
   Nav,
   NavbarContainer,
   NavLogo,
-  // NavIcon,
   MobileIcon,
   NavMenu,
-  // NavItem,
   NavItemBtn,
-  // NavLinks,
   NavBtnLink,
 } from "./Navbar.elements";
 import logo from "../../images/logo.svg";
+import { AuthContext } from "../../Helpers/AuthHelpers";
+import { logout as signout } from "../../actions/auth";
 
-const Navbar = ({ children, authStatus, onLogout }) => {
+const Navbar = (props) => {
+  const { logout } = useContext(AuthContext);
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const [authCTA, setAuthCTA] = useState('Sign In');
+  const [authRoute, setAuthRoute] = useState('');
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -37,6 +38,22 @@ const Navbar = ({ children, authStatus, onLogout }) => {
     showButton();
   }, []);
 
+  useEffect(() => {
+    if(props.auth.uuid) {
+      setAuthCTA('Sign Out');
+    } else {
+      setAuthCTA('Sign In');
+      setAuthRoute('/sign-in');
+    }
+  }, [props.auth.uuid])
+
+  const handleSignout = () => {
+    if (props.auth.uuid) {
+      logout();
+      props.dispatch(signout());
+    }
+  }
+
   window.addEventListener("resize", showButton);
 
   return (
@@ -51,22 +68,6 @@ const Navbar = ({ children, authStatus, onLogout }) => {
               {click ? <FaTimes /> : <FaBars />}
             </MobileIcon>
             <NavMenu onClick={handleClick} click={click}>
-              {/* <NavItem>
-                <NavLinks to='/' onClick={closeMobileMenu}>
-                  PAGE 1
-                </NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks to='/page2' onClick={closeMobileMenu}>
-                  PAGE 2
-                </NavLinks>
-              </NavItem>
-              <NavItem> 
-                <NavLinks to='/page3' onClick={closeMobileMenu}>
-                 PAGE 3
-                </NavLinks>
-              </NavItem>*/}
-
               <NavItemBtn>
                 {button ? (
                   <NavBtnLink to="/match-list">
@@ -82,22 +83,22 @@ const Navbar = ({ children, authStatus, onLogout }) => {
               </NavItemBtn>
               <NavItemBtn>
                 {button ? (
-                  <NavBtnLink to={!authStatus && "/sign-in"}>
+                  <NavBtnLink to={authRoute}>
                     <Button 
                       buttonStyle="btn--secondary" 
-                      onClick={authStatus ? onLogout : () => {}}
+                      onClick={props.authStatus ? handleSignout : () => {}}
                     >
-                      {authStatus ? "Sign Out" : "Sign In"}
+                      {authCTA}
                     </Button>
                   </NavBtnLink>
                 ) : (
-                  <NavBtnLink to={!authStatus && "/sign-in"}>
+                  <NavBtnLink to={authRoute}>
                     <Button
-                      onClick={authStatus ? onLogout : closeMobileMenu}
+                      onClick={props.authStatus ? handleSignout : closeMobileMenu}
                       fontBig
                       buttonStyle="btn--secondary"
                     >
-                    {authStatus ? "Sign Out" : "Sign In"}
+                    {authCTA}
                     </Button>
                   </NavBtnLink>
                 )}
@@ -107,9 +108,13 @@ const Navbar = ({ children, authStatus, onLogout }) => {
         </Nav>
       </IconContext.Provider>
 
-      <div>{children}</div>
+      <div>{props.children}</div>
     </div>
   );
 };
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+  auth: state
+});
+
+export default connect(mapStateToProps)(Navbar);

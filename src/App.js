@@ -1,32 +1,21 @@
 import React from "react";
+import { Authenticator } from './Helpers/AuthHelpers';
+import { Provider } from "react-redux";
 import GlobalStyle from "./globalStyles";
 import AppRouter from "./Routers/AppRouter";
+import configureStore from "./store/createStore";
 import "./App.scss";
-import { useEffect } from "react";
-import { Authenticator } from './Helpers/AuthHelpers';
-import {upcomingMatches} from "./Helpers/APIHelpers";
+
+const store = configureStore();
 
 const App = () => {
-  
-  useEffect(() => {
-
-    if(!JSON.parse(localStorage.getItem('upcomingMatches'))){
-      upcomingMatches()
-    }
-    
-    setInterval(()=>{
-      upcomingMatches();
-    },86400000)
-    
-  }, [])
-
-
   return (
-    <Authenticator>
-      <GlobalStyle />
-      {/*<ScrollToTop />*/}
-      <AppRouter />
-    </Authenticator>
+    <Provider store={store}>
+      <Authenticator>
+        <GlobalStyle />
+        <AppRouter />
+      </Authenticator>
+    </Provider>
   );
 };
 

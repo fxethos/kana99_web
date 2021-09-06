@@ -1,14 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-  InfoSection,
-  JoinFantacy,
-  Navbar,
-  Footer,
-} from "../../components";
+import React, { useContext, useState } from "react";
+import { InfoSection, JoinFantacy, Navbar, Footer } from "../../components";
 import { AuthContext } from "../../Helpers/AuthHelpers";
+import { connect } from "react-redux";
 
-const Home = () => {
-  const { getSession, logout } = useContext(AuthContext);
+const Home = (props) => {
+  const { getSession } = useContext(AuthContext);
   const [authStatus, setAuthStatus] = useState(false);
   if (!authStatus) {
     getSession().then(session => {
@@ -18,7 +14,7 @@ const Home = () => {
   }
   return (
     <React.Fragment>
-      <Navbar authStatus={authStatus} onLogout={logout} />
+      <Navbar authStatus={authStatus} />
       <InfoSection />
       <JoinFantacy />
       <Footer />
@@ -26,4 +22,8 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => ({
+  auth: state
+});
+
+export default connect(mapStateToProps)(Home);

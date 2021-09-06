@@ -8,8 +8,8 @@ const axios = require('axios');
 
 // class APIHelper {
 
-const host = new URL('http://localhost:3000');
-// const host = new URL('http://35.154.51.112:3000');
+// const host = new URL('http://localhost:3000');
+const host = new URL('http://35.154.51.112:3000');
 const endpoints = {
     staticData: '/api/getstaticdata',
     fantacyMatchCredits: '/api/fantasy_match_credits/db',
